@@ -47,10 +47,23 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 #search{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:10px 14px;font:inherit;width:min(320px,100%);clip-path:var(--chamfer)}
 #search:focus{outline:2px solid var(--accent);outline-offset:1px}
 .chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:7px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:'Barlow Condensed';font-weight:600}
+.chip:hover{border-color:var(--chipcolor,var(--accent));color:var(--text)}
 .chip[aria-pressed="true"]{color:#0E1114;background:var(--chipcolor,var(--accent));border-color:var(--chipcolor,var(--accent))}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:8px 0 72px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:4px 0 8px}
+.counters{display:flex;gap:32px;margin-top:26px;flex-wrap:wrap}
+.counters div{border-left:3px solid var(--accent);padding-left:13px}
+.counters b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:34px;line-height:1}
+.counters i{font-style:normal;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em}
+.teamsec{margin:26px 0 8px}
+.teamhead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.teamhead .trail{width:26px;height:8px;background:var(--team);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.teamhead h2{font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.03em}
+.teamhead .tcount{color:var(--dim,#4a525a);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-family:'Barlow Condensed';margin-left:auto}
+.cardstats{display:flex;gap:22px;margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:16px;font-weight:500;color:var(--text)}
+.cardstats div i{font-style:normal;font-size:9px;color:#4a525a;text-transform:uppercase;letter-spacing:.18em}
 .card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:18px 18px 16px 22px;transition:transform .12s ease}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--team)}
 .card:hover{transform:translateY(-2px);border-color:var(--team)}
@@ -88,6 +101,7 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .loadout h3{font-family:'Barlow Condensed';font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.04em}
 .loadout .weapon{color:var(--team);font-family:'IBM Plex Mono';font-size:14px;margin:6px 0 12px}
 .loadout ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+section ul li{font-size:12px;font-family:'IBM Plex Mono';background:var(--panel2);border:1px solid var(--line);padding:5px 10px;list-style:none}
 .loadout li{font-size:12px;font-family:'IBM Plex Mono';background:var(--panel2);border:1px solid var(--line);padding:4px 8px}
 .loadout .meta{margin-top:12px;color:var(--muted);font-size:13px}
 .empty-note{color:var(--muted);background:var(--panel);border:1px dashed var(--line);padding:22px;font-size:14px}
@@ -103,95 +117,113 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <body>
 <header class="site"><div class="wrap">
 <a class="logo" href="index.html">COD<b>LOCKER</b></a>
-<nav class="nav"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
+<nav class="nav"><a href="classes.html" style="color:var(--accent)">Classes</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
 <span class="season">Black Ops 7 · 2026 CDL Season</span>
 </div></header>
 <div class="hero"><div class="wrap">
 <h1>Every CDL pro.<br><span>Every setting.</span></h1>
-<p>Controller settings, sensitivities and competitive classes for all 12 Call of Duty League rosters — Black Ops 7 · 2026 CDL Season. Pulled from streams, events and interviews as they're confirmed.</p>
+<p>Controller settings, sensitivities and competitive classes for all 12 Call of Duty League rosters — pulled from streams, events and interviews as they're confirmed.</p>
+<div class="counters">
+<div><b>51</b><i>Players</i></div>
+<div><b>12</b><i>Teams</i></div>
+</div>
 </div></div>
 <div class="controls wrap">
 <input id="search" type="search" placeholder="Search a player…" aria-label="Search players">
 <button class="chip" data-team="all" aria-pressed="true">All teams</button><button class="chip" data-team="optic" aria-pressed="false" style="--chipcolor:#93C950">OpTic Texas</button><button class="chip" data-team="thieves" aria-pressed="false" style="--chipcolor:#E8322E">Los Angeles Thieves</button><button class="chip" data-team="m8" aria-pressed="false" style="--chipcolor:#FF5CA8">Paris Gentle Mates</button><button class="chip" data-team="faze" aria-pressed="false" style="--chipcolor:#E43D30">FaZe Vegas</button><button class="chip" data-team="falcons" aria-pressed="false" style="--chipcolor:#00C48C">Riyadh Falcons</button><button class="chip" data-team="heretics" aria-pressed="false" style="--chipcolor:#2E6BFF">Miami Heretics</button><button class="chip" data-team="koi" aria-pressed="false" style="--chipcolor:#FF8A00">Toronto KOI</button><button class="chip" data-team="g2" aria-pressed="false" style="--chipcolor:#EE3D40">G2 Minnesota</button><button class="chip" data-team="carolina" aria-pressed="false" style="--chipcolor:#1E90D6">Carolina Royal Ravens</button><button class="chip" data-team="boston" aria-pressed="false" style="--chipcolor:#2BD97C">Boston Breach</button><button class="chip" data-team="cloud9" aria-pressed="false" style="--chipcolor:#00AEEF">Cloud9 New York</button><button class="chip" data-team="surge" aria-pressed="false" style="--chipcolor:#38B6FF">Vancouver Surge</button>
 <span class="count" id="count"></span>
 </div>
-<main class="grid wrap">
-<a class="card" href="dashy.html" data-team="optic" data-tag="dashy" style="--team:#93C950">
+<main class="wrap" style="padding-bottom:72px">
+<section class="teamsec" data-team="optic" style="--team:#93C950">
+<div class="teamhead"><span class="trail"></span><h2>OpTic Texas</h2><span class="tcount">5 players</span></div>
+<div class="grid"><a class="card" href="dashy.html" data-team="optic" data-tag="dashy" style="--team:#93C950">
 <span class="tag">Dashy</span>
 <span class="team" style="display:block">OpTic Texas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.65</b><i>SENS</i></div><div><b>98</b><i>FOV</i></div></div>
 </a><a class="card" href="huke.html" data-team="optic" data-tag="huke" style="--team:#93C950">
 <span class="tag">Huke</span>
 <span class="team" style="display:block">OpTic Texas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>99</b><i>FOV</i></div></div>
 </a><a class="card" href="mercules.html" data-team="optic" data-tag="mercules" style="--team:#93C950">
 <span class="tag">Mercules</span>
 <span class="team" style="display:block">OpTic Texas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="scump.html" data-team="optic" data-tag="scump" style="--team:#93C950">
 <span class="tag">Scump</span>
 <span class="team" style="display:block">OpTic Texas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.65</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="shotzzy.html" data-team="optic" data-tag="shotzzy" style="--team:#93C950">
 <span class="tag">Shotzzy</span>
 <span class="team" style="display:block">OpTic Texas</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="abezy.html" data-team="thieves" data-tag="abezy" style="--team:#E8322E">
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="thieves" style="--team:#E8322E">
+<div class="teamhead"><span class="trail"></span><h2>Los Angeles Thieves</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="abezy.html" data-team="thieves" data-tag="abezy" style="--team:#E8322E">
 <span class="tag">aBeZy</span>
 <span class="team" style="display:block">Los Angeles Thieves</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.65</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="hydra.html" data-team="thieves" data-tag="hydra" style="--team:#E8322E">
 <span class="tag">HyDra</span>
 <span class="team" style="display:block">Los Angeles Thieves</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="nium.html" data-team="thieves" data-tag="nium" style="--team:#E8322E">
 <span class="tag">Nium</span>
 <span class="team" style="display:block">Los Angeles Thieves</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>101</b><i>FOV</i></div></div>
 </a><a class="card" href="scrap.html" data-team="thieves" data-tag="scrap" style="--team:#E8322E">
 <span class="tag">Scrap</span>
 <span class="team" style="display:block">Los Angeles Thieves</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="estreal.html" data-team="m8" data-tag="estreal" style="--team:#FF5CA8">
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>98</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="m8" style="--team:#FF5CA8">
+<div class="teamhead"><span class="trail"></span><h2>Paris Gentle Mates</h2><span class="tcount">5 players</span></div>
+<div class="grid"><a class="card" href="estreal.html" data-team="m8" data-tag="estreal" style="--team:#FF5CA8">
 <span class="tag">Estreal</span>
 <span class="team" style="display:block">Paris Gentle Mates</span>
 <span class="status">○ Pending</span>
 </a><a class="card" href="ghosty.html" data-team="m8" data-tag="ghosty" style="--team:#FF5CA8">
 <span class="tag">Ghosty</span>
 <span class="team" style="display:block">Paris Gentle Mates</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="joedeceives.html" data-team="m8" data-tag="joedeceives" style="--team:#FF5CA8">
 <span class="tag">JoeDeceives</span>
 <span class="team" style="display:block">Paris Gentle Mates</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.83</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="neptune.html" data-team="m8" data-tag="neptune" style="--team:#FF5CA8">
 <span class="tag">Neptune</span>
 <span class="team" style="display:block">Paris Gentle Mates</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>102</b><i>FOV</i></div></div>
 </a><a class="card" href="sib.html" data-team="m8" data-tag="sib" style="--team:#FF5CA8">
 <span class="tag">Sib</span>
 <span class="team" style="display:block">Paris Gentle Mates</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="04.html" data-team="faze" data-tag="04" style="--team:#E43D30">
+<div class="cardstats"><div><b>1.6</b><i>SENS</i></div><div><b>107</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="faze" style="--team:#E43D30">
+<div class="teamhead"><span class="trail"></span><h2>FaZe Vegas</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="04.html" data-team="faze" data-tag="04" style="--team:#E43D30">
 <span class="tag">04</span>
 <span class="team" style="display:block">FaZe Vegas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>102</b><i>FOV</i></div></div>
 </a><a class="card" href="abuzah.html" data-team="faze" data-tag="abuzah" style="--team:#E43D30">
 <span class="tag">Abuzah</span>
 <span class="team" style="display:block">FaZe Vegas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.65</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="drazah.html" data-team="faze" data-tag="drazah" style="--team:#E43D30">
 <span class="tag">Drazah</span>
 <span class="team" style="display:block">FaZe Vegas</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="simp.html" data-team="faze" data-tag="simp" style="--team:#E43D30">
 <span class="tag">Simp</span>
 <span class="team" style="display:block">FaZe Vegas</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="cellium.html" data-team="falcons" data-tag="cellium" style="--team:#00C48C">
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="falcons" style="--team:#00C48C">
+<div class="teamhead"><span class="trail"></span><h2>Riyadh Falcons</h2><span class="tcount">5 players</span></div>
+<div class="grid"><a class="card" href="cellium.html" data-team="falcons" data-tag="cellium" style="--team:#00C48C">
 <span class="tag">Cellium</span>
 <span class="team" style="display:block">Riyadh Falcons</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>2.1</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="clayster.html" data-team="falcons" data-tag="clayster" style="--team:#00C48C">
 <span class="tag">Clayster</span>
 <span class="team" style="display:block">Riyadh Falcons</span>
@@ -199,35 +231,41 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </a><a class="card" href="exnid.html" data-team="falcons" data-tag="exnid" style="--team:#00C48C">
 <span class="tag">Exnid</span>
 <span class="team" style="display:block">Riyadh Falcons</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="kismet.html" data-team="falcons" data-tag="kismet" style="--team:#00C48C">
 <span class="tag">KiSMET</span>
 <span class="team" style="display:block">Riyadh Falcons</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="pred.html" data-team="falcons" data-tag="pred" style="--team:#00C48C">
 <span class="tag">Pred</span>
 <span class="team" style="display:block">Riyadh Falcons</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="mettalz.html" data-team="heretics" data-tag="mettalz" style="--team:#2E6BFF">
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="heretics" style="--team:#2E6BFF">
+<div class="teamhead"><span class="trail"></span><h2>Miami Heretics</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="mettalz.html" data-team="heretics" data-tag="mettalz" style="--team:#2E6BFF">
 <span class="tag">MettalZ</span>
 <span class="team" style="display:block">Miami Heretics</span>
 <span class="status">○ Pending</span>
 </a><a class="card" href="reeal.html" data-team="heretics" data-tag="reeal" style="--team:#2E6BFF">
 <span class="tag">ReeaL</span>
 <span class="team" style="display:block">Miami Heretics</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="renkor.html" data-team="heretics" data-tag="renkor" style="--team:#2E6BFF">
 <span class="tag">RenKoR</span>
 <span class="team" style="display:block">Miami Heretics</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>98</b><i>FOV</i></div></div>
 </a><a class="card" href="super.html" data-team="heretics" data-tag="super" style="--team:#2E6BFF">
 <span class="tag">SupeR</span>
 <span class="team" style="display:block">Miami Heretics</span>
 <span class="status">○ Pending</span>
-</a><a class="card" href="abe.html" data-team="koi" data-tag="abe" style="--team:#FF8A00">
+</a></div>
+</section><section class="teamsec" data-team="koi" style="--team:#FF8A00">
+<div class="teamhead"><span class="trail"></span><h2>Toronto KOI</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="abe.html" data-team="koi" data-tag="abe" style="--team:#FF8A00">
 <span class="tag">Abe</span>
 <span class="team" style="display:block">Toronto KOI</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="cleanx.html" data-team="koi" data-tag="cleanx" style="--team:#FF8A00">
 <span class="tag">CleanX</span>
 <span class="team" style="display:block">Toronto KOI</span>
@@ -239,15 +277,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </a><a class="card" href="kips.html" data-team="koi" data-tag="kips" style="--team:#FF8A00">
 <span class="tag">Kips</span>
 <span class="team" style="display:block">Toronto KOI</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="envoy.html" data-team="g2" data-tag="envoy" style="--team:#EE3D40">
+<div class="cardstats"><div><b>1.85</b><i>SENS</i></div><div><b>105</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="g2" style="--team:#EE3D40">
+<div class="teamhead"><span class="trail"></span><h2>G2 Minnesota</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="envoy.html" data-team="g2" data-tag="envoy" style="--team:#EE3D40">
 <span class="tag">Envoy</span>
 <span class="team" style="display:block">G2 Minnesota</span>
 <span class="status">○ Pending</span>
 </a><a class="card" href="kremp.html" data-team="g2" data-tag="kremp" style="--team:#EE3D40">
 <span class="tag">Kremp</span>
 <span class="team" style="display:block">G2 Minnesota</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="nastie.html" data-team="g2" data-tag="nastie" style="--team:#EE3D40">
 <span class="tag">Nastie</span>
 <span class="team" style="display:block">G2 Minnesota</span>
@@ -255,31 +296,37 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </a><a class="card" href="skyz.html" data-team="g2" data-tag="skyz" style="--team:#EE3D40">
 <span class="tag">Skyz</span>
 <span class="team" style="display:block">G2 Minnesota</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="exceed.html" data-team="carolina" data-tag="exceed" style="--team:#1E90D6">
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>102</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="carolina" style="--team:#1E90D6">
+<div class="teamhead"><span class="trail"></span><h2>Carolina Royal Ravens</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="exceed.html" data-team="carolina" data-tag="exceed" style="--team:#1E90D6">
 <span class="tag">Exceed</span>
 <span class="team" style="display:block">Carolina Royal Ravens</span>
 <span class="status">○ Pending</span>
 </a><a class="card" href="fire.html" data-team="carolina" data-tag="fire" style="--team:#1E90D6">
 <span class="tag">Fire</span>
 <span class="team" style="display:block">Carolina Royal Ravens</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>107</b><i>FOV</i></div></div>
 </a><a class="card" href="lurqxx.html" data-team="carolina" data-tag="lurqxx" style="--team:#1E90D6">
 <span class="tag">Lurqxx</span>
 <span class="team" style="display:block">Carolina Royal Ravens</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>2.05</b><i>SENS</i></div><div><b>103</b><i>FOV</i></div></div>
 </a><a class="card" href="standy.html" data-team="carolina" data-tag="standy" style="--team:#1E90D6">
 <span class="tag">Standy</span>
 <span class="team" style="display:block">Carolina Royal Ravens</span>
 <span class="status">○ Pending</span>
-</a><a class="card" href="afro.html" data-team="boston" data-tag="afro" style="--team:#2BD97C">
+</a></div>
+</section><section class="teamsec" data-team="boston" style="--team:#2BD97C">
+<div class="teamhead"><span class="trail"></span><h2>Boston Breach</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="afro.html" data-team="boston" data-tag="afro" style="--team:#2BD97C">
 <span class="tag">Afro</span>
 <span class="team" style="display:block">Boston Breach</span>
 <span class="status">○ Pending</span>
 </a><a class="card" href="purj.html" data-team="boston" data-tag="purj" style="--team:#2BD97C">
 <span class="tag">Purj</span>
 <span class="team" style="display:block">Boston Breach</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="spart.html" data-team="boston" data-tag="spart" style="--team:#2BD97C">
 <span class="tag">Spart</span>
 <span class="team" style="display:block">Boston Breach</span>
@@ -288,10 +335,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <span class="tag">TJHaLy</span>
 <span class="team" style="display:block">Boston Breach</span>
 <span class="status">○ Pending</span>
-</a><a class="card" href="encourage.html" data-team="cloud9" data-tag="encourage" style="--team:#00AEEF">
+</a></div>
+</section><section class="teamsec" data-team="cloud9" style="--team:#00AEEF">
+<div class="teamhead"><span class="trail"></span><h2>Cloud9 New York</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="encourage.html" data-team="cloud9" data-tag="encourage" style="--team:#00AEEF">
 <span class="tag">Encourage</span>
 <span class="team" style="display:block">Cloud9 New York</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.75</b><i>SENS</i></div><div><b>101</b><i>FOV</i></div></div>
 </a><a class="card" href="hide.html" data-team="cloud9" data-tag="hide" style="--team:#00AEEF">
 <span class="tag">Hide</span>
 <span class="team" style="display:block">Cloud9 New York</span>
@@ -303,8 +353,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </a><a class="card" href="wevy.html" data-team="cloud9" data-tag="wevy" style="--team:#00AEEF">
 <span class="tag">Wevy</span>
 <span class="team" style="display:block">Cloud9 New York</span>
-<span class="status tracked">● Settings tracked</span>
-</a><a class="card" href="craze.html" data-team="surge" data-tag="craze" style="--team:#38B6FF">
+<div class="cardstats"><div><b>1.8</b><i>SENS</i></div><div><b>105</b><i>FOV</i></div></div>
+</a></div>
+</section><section class="teamsec" data-team="surge" style="--team:#38B6FF">
+<div class="teamhead"><span class="trail"></span><h2>Vancouver Surge</h2><span class="tcount">4 players</span></div>
+<div class="grid"><a class="card" href="craze.html" data-team="surge" data-tag="craze" style="--team:#38B6FF">
 <span class="tag">Craze</span>
 <span class="team" style="display:block">Vancouver Surge</span>
 <span class="status">○ Pending</span>
@@ -315,12 +368,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </a><a class="card" href="mamba.html" data-team="surge" data-tag="mamba" style="--team:#38B6FF">
 <span class="tag">Mamba</span>
 <span class="team" style="display:block">Vancouver Surge</span>
-<span class="status tracked">● Settings tracked</span>
+<div class="cardstats"><div><b>1.7</b><i>SENS</i></div><div><b>100</b><i>FOV</i></div></div>
 </a><a class="card" href="nero.html" data-team="surge" data-tag="nero" style="--team:#38B6FF">
 <span class="tag">Nero</span>
 <span class="team" style="display:block">Vancouver Surge</span>
 <span class="status">○ Pending</span>
-</a>
+</a></div>
+</section>
 </main>
 <footer><div class="wrap">
 <span>CODLOCKER — Every CDL pro. Every setting.</span>
@@ -330,6 +384,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 const search=document.getElementById('search');
 const chips=[...document.querySelectorAll('.chip')];
 const cards=[...document.querySelectorAll('.card')];
+const secs=[...document.querySelectorAll('.teamsec')];
 const count=document.getElementById('count');
 let team='all';
 function apply(){
@@ -338,6 +393,10 @@ function apply(){
   cards.forEach(c=>{
     const ok=(team==='all'||c.dataset.team===team)&&c.dataset.tag.includes(q);
     c.style.display=ok?'':'none'; if(ok)n++;
+  });
+  secs.forEach(s=>{
+    const any=[...s.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+    s.style.display=any?'':'none';
   });
   count.textContent=n+' players';
 }
