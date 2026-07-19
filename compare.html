@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compare CDL Pro Settings Side by Side | CODLOCKER</title>
+<meta name="description" content="Pick any two CDL pros and compare their Black Ops 7 settings side by side — sens, FOV, deadzones, layouts and controllers.">
+<link rel="canonical" href="https://thecodlocker.com/compare.html">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4248859491912544" crossorigin="anonymous"></script>
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="Compare CDL Pro Settings Side by Side | CODLOCKER">
+<meta property="og:description" content="Pick any two CDL pros and compare their Black Ops 7 settings side by side — sens, FOV, deadzones, layouts and controllers.">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://thecodlocker.com/compare.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1114; --panel:#151A20; --panel2:#11151A; --line:#262D34;
+  --text:#E9EDF0; --muted:#8A939C; --accent:#FF8A2A; --good:#3DDC84;
+  --chamfer:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',system-ui,sans-serif;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1000px 560px at 50% -10%,rgba(255,122,26,.14),transparent 60%),repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.display{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+header.site{border-bottom:1px solid var(--accent);position:sticky;top:0;background:rgba(14,17,20,.92);backdrop-filter:blur(8px);z-index:10}
+header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
+.logo{font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:.06em}
+.logo b{color:var(--accent)}
+.nav{display:flex;gap:16px;margin-left:auto}
+.nav a{color:var(--muted);font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:13px}
+.nav a:hover{color:var(--accent)}
+.navbtn{background:var(--accent);color:#0E1114!important;padding:7px 16px;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));font-weight:700!important}
+.navbtn:hover{background:#FFB01A;color:#0E1114!important}
+.herocta{display:inline-block;margin-top:26px;background:var(--accent);color:#0E1114;font-family:'Barlow Condensed';font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.08em;padding:13px 26px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.herocta:hover{background:#FFB01A}
+.season{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-left:18px}
+@media(max-width:680px){.season{display:none}}
+
+.hero{padding:64px 0 36px;border-bottom:2px solid var(--accent)}
+.hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(44px,8vw,84px);line-height:.95;text-transform:uppercase}
+.hero h1 span{background:linear-gradient(90deg,#FF8A2A,#FFC24D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);margin-top:14px;max-width:52ch}
+
+.controls{padding:22px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#search{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:10px 14px;font:inherit;width:min(320px,100%);clip-path:var(--chamfer)}
+#search:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:7px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:'Barlow Condensed';font-weight:600}
+.chip:hover{border-color:var(--chipcolor,var(--accent));color:var(--text)}
+.chip[aria-pressed="true"]{color:#0E1114;background:var(--chipcolor,var(--accent));border-color:var(--chipcolor,var(--accent))}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:4px 0 8px}
+.counters{display:flex;gap:32px;margin-top:26px;flex-wrap:wrap}
+.counters div{border-left:3px solid var(--accent);padding-left:13px}
+.counters b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:34px;line-height:1}
+.counters i{font-style:normal;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em}
+.teamsec{margin:26px 0 8px}
+.teamhead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.teamhead .trail{width:44px;height:9px;box-shadow:0 0 12px var(--team);background:var(--team);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.teamhead h2{font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.03em}
+.teamhead .tcount{color:var(--dim,#4a525a);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-family:'Barlow Condensed';margin-left:auto}
+.cardstats{display:flex;gap:22px;margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:16px;font-weight:500;color:var(--text)}
+.cardstats div i{font-style:normal;font-size:9px;color:#4a525a;text-transform:uppercase;letter-spacing:.18em}
+.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:18px 18px 16px 22px;transition:transform .12s ease}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--team),transparent 140%)}
+.card:hover{transform:translateY(-2px);border-color:var(--team);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--team) 45%,transparent))}
+.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:28px;text-transform:uppercase;line-height:1}
+.card .team{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+.card .status{margin-top:14px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.card .status.tracked{color:var(--good)}
+.count{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+
+/* player page */
+.lower-third{border-bottom:2px solid var(--team);padding:52px 0 30px;position:relative;overflow:hidden}
+.lower-third::after{content:"";position:absolute;right:-70px;top:-50px;width:360px;height:360px;background:radial-gradient(closest-side,var(--team),transparent 70%);opacity:.16;pointer-events:none}
+.lower-third .rail{height:7px;width:150px;background:linear-gradient(90deg,var(--team),transparent);box-shadow:0 0 14px var(--team);margin-bottom:20px}
+.lower-third h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(48px,9vw,92px);line-height:.9;text-transform:uppercase}
+.lower-third .sub{display:flex;gap:14px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.lower-third .teamname{color:var(--team);font-family:'Barlow Condensed';font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.06em}
+.badge{font-size:10px;text-transform:uppercase;letter-spacing:.12em;padding:4px 8px;border:1px solid var(--line)}
+.badge.unverified{color:var(--accent);border-color:var(--accent)}
+.badge.verified{color:var(--good);border-color:var(--good);box-shadow:0 0 10px rgba(61,220,132,.35)}
+.back{color:var(--muted);font-size:17px;font-weight:500;display:inline-block;padding:6px 0}
+.back:hover{color:var(--accent)}
+.pagemeta{color:var(--muted);font-size:13px}
+
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;padding:32px 0}
+.panel{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);padding:20px 22px}
+.panel h2{font-family:'Barlow Condensed';font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px dotted #20262d;font-size:14px}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--muted)}
+.row .v{font-family:'IBM Plex Mono';font-size:13px;text-align:right}
+.row .v.empty{color:#4a525a}
+
+.classes{padding:8px 0 64px}
+.classes>h2{font-family:'Barlow Condensed';font-weight:700;font-size:26px;text-transform:uppercase;margin-bottom:16px}
+.loadout{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);padding:20px 22px;margin-bottom:14px}
+.loadout h3{font-family:'Barlow Condensed';font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.04em}
+.loadout .weapon{color:var(--team);font-family:'IBM Plex Mono';font-size:14px;margin:6px 0 12px}
+.loadout ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+section ul li{font-size:12px;font-family:'IBM Plex Mono';background:var(--panel2);border:1px solid var(--line);padding:5px 10px;list-style:none}
+.loadout li{font-size:12px;font-family:'IBM Plex Mono';background:var(--panel2);border:1px solid var(--line);padding:4px 8px}
+.loadout .meta{margin-top:12px;color:var(--muted);font-size:13px}
+.empty-note{color:var(--muted);background:var(--panel);border:1px dashed var(--line);padding:22px;font-size:14px}
+.notice{margin:0 0 8px;padding:12px 16px;border-left:3px solid var(--accent);background:var(--panel);color:var(--muted);font-size:13px}
+.source{color:var(--muted);font-size:13px;padding-bottom:40px}
+.source a{color:var(--accent)}
+
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body style="--team:#FF8A2A">
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html">COD<b>LOCKER</b></a>
+<nav class="nav"><a href="classes.html" class="navbtn">Classes</a><a href="stats.html">Stats</a><a href="compare.html">Compare</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
+<span class="season">Black Ops 7 · 2026 CDL Season</span>
+</div></header>
+<div class="lower-third"><div class="wrap">
+<a class="back" href="index.html">← All players</a>
+<div class="rail" style="margin-top:18px;background:var(--accent)"></div>
+<h1 style="font-size:clamp(40px,7vw,72px)">Compare Players</h1>
+<div class="sub"><span class="pagemeta">Side-by-side settings for any two tracked pros</span></div>
+</div></div>
+<section class="wrap" style="padding:30px 0 64px;max-width:760px">
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+<select id="pa" style="flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:11px 14px;font:inherit"></select>
+<select id="pb" style="flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:11px 14px;font:inherit"></select>
+</div>
+<div class="panel" id="cmp"></div>
+</section>
+<footer><div class="wrap">
+<span>CODLOCKER — Every CDL pro. Every setting.</span>
+<span><a href="settings-explained.html" style="color:inherit;text-decoration:underline">Settings Guide</a> &nbsp;·&nbsp; <a href="build-codes.html" style="color:inherit;text-decoration:underline">Build Codes</a> &nbsp;·&nbsp; <a href="about.html" style="color:inherit;text-decoration:underline">About</a> &nbsp;·&nbsp; <a href="contact.html" style="color:inherit;text-decoration:underline">Contact</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> &nbsp;·&nbsp; Fan-made. Not affiliated with Activision or the Call of Duty League.</span>
+</div></footer>
+<script>const P={"Dashy": {"team": "OpTic Texas", "color": "#93C950", "slug": "dashy", "controller": "Marius custom (PS5)", "grip": null, "buttonLayout": "Default", "stickLayout": null, "horizontalSens": 1.65, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 98, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Huke": {"team": "OpTic Texas", "color": "#93C950", "slug": "huke", "controller": "Marius custom (PS5)", "grip": "Claw", "buttonLayout": "Tactical Flipped", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 99, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Mercules": {"team": "OpTic Texas", "color": "#93C950", "slug": "mercules", "controller": "DualSense (PS5), default", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 4, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Scump": {"team": "OpTic Texas", "color": "#93C950", "slug": "scump", "controller": "Marius custom (PS5)", "grip": "Claw", "buttonLayout": "Default", "stickLayout": null, "horizontalSens": 1.65, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Shotzzy": {"team": "OpTic Texas", "color": "#93C950", "slug": "shotzzy", "controller": "Marius custom (PS5)", "grip": "Claw", "buttonLayout": "Default", "stickLayout": "Default", "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "aBeZy": {"team": "Los Angeles Thieves", "color": "#E8322E", "slug": "abezy", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": "Stick and Move + Tactical", "stickLayout": null, "horizontalSens": 1.65, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "HyDra": {"team": "Los Angeles Thieves", "color": "#E8322E", "slug": "hydra", "controller": "PS4 controller", "grip": "Claw", "buttonLayout": "Bumper Jumper", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Nium": {"team": "Los Angeles Thieves", "color": "#E8322E", "slug": "nium", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 101, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Scrap": {"team": "Los Angeles Thieves", "color": "#E8322E", "slug": "scrap", "controller": "Battle Beaver custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 98, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Estreal": {"team": "Paris Gentle Mates", "color": "#FF5CA8", "slug": "estreal", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.9, "verticalSens": 1.9, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Ghosty": {"team": "Paris Gentle Mates", "color": "#FF5CA8", "slug": "ghosty", "controller": "Marius custom (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "JoeDeceives": {"team": "Paris Gentle Mates", "color": "#FF5CA8", "slug": "joedeceives", "controller": "DualSense Edge (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.83, "verticalSens": 1.83, "adsMultiplier": 1.0, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 2, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 9, "thumbsticks": "KontrolFreek Inferno (right stick only)"}, "Neptune": {"team": "Paris Gentle Mates", "color": "#FF5CA8", "slug": "neptune", "controller": "Marius custom (PS4) \u2014 smart bumpers & triggers", "grip": "Claw", "buttonLayout": "Tactical", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": "Long TMR sticks"}, "Sib": {"team": "Paris Gentle Mates", "color": "#FF5CA8", "slug": "sib", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": "Default Flipped", "stickLayout": null, "horizontalSens": 1.6, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 107, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "04": {"team": "FaZe Vegas", "color": "#E43D30", "slug": "04", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Abuzah": {"team": "FaZe Vegas", "color": "#E43D30", "slug": "abuzah", "controller": "Marius custom (PS4)", "grip": "Claw", "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.65, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Drazah": {"team": "FaZe Vegas", "color": "#E43D30", "slug": "drazah", "controller": "Battle Beaver custom (PS4)", "grip": null, "buttonLayout": "Default", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Simp": {"team": "FaZe Vegas", "color": "#E43D30", "slug": "simp", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": "Default", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Cellium": {"team": "Riyadh Falcons", "color": "#00C48C", "slug": "cellium", "controller": "Battle Beaver custom (PS4), 8KHz", "grip": null, "buttonLayout": "Tactical Flipped", "stickLayout": null, "horizontalSens": 2.1, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Exnid": {"team": "Riyadh Falcons", "color": "#00C48C", "slug": "exnid", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "KiSMET": {"team": "Riyadh Falcons", "color": "#00C48C", "slug": "kismet", "controller": "SCUF Reflex (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Pred": {"team": "Riyadh Falcons", "color": "#00C48C", "slug": "pred", "controller": "SCUF (PS4)", "grip": null, "buttonLayout": "Default", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "ReeaL": {"team": "Miami Heretics", "color": "#2E6BFF", "slug": "reeal", "controller": "PS5 controller", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "RenKoR": {"team": "Miami Heretics", "color": "#2E6BFF", "slug": "renkor", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 98, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Abe": {"team": "Toronto KOI", "color": "#FF8A00", "slug": "abe", "controller": "SCUF (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": 0.9, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Insight": {"team": "Toronto KOI", "color": "#FF8A00", "slug": "insight", "controller": "SCUF Reflex Pro (PS5)", "grip": null, "buttonLayout": "Tactical", "stickLayout": null, "horizontalSens": 1.65, "verticalSens": 1.65, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Kips": {"team": "Toronto KOI", "color": "#FF8A00", "slug": "kips", "controller": "Marius custom (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.85, "verticalSens": 1.85, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 105, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Envoy": {"team": "G2 Minnesota", "color": "#EE3D40", "slug": "envoy", "controller": "SCUF Impact (PS4)", "grip": null, "buttonLayout": "Tactical", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Kremp": {"team": "G2 Minnesota", "color": "#EE3D40", "slug": "kremp", "controller": "Marius custom (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Nastie": {"team": "G2 Minnesota", "color": "#EE3D40", "slug": "nastie", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": "Default Flipped", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Skyz": {"team": "G2 Minnesota", "color": "#EE3D40", "slug": "skyz", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": "Default Claw", "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Fire": {"team": "Carolina Royal Ravens", "color": "#1E90D6", "slug": "fire", "controller": "PS5 controller (2 back buttons)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 107, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Lurqxx": {"team": "Carolina Royal Ravens", "color": "#1E90D6", "slug": "lurqxx", "controller": "SCUF (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 2.05, "verticalSens": 2.05, "adsMultiplier": 0.95, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Purj": {"team": "Boston Breach", "color": "#2BD97C", "slug": "purj", "controller": "Marius custom (PS4)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Spart": {"team": "Boston Breach", "color": "#2BD97C", "slug": "spart", "controller": "Battle Beaver custom (no smart pad)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.6, "verticalSens": 1.6, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 98, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Encourage": {"team": "Cloud9 New York", "color": "#00AEEF", "slug": "encourage", "controller": "SCUF Reflex (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 101, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Hide": {"team": "Cloud9 New York", "color": "#00AEEF", "slug": "hide", "controller": "Marius custom (PS5)", "grip": "Claw", "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.8, "verticalSens": 1.8, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 103, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": "KontrolFreek (right stick)"}, "Wevy": {"team": "Cloud9 New York", "color": "#00AEEF", "slug": "wevy", "controller": "DualSense (PS5), default", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.8, "verticalSens": 1.8, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 105, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Craze": {"team": "Vancouver Surge", "color": "#38B6FF", "slug": "craze", "controller": "Battle Beaver custom (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.75, "verticalSens": 1.75, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 99, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}, "Lunarz": {"team": "Vancouver Surge", "color": "#38B6FF", "slug": "lunarz", "controller": "SCUF Reflex (PS5)", "grip": null, "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 0, "deadzoneRightMin": 2, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 70, "deadzoneRightMax": 99, "thumbsticks": null}, "Mamba": {"team": "Vancouver Surge", "color": "#38B6FF", "slug": "mamba", "controller": "DualSense (PS5), default", "grip": "Claw", "buttonLayout": null, "stickLayout": null, "horizontalSens": 1.7, "verticalSens": 1.7, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 3, "deadzoneRightMin": 6, "aimAssistType": "Default", "fov": 100, "deadzoneLeftMax": 63, "deadzoneRightMax": 99, "thumbsticks": null}, "Nero": {"team": "Vancouver Surge", "color": "#38B6FF", "slug": "nero", "controller": "Demonwork custom (PS4)", "grip": null, "buttonLayout": "Standard Flipped", "stickLayout": null, "horizontalSens": 1.8, "verticalSens": 1.8, "adsMultiplier": null, "responseCurve": "Dynamic", "deadzoneLeftMin": 1, "deadzoneRightMin": 3, "aimAssistType": "Default", "fov": 102, "deadzoneLeftMax": 75, "deadzoneRightMax": 99, "thumbsticks": null}};const F=[["horizontalSens", "Horizontal sens"], ["verticalSens", "Vertical sens"], ["adsMultiplier", "ADS multiplier"], ["fov", "FOV"], ["responseCurve", "Response curve"], ["deadzoneLeftMin", "Deadzone L min"], ["deadzoneLeftMax", "Deadzone L max"], ["deadzoneRightMin", "Deadzone R min"], ["deadzoneRightMax", "Deadzone R max"], ["buttonLayout", "Button layout"], ["grip", "Grip"], ["controller", "Controller"]];
+const a=document.getElementById('pa'),b=document.getElementById('pb'),out=document.getElementById('cmp');
+const names=Object.keys(P).sort((x,y)=>x.toLowerCase()<y.toLowerCase()?-1:1);
+for(const n of names){a.add(new Option(n,n));b.add(new Option(n,n));}
+a.value=names[0];b.value=names[1]||names[0];
+function fmt(v){return (v===null||v===undefined||v==="")?"—":v}
+function render(){
+  const pa=P[a.value],pb=P[b.value];
+  let h='<table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr><th></th>';
+  h+=`<th style="padding:10px;color:${pa.color};font-family:'Barlow Condensed';font-size:22px;text-transform:uppercase"><a href="${pa.slug}.html" style="color:inherit">${a.value}</a><div style="font-size:11px;color:#8A939C;letter-spacing:.1em">${pa.team}</div></th>`;
+  h+=`<th style="padding:10px;color:${pb.color};font-family:'Barlow Condensed';font-size:22px;text-transform:uppercase"><a href="${pb.slug}.html" style="color:inherit">${b.value}</a><div style="font-size:11px;color:#8A939C;letter-spacing:.1em">${pb.team}</div></th></tr></thead><tbody>`;
+  for(const [k,label] of F){
+    const va=fmt(pa[k]),vb=fmt(pb[k]);
+    const diff=(va!=="—"&&vb!=="—"&&String(va)!==String(vb));
+    h+=`<tr><td style="padding:9px;color:#8A939C;border-bottom:1px solid #1b2128">${label}</td>`;
+    h+=`<td style="padding:9px;text-align:center;border-bottom:1px solid #1b2128;font-family:'IBM Plex Mono';font-size:13px;${diff?'color:#FF8A2A':''}">${va}</td>`;
+    h+=`<td style="padding:9px;text-align:center;border-bottom:1px solid #1b2128;font-family:'IBM Plex Mono';font-size:13px;${diff?'color:#FF8A2A':''}">${vb}</td></tr>`;
+  }
+  out.innerHTML=h+'</tbody></table><p style="color:#4a525c;font-size:12px;margin-top:12px">Orange = the two players differ on that setting.</p>';
+}
+a.onchange=render;b.onchange=render;render();</script>
+</body></html>
