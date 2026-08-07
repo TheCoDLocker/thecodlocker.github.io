@@ -61,7 +61,7 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .chip[aria-pressed="true"]{color:#0E1114;background:var(--chipcolor,var(--accent));border-color:var(--chipcolor,var(--accent))}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:8px;padding:4px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:11px;padding:4px 0 8px}
 .counters{display:flex;gap:32px;margin-top:26px;flex-wrap:wrap}
 .counters div{border-left:3px solid var(--accent);padding-left:13px}
 .counters b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:34px;line-height:1}
@@ -71,13 +71,14 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .teamhead .trail{width:44px;height:9px;box-shadow:0 0 12px var(--team);background:var(--team);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
 .teamhead h2{font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.03em}
 .teamhead .tcount{color:var(--dim,#4a525a);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-family:'Barlow Condensed';margin-left:auto}
-.cardstats{display:flex;gap:14px;margin-top:8px;border-top:1px dotted var(--line);padding-top:6px}
-.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:14px;font-weight:500;color:var(--text)}
+.cardstats{display:flex;gap:20px;margin-top:12px;border-top:1px solid var(--line);padding-top:9px}
+.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:16px;font-weight:500;color:var(--text)}
 .cardstats div i{font-style:normal;font-size:9px;color:#4a525a;text-transform:uppercase;letter-spacing:.18em}
-.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:12px 14px 10px 16px;transition:transform .12s ease}
-.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--team),transparent 140%)}
-.card:hover{transform:translateY(-2px);border-color:var(--team);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--team) 45%,transparent))}
-.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:21px;text-transform:uppercase;line-height:1}
+.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:17px 18px 14px 18px;transition:transform .12s ease}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--team) 0%,color-mix(in srgb,var(--team) 25%,transparent) 100%)}
+.card::after{content:"";position:absolute;right:0;bottom:0;width:0;height:0;border-style:solid;border-width:0 0 14px 14px;border-color:transparent transparent var(--team) transparent;opacity:.55}
+.card:hover{transform:translateY(-2px);border-color:var(--team);background:linear-gradient(180deg,color-mix(in srgb,var(--team) 10%,var(--panel)) 0%,var(--panel) 60%);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--team) 45%,transparent))}
+.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:27px;text-transform:uppercase;line-height:1}
 .card .team{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
 .card .status{margin-top:14px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
 .card .status.tracked{color:var(--good)}
