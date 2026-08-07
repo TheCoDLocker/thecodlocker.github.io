@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Deadzone Data: What the League Actually Runs | CODLOCKER</title>
-<meta name="description" content="A fresh pass across the league&#x27;s deadzone settings breaks the biggest assumption about them.">
+<meta name="description" content="We did a precision pass on deadzones across the league. The standard everyone quotes isn&#x27;t the standard.">
 
 <link rel="canonical" href="https://thecodlocker.com/deadzone-data-2026.html">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4248859491912544" crossorigin="anonymous"></script>
 <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:title" content="The Deadzone Data: What the League Actually Runs | CODLOCKER">
-<meta property="og:description" content="A fresh pass across the league&#x27;s deadzone settings breaks the biggest assumption about them.">
+<meta property="og:description" content="We did a precision pass on deadzones across the league. The standard everyone quotes isn&#x27;t the standard.">
 <meta property="og:type" content="website">
 
 <meta property="og:url" content="https://thecodlocker.com/deadzone-data-2026.html">
@@ -48,8 +48,8 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .season{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-left:18px}
 @media(max-width:680px){.season{display:none}}
 
-.hero{padding:64px 0 36px;border-bottom:2px solid var(--accent)}
-.hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(44px,8vw,84px);line-height:.95;text-transform:uppercase}
+.hero{padding:30px 0 24px;border-bottom:2px solid var(--accent)}
+.hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(30px,4.6vw,48px);line-height:1;text-transform:uppercase}
 .hero h1 span{background:linear-gradient(90deg,#FF8A2A,#FFC24D);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{color:var(--muted);margin-top:14px;max-width:52ch}
 
@@ -61,7 +61,7 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .chip[aria-pressed="true"]{color:#0E1114;background:var(--chipcolor,var(--accent));border-color:var(--chipcolor,var(--accent))}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:4px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:8px;padding:4px 0 8px}
 .counters{display:flex;gap:32px;margin-top:26px;flex-wrap:wrap}
 .counters div{border-left:3px solid var(--accent);padding-left:13px}
 .counters b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:34px;line-height:1}
@@ -71,13 +71,13 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .teamhead .trail{width:44px;height:9px;box-shadow:0 0 12px var(--team);background:var(--team);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
 .teamhead h2{font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.03em}
 .teamhead .tcount{color:var(--dim,#4a525a);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-family:'Barlow Condensed';margin-left:auto}
-.cardstats{display:flex;gap:22px;margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
-.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:16px;font-weight:500;color:var(--text)}
+.cardstats{display:flex;gap:14px;margin-top:8px;border-top:1px dotted var(--line);padding-top:6px}
+.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:14px;font-weight:500;color:var(--text)}
 .cardstats div i{font-style:normal;font-size:9px;color:#4a525a;text-transform:uppercase;letter-spacing:.18em}
-.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:18px 18px 16px 22px;transition:transform .12s ease}
+.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:12px 14px 10px 16px;transition:transform .12s ease}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--team),transparent 140%)}
 .card:hover{transform:translateY(-2px);border-color:var(--team);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--team) 45%,transparent))}
-.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:28px;text-transform:uppercase;line-height:1}
+.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:21px;text-transform:uppercase;line-height:1}
 .card .team{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
 .card .status{margin-top:14px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
 .card .status.tracked{color:var(--good)}
@@ -139,10 +139,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </div></div>
 <section class="wrap" style="padding:32px 0 64px;max-width:760px;color:var(--text);font-size:15px;line-height:1.85">
 
-<p>The common wisdom says pros run a 1/75 left-stick deadzone and 3/99 right. After a precision pass across the tracked league, the real picture is messier — and more interesting.</p>
-<p style="margin-top:14px">The headline: a left-stick minimum of <b>0</b> is closer to the true league norm than 1. Shotzzy, Simp, HyDra, Mercules, aBeZy, Nastie, 04, Neptune and Exnid all bottom out the left stick entirely — zero buffer, instant response, full trust in their hardware. On custom controllers with fresh sticks, that's free responsiveness; on a worn pad it would drift immediately, which is why the pros can run it and most players shouldn't blindly copy it.</p>
-<p style="margin-top:14px">Left-stick maximums scatter more than expected: <a href="alluka.html" style="color:var(--accent)">Alluka</a> caps at 60, <a href="sib.html" style="color:var(--accent)">Sib</a> and <a href="nium.html" style="color:var(--accent)">Nium</a> at 65, <a href="kips.html" style="color:var(--accent)">Kips</a> and <a href="abezy.html" style="color:var(--accent)">aBeZy</a> at 70 — meaning full sprint input arrives before the stick physically reaches its edge. Right-stick minimums run 2–5 across the league, and <a href="ghosty.html" style="color:var(--accent)">Ghosty</a> is the outlier of the pass: a 3 minimum and 99 maximum on <i>both</i> sticks.</p>
-<p style="margin-top:14px">The pattern underneath: deadzones are the most individually-tuned setting in the game, far more than sens or FOV — because they're tuned to a specific physical controller, not to aim feel. Every tracked player's exact values are on their page.</p>
+<p>Ask anyone what pros run for deadzones and you'll hear the same answer: 1/75 left, 3/99 right. We just finished going player by player and that answer is wrong, or at least lazy.</p>
+<p style="margin-top:14px">The actual norm on the left stick minimum is 0. Not 1. Shotzzy, Simp, HyDra, Mercules, aBeZy, Nastie, 04, Neptune, Exnid — all of them bottom it out completely. No buffer at all. That works because they're on fresh custom controllers that don't drift. Copy it on a year-old pad and you'll be spinning in the spawn.</p>
+<p style="margin-top:14px">Left-stick maxes are all over the place too. <a href="alluka.html" style="color:var(--accent)">Alluka</a> caps at 60, <a href="sib.html" style="color:var(--accent)">Sib</a> and <a href="nium.html" style="color:var(--accent)">Nium</a> at 65, <a href="kips.html" style="color:var(--accent)">Kips</a> and <a href="abezy.html" style="color:var(--accent)">aBeZy</a> at 70. That just means full movement input kicks in before the stick hits the edge. Right-stick minimums run anywhere from 2 to 5 depending on the player, and <a href="ghosty.html" style="color:var(--accent)">Ghosty</a> is doing his own thing entirely — 3/99 on both sticks.</p>
+<p style="margin-top:14px">Takeaway: deadzones are the most personal setting in the game. Sens and FOV cluster hard. Deadzones don't, because they're tuned to a specific physical controller in a specific condition. Exact values for every tracked player are on their pages.</p>
 
 </section>
 <footer><div class="wrap">

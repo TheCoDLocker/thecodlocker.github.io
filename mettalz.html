@@ -48,8 +48,8 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .season{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;margin-left:18px}
 @media(max-width:680px){.season{display:none}}
 
-.hero{padding:64px 0 36px;border-bottom:2px solid var(--accent)}
-.hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(44px,8vw,84px);line-height:.95;text-transform:uppercase}
+.hero{padding:30px 0 24px;border-bottom:2px solid var(--accent)}
+.hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:clamp(30px,4.6vw,48px);line-height:1;text-transform:uppercase}
 .hero h1 span{background:linear-gradient(90deg,#FF8A2A,#FFC24D);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{color:var(--muted);margin-top:14px;max-width:52ch}
 
@@ -61,7 +61,7 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .chip[aria-pressed="true"]{color:#0E1114;background:var(--chipcolor,var(--accent));border-color:var(--chipcolor,var(--accent))}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:4px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:8px;padding:4px 0 8px}
 .counters{display:flex;gap:32px;margin-top:26px;flex-wrap:wrap}
 .counters div{border-left:3px solid var(--accent);padding-left:13px}
 .counters b{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:34px;line-height:1}
@@ -71,13 +71,13 @@ header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
 .teamhead .trail{width:44px;height:9px;box-shadow:0 0 12px var(--team);background:var(--team);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
 .teamhead h2{font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.03em}
 .teamhead .tcount{color:var(--dim,#4a525a);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-family:'Barlow Condensed';margin-left:auto}
-.cardstats{display:flex;gap:22px;margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
-.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:16px;font-weight:500;color:var(--text)}
+.cardstats{display:flex;gap:14px;margin-top:8px;border-top:1px dotted var(--line);padding-top:6px}
+.cardstats div b{display:block;font-family:'IBM Plex Mono';font-size:14px;font-weight:500;color:var(--text)}
 .cardstats div i{font-style:normal;font-size:9px;color:#4a525a;text-transform:uppercase;letter-spacing:.18em}
-.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:18px 18px 16px 22px;transition:transform .12s ease}
+.card{background:var(--panel);border:1px solid var(--line);clip-path:var(--chamfer);display:block;position:relative;padding:12px 14px 10px 16px;transition:transform .12s ease}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--team),transparent 140%)}
 .card:hover{transform:translateY(-2px);border-color:var(--team);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--team) 45%,transparent))}
-.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:28px;text-transform:uppercase;line-height:1}
+.card .tag{font-family:'Barlow Condensed';font-weight:700;font-size:21px;text-transform:uppercase;line-height:1}
 .card .team{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
 .card .status{margin-top:14px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
 .card .status.tracked{color:var(--good)}
