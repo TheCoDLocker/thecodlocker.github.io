@@ -33,7 +33,8 @@ a{color:inherit;text-decoration:none}
 
 header.site{border-bottom:1px solid var(--accent);position:sticky;top:0;background:rgba(14,17,20,.92);backdrop-filter:blur(8px);z-index:10}
 header.site .wrap{display:flex;align-items:center;gap:14px;height:58px}
-.logo{font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:.06em}
+.logo{font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:.06em;display:flex;align-items:center;gap:9px}
+.logomark{height:30px;width:30px;object-fit:contain}
 .logo b{color:var(--accent)}
 .nav{display:flex;gap:16px;margin-left:auto}
 .nav a{color:var(--muted);font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:13px}
@@ -128,7 +129,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </head>
 <body style="--team:#93C950">
 <header class="site"><div class="wrap">
-<a class="logo" href="index.html">COD<b>LOCKER</b></a>
+<a class="logo" href="index.html"><img src="logo.png" alt="" class="logomark">COD<b>LOCKER</b></a>
 <nav class="nav"><a href="classes.html" class="navbtn">Classes</a><a href="stats.html">Stats</a><a href="news.html">News</a><a href="compare.html">Compare</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
 <span class="season">Black Ops 7 · 2026 CDL Season</span>
 </div></header>
