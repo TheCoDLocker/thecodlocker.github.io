@@ -112,6 +112,41 @@ footer{border-top:1px solid #283139;padding:17px 0;background:#080b0e;color:var(
 @media(max-width:700px){.grid{gap:9px;padding:10px}.teamsec{margin-top:12px}.stats-hero-grid{grid-template-columns:1fr}.stats-hero-badge{display:none}.stats-insights{grid-template-columns:1fr}.stats-insights .insight-card:last-child{grid-column:auto}.compare-selectors{grid-template-columns:1fr}.compare-vs{min-height:42px}.compare-profiles{grid-template-columns:1fr}.guide-tools{grid-template-columns:1fr}}
 @media(max-width:540px){.grid{grid-template-columns:1fr;gap:9px}.card{min-height:94px;padding:15px 14px}.teams-list{padding-left:8px;padding-right:8px}.page-body{padding-left:15px;padding-right:15px}.stats-summary .summary-value{font-size:32px}.sens-hist{gap:8px}.sens-bar{width:34px}.bar-row{grid-template-columns:92px 1fr 26px}.guide-card{min-height:180px;padding:21px 20px}.guide-open{left:20px}.compare-table{min-width:560px}}
 
+/* V10 compact desktop homepage — same design, less vertical space */
+@media(min-width:821px){
+  .home-shell{margin-top:10px}
+  .hero-grid{min-height:280px;grid-template-columns:1.12fr .88fr}
+  .hero-copy{padding:27px 40px 24px}
+  .eyebrow{font-size:13px;margin-bottom:8px}
+  .hero h1{font-size:clamp(44px,3.8vw,56px);line-height:.91;max-width:none}
+  .hero p{margin-top:11px;font-size:14px;line-height:1.45;max-width:500px}
+  .hero-actions{margin-top:15px;gap:8px}
+  .herocta,.herocta2{min-height:39px;padding:0 16px;font-size:13px}
+  .hero-art{min-height:270px}
+  .hero-art::before{width:min(250px,68%)}
+  .hero-art::after{width:min(296px,81%)}
+  .hero-logo{width:min(215px,56%)}
+  .dash-stat{min-height:68px;padding:11px 20px 10px}
+  .dash-stat::before{left:19px;width:30px}
+  .dash-label{font-size:10px}
+  .dash-value{margin-top:5px;font-size:25px}
+  .dash-value.date{font-size:15px}
+  .dash-sub{margin-top:4px}
+  .recent-section{padding:16px 24px 18px}
+  .section-title-row{margin-bottom:11px}
+  .section-title-row h2{font-size:19px}
+  .recent-grid{gap:11px}
+  .recent-card{min-height:76px;padding:11px 14px 10px}
+  .recent-name{font-size:17px}
+  .recent-team{margin-top:6px}
+  .directory{padding:14px 24px 2px}
+  .search-wrap{margin-bottom:9px}
+  #search{height:42px}
+  .chips{padding-bottom:9px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
+  .chip{padding:7px 11px;flex:0 0 auto}
+  .teams-list{padding-top:4px}
+}
+
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
