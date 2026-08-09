@@ -89,7 +89,36 @@ header.site .wrap{height:66px;display:flex;align-items:center;gap:20px}
 footer{border-top:1px solid #283139;padding:17px 0;background:#080b0e;color:var(--muted);font-size:11px}footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}.footer-brand{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed';font-size:22px;font-weight:700;color:#f1f3f4}.footer-brand img{width:36px;height:36px}.footer-brand b{color:var(--accent)}.footer-links{display:flex;flex-wrap:wrap;gap:15px}.footer-links a:hover{color:var(--accent)}
 
 @media(max-width:1100px){.nav{gap:14px}.nav a{font-size:13.5px}.header-searchbox{display:none}.hero-grid{grid-template-columns:1.14fr .86fr}.hero-copy{padding:43px 38px 38px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.recent-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.about-home{grid-template-columns:1.35fr repeat(3,.8fr)}.stats-grid{grid-template-columns:1fr}.page-summary{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:1080px){.analysis-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* V12 player profile polish */
+.sheet{max-width:1180px;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:26px 0 22px}
+.panel{position:relative;overflow:hidden;background:linear-gradient(180deg,#121920 0%,#0d1318 100%);border:1px solid #2b353d;border-radius:7px;clip-path:none;padding:19px 20px 17px;box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.panel::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--team,var(--accent)),color-mix(in srgb,var(--team,var(--accent)) 18%,transparent),transparent)}
+.panel::after{content:"";position:absolute;right:-50px;top:-55px;width:125px;height:125px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--team,var(--accent)) 12%,transparent),transparent 68%);pointer-events:none}
+.panel h2{display:flex;align-items:center;gap:8px;margin-bottom:13px;padding-bottom:11px;border-bottom:1px solid #27313a;color:#f4f6f8;font-size:17px;letter-spacing:.11em}
+.panel h2::before{content:"";width:5px;height:15px;border-radius:2px;background:var(--team,var(--accent));box-shadow:0 0 10px color-mix(in srgb,var(--team,var(--accent)) 35%,transparent)}
+.row{padding:8px 0;border-bottom:1px solid #202a31;font-size:13px}
+.row .k{color:#89959e;font-size:12px}
+.row .v{font-family:'IBM Plex Mono';font-size:13px;font-weight:500;color:#f0f3f5}
+.player-analysis{max-width:1180px;padding:4px 0 26px}
+.player-analysis-head{align-items:center;margin:0 0 13px;padding:0 2px}
+.player-analysis-head h2{font-size:29px;letter-spacing:.025em}
+.player-analysis-head p{max-width:610px;color:#85919a;font-size:12px}
+.analysis-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
+.analysis-card{min-height:184px;padding:18px 18px 17px;background:linear-gradient(165deg,#141c22 0%,#0d1318 75%);border:1px solid #2d3942;border-radius:7px;box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.analysis-card::before{height:3px;background:linear-gradient(90deg,var(--team,var(--accent)) 0%,color-mix(in srgb,var(--team,var(--accent)) 42%,transparent) 48%,transparent 100%)}
+.analysis-card::after{content:"";position:absolute;right:-28px;bottom:-38px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--team,var(--accent)) 10%,transparent),transparent 70%);pointer-events:none}
+.analysis-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--team,var(--accent)) 55%,#2d3942);box-shadow:0 16px 36px rgba(0,0,0,.23),0 0 18px color-mix(in srgb,var(--team,var(--accent)) 8%,transparent)}
+.analysis-label{font-family:'Barlow Condensed';font-weight:700;font-size:11px;letter-spacing:.13em;color:color-mix(in srgb,var(--team,var(--accent)) 75%,#b5bdc4);position:relative;z-index:1}
+.analysis-value{margin-top:10px;font-size:29px;line-height:.92;letter-spacing:.01em;color:#f6f8fa;position:relative;z-index:1}
+.analysis-copy{margin-top:12px;color:#a4afb7;font-size:12.5px;line-height:1.58;position:relative;z-index:1}
+.player-written{max-width:980px;margin:8px auto 30px;padding:24px 26px 25px;background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.006));border:1px solid #273139;border-left:3px solid var(--team,var(--accent));border-radius:6px;color:#aab3ba;font-size:15px;line-height:1.82}
+.player-written h2{font-family:'Barlow Condensed';font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:.04em;color:#f1f4f6;margin-bottom:12px}
+.player-written p+p{margin-top:11px}
+
+
+@media(max-width:1080px){.analysis-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.analysis-card{min-height:166px}.sheet{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.sheet{grid-template-columns:1fr 1fr}.panel:last-child{grid-column:1/-1}.analysis-grid{grid-template-columns:1fr 1fr}.player-written{margin-left:20px;margin-right:20px}}
 @media(max-width:820px){header.site .wrap{height:auto;min-height:62px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}.logo{font-size:27px}.logomark{width:40px;height:40px}.nav{width:100%;order:3;margin:0;overflow-x:auto;padding-bottom:7px;white-space:nowrap;flex-wrap:nowrap}.hero-grid{grid-template-columns:1fr}.hero-copy{padding:38px 26px 30px}.hero-art{min-height:285px;border-top:1px solid #20272e}.hero-logo{width:min(245px,60%)}.hero-art::before{width:min(285px,70%)}.hero-art::after{width:min(335px,82%)}.dashboard-stats{grid-template-columns:repeat(3,1fr)}.dash-stat:nth-child(3){border-right:0}.dash-stat:nth-child(-n+3){border-bottom:1px solid #293139}.dash-stat:last-child{grid-column:2/4}.recent-grid{grid-template-columns:1fr 1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-home{grid-template-columns:1fr}.about-feature{border-left:0;border-top:1px solid #293139;text-align:left;align-items:flex-start}.page-summary{grid-template-columns:1fr 1fr}.news-grid{grid-template-columns:1fr}.news-card:first-child{grid-column:auto}.analysis-grid{grid-template-columns:1fr 1fr}.player-analysis-head{align-items:flex-start;flex-direction:column}.article-statline{grid-template-columns:1fr}.compare-selectors{grid-template-columns:1fr}.page-hero{padding:27px 24px 24px}.page-body{padding:23px 22px 32px}.page-hero::after{display:none}}
 @media(max-width:540px){.wrap{padding:0 14px}.home-shell{padding:0;margin-top:9px}.home-frame{border-left:0;border-right:0;border-radius:0}.hero-copy{padding:31px 19px 27px}.hero h1{font-size:52px}.hero p{font-size:14px}.hero-actions{display:grid;grid-template-columns:1fr}.herocta,.herocta2{width:100%}.dashboard-stats{grid-template-columns:1fr 1fr}.dash-stat{min-height:80px;padding:14px 13px}.dash-stat:nth-child(3){border-right:1px solid #293139}.dash-stat:nth-child(2n){border-right:0}.dash-stat:nth-child(-n+4){border-bottom:1px solid #293139}.dash-stat:last-child{grid-column:1/-1;border-right:0}.dash-value{font-size:25px}.dash-value.date{font-size:15px}.recent-section,.directory{padding-left:14px;padding-right:14px}.recent-grid{grid-template-columns:1fr}.chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:12px}.chip{flex:0 0 auto}.teams-list{padding:4px 8px 16px}.grid{grid-template-columns:1fr 1fr;gap:7px;padding:8px}.card{padding:13px 11px;min-height:86px}.card .tag{font-size:19px}.cardstats div{padding-right:11px;margin-right:11px}.cardstats div b{font-size:14px}.teamhead{padding:0 12px}.teamhead h2{font-size:20px}.teamhead .tcount{display:none}.view-team{margin-left:auto}.about-home{margin:0 8px 10px}.about-copy{padding:22px 19px}.about-feature{padding:19px}.page-shell{padding:0;margin-top:10px}.page-frame{border-left:0;border-right:0;border-radius:0}.page-hero{padding:25px 18px 21px}.page-body{padding:20px 15px 28px}.page-summary{grid-template-columns:1fr 1fr}.summary-card{min-height:88px;padding:15px}.summary-value{font-size:28px}.bar-row{grid-template-columns:105px 1fr 25px}.news-card{padding:20px}.news-card:first-child h2,.news-card h2{font-size:25px}}
 
@@ -169,7 +198,6 @@ footer{border-top:1px solid #283139;padding:17px 0;background:#080b0e;color:var(
 <h1>CleanX</h1>
 <div class="sub"><span class="teamname">Toronto KOI</span><span class="badge verified">Verified</span><span class="pagemeta">Black Ops 7 · 2026 CDL Season · Updated 2026-07-10</span></div>
 </div></div>
-<section class="wrap" style="max-width:820px;padding-top:26px;color:var(--muted);font-size:15px;line-height:1.8"><p>One of Toronto KOI's 2026 CDL roster, CleanX's setup breaks down like this. The Tactical Flipped button layout is confirmed by the league's official player settings data. Settings update whenever CleanX changes something — the date under the player name shows the last confirmed change.</p></section>
 
 <section class="sheet wrap">
 <div class="panel"><h2>Setup</h2><div class="row"><span class="k">Controller</span><span class="v empty">—</span></div>
@@ -189,6 +217,7 @@ footer{border-top:1px solid #283139;padding:17px 0;background:#080b0e;color:var(
 <div class="panel"><h2>Display</h2><div class="row"><span class="k">FOV</span><span class="v empty">—</span></div></div>
 </section>
 
+<section class="wrap player-written"><h2>Setup breakdown</h2><p>One of Toronto KOI's 2026 CDL roster, CleanX's setup breaks down like this. The Tactical Flipped button layout is confirmed by the league's official player settings data. Settings update whenever CleanX changes something — the date under the player name shows the last confirmed change.</p></section>
 
 
 <div class="wrap verification-card"><span class="verify-title">Verification record</span><span class="verify-line"><b>Verified July 10, 2026</b> · Call of Duty League player settings · <b>Official league data</b></span></div>
