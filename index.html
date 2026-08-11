@@ -253,6 +253,94 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 }
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+/* V24.2 homepage refresh — restrained redesign, homepage only */
+.home-shell{max-width:1390px;margin-top:22px;padding:0 18px}
+.home-frame{border-radius:10px;background:#080b0e;box-shadow:0 24px 70px rgba(0,0,0,.42);overflow:hidden}
+
+/* Hero: same two-column composition, more depth and clearer hierarchy */
+.hero{background:linear-gradient(110deg,#090d10 0%,#080b0e 57%,#0b0e11 100%)}
+.hero::before{opacity:.28;background-size:52px 52px;mask-image:linear-gradient(90deg,#000 0%,#000 64%,transparent 96%)}
+.hero::after{width:48%;background:radial-gradient(circle at 56% 50%,rgba(255,79,18,.19),transparent 42%),linear-gradient(135deg,transparent 18%,rgba(255,79,18,.055) 18.2%,transparent 18.8%,transparent 38%,rgba(255,79,18,.06) 38.2%,transparent 38.8%)}
+.hero-grid{grid-template-columns:1.12fr .88fr;min-height:436px}
+.hero-copy{padding:54px 58px 48px}
+.hero-copy::before{content:"";position:absolute;left:0;top:54px;width:4px;height:88px;background:linear-gradient(180deg,var(--accent),rgba(255,79,18,.12));box-shadow:0 0 18px rgba(255,79,18,.26)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:15px;font-size:13px;color:#ff6a2b}
+.eyebrow::before{content:"";width:19px;height:1px;background:currentColor}
+.hero h1{font-size:clamp(52px,5.1vw,78px);line-height:.88;max-width:9.1ch;letter-spacing:-.008em}
+.hero h1 span{background:linear-gradient(90deg,#ff4f12,#ff7837);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:570px;margin-top:20px;color:#aab2b8;font-size:16px;line-height:1.62}
+.hero-details{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hero-details span{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border:1px solid #303941;border-radius:999px;background:rgba(15,20,24,.72);color:#9da7ae;font-family:'IBM Plex Mono';font-size:9px;letter-spacing:.07em;text-transform:uppercase}
+.hero-details span::before{content:"";width:5px;height:5px;margin-right:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(255,79,18,.45)}
+.hero-actions{margin-top:23px;gap:9px}
+.herocta,.herocta2{min-height:43px;border-radius:4px;padding:0 18px}
+.herocta{box-shadow:0 10px 25px rgba(255,79,18,.16),inset 0 1px rgba(255,255,255,.12)}
+.herocta2{background:rgba(15,20,24,.82)}
+.hero-art{min-height:410px;isolation:isolate}
+.hero-art::before{width:min(340px,71%);border-color:rgba(255,79,18,.35);box-shadow:0 0 0 14px rgba(255,79,18,.025),0 0 75px rgba(255,79,18,.14),inset 0 0 55px rgba(255,79,18,.05)}
+.hero-art::after{width:min(410px,86%);border-color:rgba(255,79,18,.15);animation:homeOrbit 34s linear infinite}
+.hero-logo{width:min(286px,61%);filter:drop-shadow(0 24px 34px rgba(0,0,0,.62)) drop-shadow(0 0 22px rgba(255,79,18,.15))}
+@keyframes homeOrbit{to{transform:rotate(360deg)}}
+
+/* Stat strip becomes quieter mini-dashboard cards while remaining one strip */
+.dashboard-stats{gap:0;background:#0b0f12}
+.dash-stat{min-height:92px;padding:18px 23px 16px;background:linear-gradient(180deg,rgba(18,24,29,.86),rgba(12,17,21,.9));transition:background .16s ease}
+.dash-stat:hover{background:linear-gradient(180deg,#151c21,#0e1418)}
+.dash-stat::before{left:22px;width:26px;height:2px;opacity:.9}
+.dash-label{color:#7f8a92;font-size:10px}.dash-value{margin-top:8px;font-size:30px}.dash-sub{color:#65717a}
+
+/* Recently updated: more editorial, less boxy */
+.recent-section{padding:27px 30px 30px;background:linear-gradient(180deg,#090d10,#080b0e)}
+.section-title-row{margin-bottom:16px}.section-title-row h2{font-size:23px;letter-spacing:.045em}
+.section-title-row h2::after{content:"";display:inline-block;width:28px;height:2px;margin:0 0 5px 10px;background:var(--accent);opacity:.9}
+.recent-grid{gap:11px}
+.recent-card{min-height:98px;padding:16px 17px 15px;border-radius:6px;background:linear-gradient(155deg,#131a1f,#0d1216 74%);box-shadow:0 8px 19px rgba(0,0,0,.13)}
+.recent-card::before{top:0;right:0;bottom:auto;width:auto;height:2px;background:linear-gradient(90deg,var(--team),color-mix(in srgb,var(--team) 18%,transparent) 70%,transparent)}
+.recent-card::after{content:"›";position:absolute;right:15px;bottom:12px;color:color-mix(in srgb,var(--team) 70%,#89939a);font-family:'Barlow Condensed';font-size:17px;opacity:.55;transition:.16s ease}
+.recent-card:hover::after{transform:translateX(2px);opacity:1}
+.recent-name{font-size:19px}.recent-team{padding-right:22px;color:#8f99a1}
+
+/* Directory gets a visual introduction without changing filters or results */
+.directory{padding:30px 30px 9px;background:#080b0e}
+.directory-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:17px;padding-top:1px}
+.directory-head h2{margin-top:3px;font-family:'Barlow Condensed';font-size:32px;line-height:1;text-transform:uppercase;letter-spacing:.025em}
+.directory-kicker{display:block;color:var(--accent);font-family:'IBM Plex Mono';font-size:9px;letter-spacing:.11em;text-transform:uppercase}
+.directory-head p{max-width:430px;color:#7f8a92;font-size:12px;line-height:1.55;text-align:right}
+#search{height:52px;border-radius:5px;background:linear-gradient(180deg,#10161a,#0d1216);border-color:#303941;padding-left:18px;font-size:14px;box-shadow:inset 0 1px rgba(255,255,255,.015)}
+#search:focus{border-color:#69737b;box-shadow:0 0 0 2px rgba(255,79,18,.08)}
+.chips{gap:6px}.chip{border-radius:4px;background:#0d1317;padding:7px 11px;color:#98a2aa}.chip[aria-pressed="true"]{background:rgba(255,79,18,.07);box-shadow:none}
+
+/* Team groups feel a little lighter, but retain the exact existing card layout */
+.teams-list{padding:10px 24px 31px}
+.teamsec{margin-top:15px;border-radius:7px;background:#0a0f12;box-shadow:0 9px 25px rgba(0,0,0,.1)}
+.teamhead{min-height:61px;background:linear-gradient(90deg,color-mix(in srgb,var(--team) 7%,#10161a),#0c1114 60%)}
+.team-logo-shell{border-radius:6px}
+.grid{gap:11px;padding:12px}
+.card{min-height:103px;padding:17px 17px 15px;border-radius:6px;background:linear-gradient(155deg,#12191e,#0d1216 76%)}
+.card::before{top:15px;bottom:15px}
+.cardstats{margin-top:14px}
+
+@media(max-width:1100px){
+  .hero-copy{padding:47px 40px 42px}.hero-copy::before{top:47px}
+  .recent-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:820px){
+  .home-shell{margin-top:12px;padding:0 10px}
+  .hero-grid{grid-template-columns:1fr}.hero-copy{padding:39px 28px 32px}.hero-copy::before{top:40px;height:72px}
+  .hero-art{min-height:270px}.hero-logo{width:min(230px,54%)}
+  .directory-head{align-items:flex-start;flex-direction:column;gap:7px}.directory-head p{text-align:left}
+}
+@media(max-width:540px){
+  .home-shell{padding:0;margin-top:8px}.home-frame{border-radius:0;border-left:0;border-right:0}
+  .hero-copy{padding:32px 20px 28px}.hero-copy::before{display:none}.hero h1{font-size:51px}.hero-details{margin-top:15px}
+  .dashboard-stats{gap:0}.recent-section,.directory{padding-left:15px;padding-right:15px}
+  .recent-grid{grid-template-columns:1fr}.directory-head h2{font-size:28px}
+  .teams-list{padding-left:8px;padding-right:8px}.grid{grid-template-columns:1fr;gap:9px;padding:9px}
+}
+@media(prefers-reduced-motion:reduce){.hero-art::after{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -268,6 +356,7 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
     <div class="eyebrow">The home of CDL settings</div>
     <h1>Every CDL Pro.<span>Every Setting.</span></h1>
     <p>The most accurate controller settings, sensitivity, FOV and competitive classes for all 12 Call of Duty League teams.</p>
+    <div class="hero-details" aria-label="CODLOCKER coverage"><span>Controller</span><span>FOV</span><span>Pro Classes</span></div>
     <div class="hero-actions"><a class="herocta" href="classes.html">View Pro Meta Classes&nbsp; ›</a><a class="herocta2" href="compare.html">Compare Players</a><a class="herocta2" href="stats.html">League Stats&nbsp; ▥</a></div>
   </div>
   <div class="hero-art"><img src="logo.png" class="hero-logo" alt="CODLOCKER controller emblem"></div>
@@ -292,6 +381,7 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 </section>
 
 <section class="directory" id="players">
+  <div class="directory-head"><div><span class="directory-kicker">CDL Player Directory</span><h2>Find Your Pro</h2></div><p>Search or filter by team to jump straight to a player’s competitive setup.</p></div>
   <div class="search-wrap"><input id="search" type="search" placeholder="Search players, teams, or settings..." aria-label="Search players"><span class="search-mark">⌕</span></div>
   <div class="chips"><button class="chip" data-team="all" aria-pressed="true">All Teams</button><button class="chip" data-team="optic" aria-pressed="false" style="--chipcolor:#93C950">OpTic Texas</button><button class="chip" data-team="thieves" aria-pressed="false" style="--chipcolor:#E8322E">Los Angeles Thieves</button><button class="chip" data-team="m8" aria-pressed="false" style="--chipcolor:#FF5CA8">Paris Gentle Mates</button><button class="chip" data-team="faze" aria-pressed="false" style="--chipcolor:#E43D30">FaZe Vegas</button><button class="chip" data-team="falcons" aria-pressed="false" style="--chipcolor:#00C48C">Riyadh Falcons</button><button class="chip" data-team="heretics" aria-pressed="false" style="--chipcolor:#2E6BFF">Miami Heretics</button><button class="chip" data-team="koi" aria-pressed="false" style="--chipcolor:#FF8A00">Toronto KOI</button><button class="chip" data-team="g2" aria-pressed="false" style="--chipcolor:#EE3D40">G2 Minnesota</button><button class="chip" data-team="carolina" aria-pressed="false" style="--chipcolor:#1E90D6">Carolina Royal Ravens</button><button class="chip" data-team="boston" aria-pressed="false" style="--chipcolor:#2BD97C">Boston Breach</button><button class="chip" data-team="cloud9" aria-pressed="false" style="--chipcolor:#00AEEF">Cloud9 New York</button><button class="chip" data-team="surge" aria-pressed="false" style="--chipcolor:#38B6FF">Vancouver Surge</button><span class="count" id="count"></span></div>
 </section>
