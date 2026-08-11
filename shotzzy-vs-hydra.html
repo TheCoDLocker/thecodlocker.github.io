@@ -207,6 +207,51 @@ footer{border-top:1px solid #283139;padding:17px 0;background:#080b0e;color:var(
 @media(max-width:900px){.player-profile-shell{display:block;padding:0 16px;margin-top:16px}.player-toc{position:relative;top:auto;max-height:none;margin-bottom:18px;display:flex;gap:5px;overflow-x:auto;padding:8px;white-space:nowrap}.player-toc-title{display:none}.player-toc a{flex:0 0 auto;min-height:34px;padding:7px 11px;font-size:13px}.player-toc a::before{left:9px;right:9px;top:auto;bottom:2px;width:auto;height:2px}.profile-section-head{align-items:flex-start;flex-direction:column;gap:5px}.profile-section-head p{text-align:left}.profile-card-grid,.hardware-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.player-profile-shell{padding:0 12px}.player-analysis.profile-analysis .analysis-grid{grid-template-columns:1fr}.hardware-known{grid-template-columns:1fr}.graphics-fov{grid-template-columns:1fr}.profile-card{padding:19px 17px}.profile-section-head h2{font-size:25px}}
 
+
+
+/* V24.1 restrained visual polish — preserve the original layout and hierarchy */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+::selection{background:rgba(255,79,18,.28);color:#fff}
+a,button,input,select,summary{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid color-mix(in srgb,var(--accent) 72%,#fff);outline-offset:2px}
+
+header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+.logo{letter-spacing:.025em}.nav a,.nav-team summary{letter-spacing:.055em}
+.header-searchbox input{background:#0b1014;border-color:#2b343c}
+
+.home-frame,.page-frame{border-color:#303941;box-shadow:0 20px 55px rgba(0,0,0,.36)}
+.hero-copy{position:relative}.hero p{color:#aab2b8}.eyebrow{letter-spacing:.065em}
+.dashboard-stats{background:linear-gradient(180deg,#0e1317,#0a0e11)}
+.dash-value{letter-spacing:.005em}.dash-label,.dash-sub{letter-spacing:.11em}
+.section-title-row h2,.teamhead h2,.page-hero h1{letter-spacing:.03em}
+
+.recent-card,.card,.summary-card,.profile-card,.hardware-item,.profile-provenance{border-color:#2d3740}
+.recent-card,.card{box-shadow:0 7px 18px rgba(0,0,0,.10)}
+.teamsec{border-color:#2d363e;box-shadow:0 10px 24px rgba(0,0,0,.10)}
+.teamhead{border-bottom-color:#2a333b}.teamhead .tcount{color:#7e8991}
+.cardstats{border-top-color:#273039}.card .status{letter-spacing:.09em}
+
+.page-hero p,.page-lede,.profile-section-head p{color:#98a2aa}
+.profile-section-head{padding-bottom:1px}.profile-section-head h2{letter-spacing:.04em}
+.profile-card h3{border-bottom-color:#2c353d;letter-spacing:.08em}
+.profile-card .row{border-bottom-color:#283139}.profile-card .row:last-child{border-bottom:0}
+.profile-card .row .k{color:#96a1a9}.profile-card .row .v{color:#f2f4f5}
+.graphics-fov{box-shadow:inset 3px 0 0 var(--team,var(--accent)),0 12px 28px rgba(0,0,0,.15)}
+.hardware-item{background:linear-gradient(180deg,#0c1115,#0a0f13)}
+.player-toc{border-color:#2d3740}.player-toc a{color:#98a2aa}
+.profile-source-link{border-color:#28323a}
+
+@media(max-width:820px){
+  header.site .wrap{gap:14px}
+  .home-shell,.page-shell{padding-left:10px;padding-right:10px}
+}
+@media(max-width:600px){
+  .hero-copy{padding-left:22px;padding-right:22px}
+  .directory{padding-left:16px;padding-right:16px}
+  .recent-section{padding-left:16px;padding-right:16px}
+  .teamhead{padding-left:16px;padding-right:16px}
+}
+
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head><body><header class="site"><div class="wrap">
