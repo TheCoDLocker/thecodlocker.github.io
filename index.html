@@ -1078,6 +1078,25 @@ header.site .wrap{height:66px;gap:26px}
 .lead-meta i{width:4px;height:4px}
 .lead-tape a::before{width:8px;height:8px}
 footer{border-top:1px solid var(--edge);background:var(--ink)}
+
+/* ---- 12. key/value rows -------------------------------------
+   Values were right-aligned flush to the card's inner edge, with
+   no trailing space, so they read as truncated. Inset the value
+   column, widen the card a little, and let a long value wrap
+   instead of running into the edge. ---------------------------- */
+.row,.profile-card .row,.panel .row{padding-left:16px!important;padding-right:16px!important;gap:22px}
+.row .v{overflow-wrap:anywhere}
+/* the card heading's accent bar lines up with the label column,
+   while every rule still spans the full width of the card */
+.profile-card h3::before{margin-left:16px}
+.profile-card,.panel{padding-left:26px;padding-right:26px}
+.panel-rows div{padding-right:6px}
+
+@media(max-width:760px){
+  .row,.profile-card .row,.panel .row{padding-left:12px!important;padding-right:12px!important;gap:14px}
+  .profile-card h3::before{margin-left:12px}
+  .profile-card,.panel{padding-left:18px;padding-right:18px}
+}
 </style>
 </head>
 <body>
