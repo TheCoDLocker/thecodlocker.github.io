@@ -254,6 +254,230 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<style id="v313-polish">
+/* ============================================================
+   V31.3 — small polish pass. Everything here is additive:
+   delete this block and the site returns to exactly v31.
+   ============================================================ */
+
+/* dark scrollbars — the default light ones cut through the theme */
+html{scrollbar-color:#2b343c #090c0f;scrollbar-width:thin}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:#090c0f}
+::-webkit-scrollbar-thumb{background:#252d35;border:3px solid #090c0f;border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#3b454e}
+
+/* accent-tinted text selection */
+::selection{background:rgba(255,79,18,.3);color:#fff}
+
+/* one consistent keyboard focus ring across every control */
+a:focus-visible,button:focus-visible,summary:focus-visible,
+input:focus-visible,select:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+/* header: the logomark reacts on hover */
+.logomark{transition:transform .2s ease,filter .2s ease}
+.logo:hover .logomark{transform:rotate(-5deg) scale(1.05);
+  filter:drop-shadow(0 0 11px rgba(255,79,18,.34))}
+.footer-brand img{transition:transform .2s ease}
+.footer-brand:hover img{transform:rotate(-5deg)}
+
+/* mark the page you're currently on in the nav */
+.nav a[aria-current="page"]{color:#fff}
+.nav a[aria-current="page"]::after{content:"";display:block;height:2px;
+  margin-top:4px;border-radius:2px;background:var(--accent);
+  box-shadow:0 0 8px rgba(255,79,18,.45)}
+.nav-team[data-current] summary{color:#fff}
+
+/* long key/value sheets: quiet banding + row hover, so the eye
+   tracks from the label on the left to the value on the right */
+.profile-card .row,.panel .row{border-radius:3px;transition:background .12s ease}
+.profile-card .row:nth-of-type(even),
+.panel .row:nth-of-type(even){background:rgba(255,255,255,.026)}
+.profile-card .row:hover,.panel .row:hover{background:rgba(255,255,255,.05)}
+
+/* the graphics sheet runs 30+ rows deep — two columns on desktop
+   halves the scroll and pulls each value back next to its label */
+@media(min-width:1000px){
+  #graphics .profile-card{column-count:2;column-gap:36px;column-rule:1px solid #1e262d}
+  #graphics .profile-card h3{column-span:all}
+  #graphics .profile-card .row{break-inside:avoid}
+  #graphics .profile-card .profile-provenance{column-span:all;break-inside:avoid}
+}
+
+
+/* data tables: same banding, existing hover still wins */
+.data-table tbody tr:nth-child(even),
+.analysis-table tbody tr:nth-child(even),
+.compare-table tbody tr:nth-child(even),
+.panel table tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+.panel table tbody tr:hover{background:#171d24}
+
+/* team pages: logo alongside the name instead of a bare headline */
+.team-hero-row{display:flex;align-items:center;gap:18px}
+.team-hero-logo{width:66px;height:66px;flex:0 0 66px;display:flex;
+  align-items:center;justify-content:center;padding:8px;background:#090d10;
+  border:1px solid color-mix(in srgb,var(--team,var(--accent)) 34%,#2a333b);
+  border-radius:9px;box-shadow:0 0 22px color-mix(in srgb,var(--team,var(--accent)) 13%,transparent)}
+.team-hero-logo img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+@media(max-width:600px){
+  .team-hero-row{gap:13px}
+  .team-hero-logo{width:50px;height:50px;flex:0 0 50px;padding:6px;border-radius:7px}
+}
+
+/* prose links read as links on hover */
+.article-prose a:hover,.page-lede a:hover,.player-written a:hover,
+.info-box a:hover,.source a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* respect the OS reduced-motion setting */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;
+    animation-iteration-count:1!important;transition-duration:.001ms!important;
+    scroll-behavior:auto!important}
+}
+</style>
+<style id="v32-square">
+/* ============================================================
+   V32 — square + rigid. Pulls every inner page onto the same
+   design language as the front page: hairline edges, flat
+   panels, no rounded corners, no glow, no floating cards.
+   Additive — delete this block to return to v31.3.
+   ============================================================ */
+
+/* ---- 1. one palette, taken from the front page --------------- */
+:root{
+  --ink:#08090b;--paper:#f3f0ea;
+  --accent:#ff5a1f;--accent2:#ff7038;--accent-deep:#c8410f;
+  --edge:#20262c;--edge-2:#2b333b;
+  --panel:#0b0e11;--panel2:#0e1216;--panel3:#11161a;
+  --line:#20262c;--line2:#2b333b;
+  --text:#f3f0ea;--muted:#8d959b;
+  --shadow:none;
+}
+
+/* ---- 2. the big faded logo comes out ------------------------- */
+.lead-main::after,.lead-main .lead-ring{display:none!important}
+
+/* every other soft circular flourish goes with it */
+.page-hero::after,.news-card::after,.compare-profile::after,
+.panel::after,.analysis-card::after,.lower-third::after,
+.meta-lock::after,.stats-summary .summary-card::after{display:none!important}
+
+/* ---- 3. square corners, everywhere --------------------------- */
+*,*::before,*::after{border-radius:0!important}
+input,select,textarea{border-radius:2px!important}
+
+/* ---- 4. one header across every page ------------------------- */
+header.site{background:rgba(8,9,11,.95);border-bottom:1px solid #1b2025;box-shadow:none}
+header.site .wrap{height:66px;gap:26px}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:700;
+  letter-spacing:.005em;color:var(--paper)}
+.logomark{width:38px;height:38px;filter:none}
+.nav{gap:21px}
+.nav a,.nav-team summary{font-family:'Barlow Condensed',sans-serif;font-size:15px;
+  font-weight:600;letter-spacing:.07em;color:#a7aeb4}
+.nav a:hover,.nav-team:hover summary,.nav-team[open] summary{color:#fff;transform:none}
+.header-searchbox{width:236px;flex:0 0 236px}
+.header-searchbox input{height:34px;border-color:#2b3238;background:#0c0f12;
+  font-family:'Barlow',sans-serif;font-size:12px}
+.team-dropdown,.header-results{border-color:var(--edge-2);background:#0a0d10;box-shadow:none}
+
+/* ---- 5. flat panels: no gradient, no glow, one hairline ------ */
+.page-frame,.panel,.profile-card,.analysis-card,.summary-card,.insight-card,
+.research-card,.guide-card,.news-card,.compare-picker,.compare-profile,
+.compare-vs,.pair-player,.pair-vs,.pair-summary,.popular-compare-card,.card,
+.recent-card,.teamsec,.player-toc,.hardware-item,.verification-card,.info-box,
+.loadout,.guides-intro-main,.guides-intro-side,.guide-tool,.compare-help div,
+.stats-hero-badge,.about-home,.analysis-table-wrap,.sens-chart-shell,
+.profile-provenance,.profile-source-link,.empty-note,.meta-mini,.team-hero-logo,
+.team-logo-shell,.team-drop-logo,.notice,.chip,.claw-list a,.pair-links a,
+.faq-item,.article-stat,.player-written{
+  background-image:none;box-shadow:none}
+
+.page-frame,.panel,.profile-card,.analysis-card,.summary-card,.insight-card,
+.research-card,.guide-card,.news-card,.compare-picker,.compare-profile,
+.compare-vs,.pair-player,.pair-summary,.popular-compare-card,.card,.recent-card,
+.teamsec,.player-toc,.hardware-item,.guides-intro-main,.guides-intro-side,
+.guide-tool,.compare-help div,.stats-hero-badge,.about-home,.analysis-table-wrap,
+.sens-chart-shell,.profile-provenance,.empty-note,.article-stat{
+  background-color:var(--panel);border-color:var(--edge)}
+
+.page-hero{background:var(--ink);border-bottom:1px solid var(--edge)}
+.lower-third{background:var(--ink);border-bottom:1px solid var(--edge)}
+.page-frame,.home-frame{background:var(--ink)}
+.directory,.teams-list,.recent-section{background:var(--ink)}
+
+/* ---- 6. accent rules stay flat and hard ---------------------- */
+.bar-fill,.panel-bar i,.meta-track i{background:var(--accent);box-shadow:none;border:0}
+.sens-bar{background:var(--accent-deep);box-shadow:none;border:0}
+.sens-col.mode .sens-bar{background:var(--accent)}
+.bar-fill::after{display:none}
+.bar-track,.panel-bar,.meta-track{background:#171c21;border:0}
+.teamhead::before,.lower-third .rail,.card::before,.recent-card::before,
+.profile-card::before,.analysis-card::before,.panel::before{
+  background:var(--team,var(--accent));box-shadow:none}
+.lower-third .rail{height:3px;width:96px;margin-top:17px}
+
+/* panels get a short accent mark, not a full-width bar — the same
+   idiom the front page uses on .summary-card and .guide-card */
+.panel::before,.profile-card::before,.analysis-card::before,
+.compare-picker::before,.compare-profile::before,.pair-player::before{
+  left:0;right:auto;width:48px;height:2px}
+.panel h2::before,.profile-card h3::before{box-shadow:none}
+.card::after{display:none}
+
+/* ---- 7. rigid hover: edges move, cards don't ----------------- */
+.card,.recent-card,.news-card,.guide-card,.research-card,.popular-compare-card,
+.analysis-card,.data-table tbody tr,.meta-mini,.chip,.nav a,.player-toc a,
+.lead-actions a,.section-rail a,.league-rail a{transition:background-color .12s ease,border-color .12s ease,color .12s ease}
+.card:hover,.card:focus-visible,.recent-card:hover,.recent-card:focus-visible,
+.news-card:hover,.guide-card:hover,.research-card:hover,.research-card:focus-visible,
+.popular-compare-card:hover,.analysis-card:hover,.chip:hover,.player-toc a:hover,
+.lead-go:hover,.lead-alt:hover,.data-table tbody tr:hover{transform:none!important}
+.card:hover,.card:focus-visible,.recent-card:hover,.recent-card:focus-visible{
+  background:var(--panel3);border-color:var(--team,var(--accent));box-shadow:none}
+.news-card:hover,.guide-card:hover,.popular-compare-card:hover,
+.research-card:hover,.research-card:focus-visible,.analysis-card:hover{
+  background:var(--panel3);border-color:var(--edge-2);box-shadow:none}
+.research-card:hover,.research-card:focus-visible{border-color:var(--accent)}
+.card:hover .tag,.card:focus-visible .tag{text-shadow:none}
+
+/* ---- 8. headings share the front page's warm white ----------- */
+.page-hero h1,.lower-third h1,.panel h2,.profile-card h3,.news-card h2,
+.guide-card h2,.faq-item h3,.player-analysis-head h2,.article-prose h2,
+.about-copy h2,.pair-summary h2,.guides-intro-main h2,.teamhead h2,
+.section-title-row h2,.popular-compare-head h2,.summary-value,.analysis-value,
+.insight-value,.card .tag,.stats-hero-badge b{color:var(--paper)}
+
+/* ---- 9. same frame width as the front page ------------------- */
+.page-shell,.player-profile-shell{max-width:1420px;padding-left:28px;padding-right:28px}
+@media(max-width:820px){
+  .page-shell,.player-profile-shell{padding-left:16px;padding-right:16px}
+}
+
+/* ---- 10. tables: rules, not rounded blocks ------------------- */
+.data-table th,.analysis-table th,.compare-table th,.panel table th{
+  background:#0d1114;border-bottom:1px solid var(--edge-2)}
+.data-table td,.analysis-table td,.compare-table td{border-bottom:1px solid #171c21}
+.compare-table td.diff{background:rgba(255,90,31,.06)}
+
+/* guide cards: link sits below the copy instead of on top of it */
+.guide-card{display:flex;flex-direction:column}
+.guide-card p{flex:1}
+.guide-open{position:static;margin-top:14px;left:auto;bottom:auto}
+
+/* team pages sit closer to the width of everything else */
+.lower-third + section.wrap{max-width:1080px!important}
+.lower-third + section.wrap > p{max-width:780px}
+
+/* ---- 11. odds and ends --------------------------------------- */
+.about-feature .feature-icon{border-color:rgba(255,90,31,.4)}
+.badge{border-color:var(--edge-2)}
+.sens-num{background:#10151a;border-color:var(--edge-2)}
+.lead-meta i{width:4px;height:4px}
+.lead-tape a::before{width:8px;height:8px}
+footer{border-top:1px solid var(--edge);background:var(--ink)}
+</style>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -278,4 +502,5 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 <div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
 <span>© 2026 CODLOCKER · Fan-made. Not affiliated with Activision or the Call of Duty League.</span>
 </div></footer><script>
-document.querySelectorAll('#ptable th').forEach((th,i)=>{th.addEventListener('click',()=>{const tb=document.querySelector('#ptable tbody');const rows=[...tb.rows];const num=th.dataset.num==='1';const asc=th.dataset.asc!=='1';document.querySelectorAll('#ptable th').forEach(x=>x.dataset.asc='');th.dataset.asc=asc?'1':'';rows.sort((a,b)=>{let av,bv;if(num){av=parseFloat(a.cells[i].dataset.v||0);bv=parseFloat(b.cells[i].dataset.v||0);}else{av=a.cells[i].textContent.toLowerCase();bv=b.cells[i].textContent.toLowerCase();}return(av>bv?1:av<bv?-1:0)*(asc?1:-1);});rows.forEach(r=>tb.appendChild(r));});});</script></body></html>
+document.querySelectorAll('#ptable th').forEach((th,i)=>{th.addEventListener('click',()=>{const tb=document.querySelector('#ptable tbody');const rows=[...tb.rows];const num=th.dataset.num==='1';const asc=th.dataset.asc!=='1';document.querySelectorAll('#ptable th').forEach(x=>x.dataset.asc='');th.dataset.asc=asc?'1':'';rows.sort((a,b)=>{let av,bv;if(num){av=parseFloat(a.cells[i].dataset.v||0);bv=parseFloat(b.cells[i].dataset.v||0);}else{av=a.cells[i].textContent.toLowerCase();bv=b.cells[i].textContent.toLowerCase();}return(av>bv?1:av<bv?-1:0)*(asc?1:-1);});rows.forEach(r=>tb.appendChild(r));});});</script><script id="v313-nav">(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();</script>
+</body></html>
