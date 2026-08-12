@@ -496,6 +496,27 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
   .profile-card h3::before{margin-left:12px}
   .profile-card,.panel{padding-left:18px;padding-right:18px}
 }
+
+/* ---- 13. evidence galleries in the source blocks -------------- */
+.profile-evidence{margin-top:14px;padding-top:14px;border-top:1px solid var(--edge)}
+.profile-evidence-label{display:block;margin-bottom:11px;font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#7d868d}
+.profile-evidence-grid{display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.profile-evidence-item{display:flex;flex-direction:column;background:#090d10;
+  border:1px solid var(--edge);transition:border-color .12s ease,background-color .12s ease}
+.profile-evidence-item:hover,.profile-evidence-item:focus-visible{
+  border-color:var(--team,var(--accent));background:var(--panel3)}
+.profile-evidence-item img{display:block;width:100%;height:auto}
+.profile-evidence-cap{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  margin-top:auto;
+  padding:9px 13px;border-top:1px solid var(--edge);
+  font-family:'Barlow',sans-serif;font-size:11.5px;color:#9aa4ac}
+.profile-evidence-cap em{flex:0 0 auto;font-style:normal;font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--team,var(--accent))}
+@media(max-width:700px){
+  .profile-evidence-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body style="--team:#93C950">
@@ -523,7 +544,7 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
 <div class="row"><span class="k">Aim assist type</span><span class="v">Default</span></div></div></div></section><section id="graphics" class="profile-section" data-profile-section><div class="profile-section-head"><div><span class="profile-section-kicker">Visuals</span><h2>Graphics</h2></div><p>Current FOV plus sourced PC graphics, with game/date context for older records.</p></div><div class="graphics-fov"><div class="graphics-fov-metric"><span class="graphics-fov-label">FOV · Field of View</span><div class="graphics-fov-value">103<span>Current in-game FOV</span></div></div><div class="graphics-fov-copy"><b>This is Mercules&#39;s Field of View (FOV) setting.</b> FOV controls how much of the game world is visible at once. Mercules currently plays on 103 FOV. PC graphics below are labeled by game/date so older values are never presented as current BO7 settings.</div></div><div class="profile-card"><h3>Graphics settings</h3><div class="row"><span class="k">Render resolution</span><span class="v">100</span></div>
 <div class="row"><span class="k">V-Sync</span><span class="v">Off</span></div>
 <div class="row"><span class="k">NVIDIA Reflex</span><span class="v">On + Boost</span></div>
-<div class="row"><span class="k">Upscaling / sharpening</span><span class="v">FidelityFX CAS</span></div>
+<div class="row"><span class="k">Upscaling / sharpening</span><span class="v">NVIDIA DLSS</span></div>
 <div class="row"><span class="k">Variable rate shading</span><span class="v">On</span></div>
 <div class="row"><span class="k">Texture resolution</span><span class="v">Low</span></div>
 <div class="row"><span class="k">Texture filter anisotropic</span><span class="v">Low</span></div>

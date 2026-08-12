@@ -496,6 +496,27 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
   .profile-card h3::before{margin-left:12px}
   .profile-card,.panel{padding-left:18px;padding-right:18px}
 }
+
+/* ---- 13. evidence galleries in the source blocks -------------- */
+.profile-evidence{margin-top:14px;padding-top:14px;border-top:1px solid var(--edge)}
+.profile-evidence-label{display:block;margin-bottom:11px;font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#7d868d}
+.profile-evidence-grid{display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.profile-evidence-item{display:flex;flex-direction:column;background:#090d10;
+  border:1px solid var(--edge);transition:border-color .12s ease,background-color .12s ease}
+.profile-evidence-item:hover,.profile-evidence-item:focus-visible{
+  border-color:var(--team,var(--accent));background:var(--panel3)}
+.profile-evidence-item img{display:block;width:100%;height:auto}
+.profile-evidence-cap{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  margin-top:auto;
+  padding:9px 13px;border-top:1px solid var(--edge);
+  font-family:'Barlow',sans-serif;font-size:11.5px;color:#9aa4ac}
+.profile-evidence-cap em{flex:0 0 auto;font-style:normal;font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--team,var(--accent))}
+@media(max-width:700px){
+  .profile-evidence-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body style="--team:#EE3D40">
