@@ -254,6 +254,88 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<style id="v313-polish">
+/* ============================================================
+   V31.3 — small polish pass. Everything here is additive:
+   delete this block and the site returns to exactly v31.
+   ============================================================ */
+
+/* dark scrollbars — the default light ones cut through the theme */
+html{scrollbar-color:#2b343c #090c0f;scrollbar-width:thin}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:#090c0f}
+::-webkit-scrollbar-thumb{background:#252d35;border:3px solid #090c0f;border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#3b454e}
+
+/* accent-tinted text selection */
+::selection{background:rgba(255,79,18,.3);color:#fff}
+
+/* one consistent keyboard focus ring across every control */
+a:focus-visible,button:focus-visible,summary:focus-visible,
+input:focus-visible,select:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+/* header: the logomark reacts on hover */
+.logomark{transition:transform .2s ease,filter .2s ease}
+.logo:hover .logomark{transform:rotate(-5deg) scale(1.05);
+  filter:drop-shadow(0 0 11px rgba(255,79,18,.34))}
+.footer-brand img{transition:transform .2s ease}
+.footer-brand:hover img{transform:rotate(-5deg)}
+
+/* mark the page you're currently on in the nav */
+.nav a[aria-current="page"]{color:#fff}
+.nav a[aria-current="page"]::after{content:"";display:block;height:2px;
+  margin-top:4px;border-radius:2px;background:var(--accent);
+  box-shadow:0 0 8px rgba(255,79,18,.45)}
+.nav-team[data-current] summary{color:#fff}
+
+/* long key/value sheets: quiet banding + row hover, so the eye
+   tracks from the label on the left to the value on the right */
+.profile-card .row,.panel .row{border-radius:3px;transition:background .12s ease}
+.profile-card .row:nth-of-type(even),
+.panel .row:nth-of-type(even){background:rgba(255,255,255,.026)}
+.profile-card .row:hover,.panel .row:hover{background:rgba(255,255,255,.05)}
+
+/* the graphics sheet runs 30+ rows deep — two columns on desktop
+   halves the scroll and pulls each value back next to its label */
+@media(min-width:1000px){
+  #graphics .profile-card{column-count:2;column-gap:36px;column-rule:1px solid #1e262d}
+  #graphics .profile-card h3{column-span:all}
+  #graphics .profile-card .row{break-inside:avoid}
+  #graphics .profile-card .profile-provenance{column-span:all;break-inside:avoid}
+}
+
+
+/* data tables: same banding, existing hover still wins */
+.data-table tbody tr:nth-child(even),
+.analysis-table tbody tr:nth-child(even),
+.compare-table tbody tr:nth-child(even),
+.panel table tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+.panel table tbody tr:hover{background:#171d24}
+
+/* team pages: logo alongside the name instead of a bare headline */
+.team-hero-row{display:flex;align-items:center;gap:18px}
+.team-hero-logo{width:66px;height:66px;flex:0 0 66px;display:flex;
+  align-items:center;justify-content:center;padding:8px;background:#090d10;
+  border:1px solid color-mix(in srgb,var(--team,var(--accent)) 34%,#2a333b);
+  border-radius:9px;box-shadow:0 0 22px color-mix(in srgb,var(--team,var(--accent)) 13%,transparent)}
+.team-hero-logo img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+@media(max-width:600px){
+  .team-hero-row{gap:13px}
+  .team-hero-logo{width:50px;height:50px;flex:0 0 50px;padding:6px;border-radius:7px}
+}
+
+/* prose links read as links on hover */
+.article-prose a:hover,.page-lede a:hover,.player-written a:hover,
+.info-box a:hover,.source a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* respect the OS reduced-motion setting */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;
+    animation-iteration-count:1!important;transition-duration:.001ms!important;
+    scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -277,4 +359,5 @@ header.site{border-bottom-color:#29323a;box-shadow:0 8px 24px rgba(0,0,0,.28)}
 const a=document.getElementById('pa'),b=document.getElementById('pb'),out=document.getElementById('cmp'),profiles=document.getElementById('profiles');const names=Object.keys(P).sort((x,y)=>x.localeCompare(y));for(const n of names){a.add(new Option(n,n));b.add(new Option(n,n));}a.value=names[0];b.value=names[1]||names[0];
 function fmt(v){return(v===null||v===undefined||v==='')?'—':v}
 function profile(n,p,label){return `<a class="compare-profile" href="${p.slug}.html" style="--pc:${p.color}"><span class="cp-kicker">${label}</span><div class="cp-name">${n}</div><div class="cp-team">${p.team}</div><div class="compare-quick"><div><b>${fmt(p.horizontalSens)}</b><span>Sens</span></div><div><b>${fmt(p.fov)}</b><span>FOV</span></div><div><b>${fmt(p.adsMultiplier)}</b><span>ADS</span></div></div></a>`}
-function render(){const pa=P[a.value],pb=P[b.value];document.getElementById('pickA').style.setProperty('--pick-color',pa.color);document.getElementById('pickB').style.setProperty('--pick-color',pb.color);profiles.innerHTML=profile(a.value,pa,'Player One')+profile(b.value,pb,'Player Two');let h='<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>Setting</th>';h+=`<th><div class="pro-name" style="color:${pa.color}">${a.value}</div><div class="pro-team">${pa.team}</div></th>`;h+=`<th><div class="pro-name" style="color:${pb.color}">${b.value}</div><div class="pro-team">${pb.team}</div></th></tr></thead><tbody>`;for(const[k,label]of F){const va=fmt(pa[k]),vb=fmt(pb[k]);const diff=(va!=='—'&&vb!=='—'&&String(va)!==String(vb));h+=`<tr><td>${label}</td><td class="${diff?'diff':''}">${va}</td><td class="${diff?'diff':''}">${vb}</td></tr>`;}out.innerHTML=h+'</tbody></table></div><p class="compare-note">Orange cells mark values that are different between the two selected players.</p>';}a.onchange=render;b.onchange=render;render();</script></body></html>
+function render(){const pa=P[a.value],pb=P[b.value];document.getElementById('pickA').style.setProperty('--pick-color',pa.color);document.getElementById('pickB').style.setProperty('--pick-color',pb.color);profiles.innerHTML=profile(a.value,pa,'Player One')+profile(b.value,pb,'Player Two');let h='<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>Setting</th>';h+=`<th><div class="pro-name" style="color:${pa.color}">${a.value}</div><div class="pro-team">${pa.team}</div></th>`;h+=`<th><div class="pro-name" style="color:${pb.color}">${b.value}</div><div class="pro-team">${pb.team}</div></th></tr></thead><tbody>`;for(const[k,label]of F){const va=fmt(pa[k]),vb=fmt(pb[k]);const diff=(va!=='—'&&vb!=='—'&&String(va)!==String(vb));h+=`<tr><td>${label}</td><td class="${diff?'diff':''}">${va}</td><td class="${diff?'diff':''}">${vb}</td></tr>`;}out.innerHTML=h+'</tbody></table></div><p class="compare-note">Orange cells mark values that are different between the two selected players.</p>';}a.onchange=render;b.onchange=render;render();</script><script id="v313-nav">(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();</script>
+</body></html>
