@@ -571,54 +571,47 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
 .stats-grid > .panel,.stats-stack > .panel{height:auto}
 
 /* ---- 18. support page ---------------------------------------- */
-.support-grid{display:grid;gap:28px;grid-template-columns:1fr 380px;align-items:start}
-.support-block{padding:20px 0 19px;border-top:1px solid var(--edge)}
-.support-block:first-child{border-top:0;padding-top:0}
-.support-kicker{display:block;margin-bottom:9px;font-family:'IBM Plex Mono',monospace;
+.support-wrap{max-width:620px}
+.support-note p{margin:0 0 14px;font-size:15.5px;line-height:1.78;color:#c9d0d6}
+.support-note p:last-child{margin-bottom:0}
+
+.paypal-panel{display:block;margin:30px 0;padding:34px 30px 26px;background:#fff;
+  border:1px solid #d9dde2;text-align:center;
+  transition:background-color .12s ease,border-color .12s ease}
+.paypal-panel:hover,.paypal-panel:focus-visible{background:#f4f7fa;border-color:#009cde}
+.paypal-mark{display:block;line-height:0;margin-bottom:14px}
+.paypal-word{display:block;font-family:'Barlow Condensed',sans-serif;font-size:52px;
+  font-weight:700;line-height:1;letter-spacing:-.01em;margin-bottom:20px}
+.paypal-word b{color:#003087;font-weight:700}
+.paypal-word i{color:#009cde;font-style:normal;font-weight:700}
+.paypal-cta{display:block;font-family:'Barlow Condensed',sans-serif;font-size:20px;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#003087}
+.paypal-cta em{font-style:normal;color:#009cde}
+.paypal-handle{display:block;margin-top:7px;font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;color:#6b7683}
+
+.support-warn{padding:20px 22px;background:var(--panel);border:1px solid var(--edge);
+  position:relative}
+.support-warn::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;
+  background:var(--accent)}
+.support-warn-kicker{display:block;margin-bottom:10px;font-family:'IBM Plex Mono',monospace;
   font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
-.support-block p{margin:0 0 10px;max-width:620px;font-size:14.5px;line-height:1.75;color:#c3cad0}
-.support-block p:last-child{margin-bottom:0}
-.support-inline-links{font-size:13px}
-.support-inline-links a{color:var(--accent)}
-.support-inline-links a:hover{text-decoration:underline;text-underline-offset:3px}
+.support-warn p{margin:0;font-size:13.5px;line-height:1.7;color:#aab3ba}
+.support-warn p b{color:var(--paper)}
+.support-warn-sub{margin-top:12px!important;padding-top:12px;border-top:1px solid #171c21;
+  font-size:12px!important;color:#7f888f!important}
 
-.support-card{position:relative;padding:24px 24px 22px;background:var(--panel);
-  border:1px solid var(--edge)}
-.support-card::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;
-  background:var(--accent)}
-.support-terms{margin:0 0 20px;padding:0;list-style:none}
-.support-terms li{position:relative;background:none;border:0;border-bottom:1px solid #171c21;
-  padding:0 0 11px 18px;margin-bottom:11px;font-family:'Barlow',sans-serif;font-size:13.5px;
-  line-height:1.6;color:#aab3ba}
-.support-terms li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0;color:#c3cad0}
-.support-terms li b{color:var(--paper)}
-.support-terms li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
-  background:var(--accent)}
-.support-terms b{color:var(--paper)}
-.support-paypal{display:flex;align-items:center;gap:14px;padding:15px 16px;
-  background:var(--accent);color:#180a04;
-  transition:background-color .12s ease,transform .001s}
-.support-paypal:hover,.support-paypal:focus-visible{background:#ff8a3d;color:#0a0405}
-.support-paypal-mark{flex:0 0 42px;height:42px;display:flex;align-items:center;
-  justify-content:center;background:rgba(0,0,0,.22);color:inherit}
-.support-paypal-body{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
-.support-paypal-label{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
-  letter-spacing:.05em;text-transform:uppercase;line-height:1}
-.support-paypal-handle{font-family:'IBM Plex Mono',monospace;font-size:11.5px;
-  letter-spacing:.02em;color:rgba(24,10,4,.72);overflow:hidden;text-overflow:ellipsis;
-  white-space:nowrap}
-.support-paypal-go{flex:0 0 auto;font-style:normal;font-size:17px;font-weight:700}
-.support-fineprint{margin:12px 0 0;font-size:11.5px;line-height:1.55;color:#7f888f}
-
-@media(max-width:900px){
-  .support-grid{grid-template-columns:1fr;gap:24px}
+@media(max-width:600px){
+  .paypal-panel{padding:26px 20px 22px}
+  .paypal-word{font-size:42px}
+  .paypal-cta{font-size:17px}
 }
 </style>
 </head>
 <body style="--team:#2E6BFF">
 <header class="site"><div class="wrap">
 <a class="logo" href="index.html"><img src="logo.png" alt="CODLOCKER" class="logomark">COD<b>LOCKER</b></a>
-<nav class="nav"><a href="classes.html" class="navbtn">Classes</a><a href="stats.html">Stats</a><a href="news.html">News</a><a href="guides.html">Guides</a><details class="nav-team"><summary>Teams</summary><div class="team-dropdown"><a class="team-drop-link" href="optic.html"><span class="team-drop-logo"><img src="team-logos/optic.jpg" alt="" loading="lazy"></span><span class="team-drop-name">OpTic Texas</span></a><a class="team-drop-link" href="thieves.html"><span class="team-drop-logo"><img src="team-logos/thieves.svg" alt="" loading="lazy"></span><span class="team-drop-name">Los Angeles Thieves</span></a><a class="team-drop-link" href="m8.html"><span class="team-drop-logo"><img src="team-logos/m8.webp" alt="" loading="lazy"></span><span class="team-drop-name">Paris Gentle Mates</span></a><a class="team-drop-link" href="faze.html"><span class="team-drop-logo"><img src="team-logos/faze.jpg" alt="" loading="lazy"></span><span class="team-drop-name">FaZe Vegas</span></a><a class="team-drop-link" href="falcons.html"><span class="team-drop-logo"><img src="team-logos/falcons.jpg" alt="" loading="lazy"></span><span class="team-drop-name">Riyadh Falcons</span></a><a class="team-drop-link" href="heretics.html"><span class="team-drop-logo"><img src="team-logos/heretics.png" alt="" loading="lazy"></span><span class="team-drop-name">Miami Heretics</span></a><a class="team-drop-link" href="koi.html"><span class="team-drop-logo"><img src="team-logos/koi.svg" alt="" loading="lazy"></span><span class="team-drop-name">Toronto KOI</span></a><a class="team-drop-link" href="g2.html"><span class="team-drop-logo"><img src="team-logos/g2.webp" alt="" loading="lazy"></span><span class="team-drop-name">G2 Minnesota</span></a><a class="team-drop-link" href="carolina.html"><span class="team-drop-logo"><img src="team-logos/carolina.png" alt="" loading="lazy"></span><span class="team-drop-name">Carolina Royal Ravens</span></a><a class="team-drop-link" href="boston.html"><span class="team-drop-logo"><img src="team-logos/boston.webp" alt="" loading="lazy"></span><span class="team-drop-name">Boston Breach</span></a><a class="team-drop-link" href="cloud9.html"><span class="team-drop-logo"><img src="team-logos/cloud9.png" alt="" loading="lazy"></span><span class="team-drop-name">Cloud9 New York</span></a><a class="team-drop-link" href="surge.html"><span class="team-drop-logo"><img src="team-logos/surge.webp" alt="" loading="lazy"></span><span class="team-drop-name">Vancouver Surge</span></a></div></details><a href="compare.html">Compare</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+<nav class="nav"><a href="classes.html" class="navbtn">Classes</a><a href="stats.html">Stats</a><a href="news.html">News</a><a href="guides.html">Guides</a><details class="nav-team"><summary>Teams</summary><div class="team-dropdown"><a class="team-drop-link" href="optic.html"><span class="team-drop-logo"><img src="team-logos/optic.jpg" alt="" loading="lazy"></span><span class="team-drop-name">OpTic Texas</span></a><a class="team-drop-link" href="thieves.html"><span class="team-drop-logo"><img src="team-logos/thieves.svg" alt="" loading="lazy"></span><span class="team-drop-name">Los Angeles Thieves</span></a><a class="team-drop-link" href="m8.html"><span class="team-drop-logo"><img src="team-logos/m8.webp" alt="" loading="lazy"></span><span class="team-drop-name">Paris Gentle Mates</span></a><a class="team-drop-link" href="faze.html"><span class="team-drop-logo"><img src="team-logos/faze.jpg" alt="" loading="lazy"></span><span class="team-drop-name">FaZe Vegas</span></a><a class="team-drop-link" href="falcons.html"><span class="team-drop-logo"><img src="team-logos/falcons.jpg" alt="" loading="lazy"></span><span class="team-drop-name">Riyadh Falcons</span></a><a class="team-drop-link" href="heretics.html"><span class="team-drop-logo"><img src="team-logos/heretics.png" alt="" loading="lazy"></span><span class="team-drop-name">Miami Heretics</span></a><a class="team-drop-link" href="koi.html"><span class="team-drop-logo"><img src="team-logos/koi.svg" alt="" loading="lazy"></span><span class="team-drop-name">Toronto KOI</span></a><a class="team-drop-link" href="g2.html"><span class="team-drop-logo"><img src="team-logos/g2.webp" alt="" loading="lazy"></span><span class="team-drop-name">G2 Minnesota</span></a><a class="team-drop-link" href="carolina.html"><span class="team-drop-logo"><img src="team-logos/carolina.png" alt="" loading="lazy"></span><span class="team-drop-name">Carolina Royal Ravens</span></a><a class="team-drop-link" href="boston.html"><span class="team-drop-logo"><img src="team-logos/boston.webp" alt="" loading="lazy"></span><span class="team-drop-name">Boston Breach</span></a><a class="team-drop-link" href="cloud9.html"><span class="team-drop-logo"><img src="team-logos/cloud9.png" alt="" loading="lazy"></span><span class="team-drop-name">Cloud9 New York</span></a><a class="team-drop-link" href="surge.html"><span class="team-drop-logo"><img src="team-logos/surge.webp" alt="" loading="lazy"></span><span class="team-drop-name">Vancouver Surge</span></a></div></details><a href="compare.html">Compare</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="support.html">Support</a></nav>
 <div class="header-searchbox"><input id="globalPlayerSearch" type="search" autocomplete="off" placeholder="Search players, teams..." aria-label="Search all players"><span class="header-search-icon">⌕</span><div class="header-results" id="globalPlayerResults"></div></div>
 <span class="season">Black Ops 7 · 2026 CDL Season</span>
 </div></header><script>(function(){const data=[{"tag":"Dashy","team":"OpTic Texas","slug":"dashy"},{"tag":"Huke","team":"OpTic Texas","slug":"huke"},{"tag":"Mercules","team":"OpTic Texas","slug":"mercules"},{"tag":"Scump","team":"OpTic Texas","slug":"scump"},{"tag":"Shotzzy","team":"OpTic Texas","slug":"shotzzy"},{"tag":"aBeZy","team":"Los Angeles Thieves","slug":"abezy"},{"tag":"HyDra","team":"Los Angeles Thieves","slug":"hydra"},{"tag":"Nium","team":"Los Angeles Thieves","slug":"nium"},{"tag":"Scrap","team":"Los Angeles Thieves","slug":"scrap"},{"tag":"Estreal","team":"Paris Gentle Mates","slug":"estreal"},{"tag":"Ghosty","team":"Paris Gentle Mates","slug":"ghosty"},{"tag":"JoeDeceives","team":"Paris Gentle Mates","slug":"joedeceives"},{"tag":"Neptune","team":"Paris Gentle Mates","slug":"neptune"},{"tag":"Sib","team":"Paris Gentle Mates","slug":"sib"},{"tag":"04","team":"FaZe Vegas","slug":"04"},{"tag":"Abuzah","team":"FaZe Vegas","slug":"abuzah"},{"tag":"Drazah","team":"FaZe Vegas","slug":"drazah"},{"tag":"Simp","team":"FaZe Vegas","slug":"simp"},{"tag":"Alluka","team":"Riyadh Falcons","slug":"alluka"},{"tag":"Cellium","team":"Riyadh Falcons","slug":"cellium"},{"tag":"Exnid","team":"Riyadh Falcons","slug":"exnid"},{"tag":"KiSMET","team":"Riyadh Falcons","slug":"kismet"},{"tag":"Pred","team":"Riyadh Falcons","slug":"pred"},{"tag":"MettalZ","team":"Miami Heretics","slug":"mettalz"},{"tag":"ReeaL","team":"Miami Heretics","slug":"reeal"},{"tag":"RenKoR","team":"Miami Heretics","slug":"renkor"},{"tag":"SupeR","team":"Miami Heretics","slug":"super"},{"tag":"Abe","team":"Toronto KOI","slug":"abe"},{"tag":"CleanX","team":"Toronto KOI","slug":"cleanx"},{"tag":"Insight","team":"Toronto KOI","slug":"insight"},{"tag":"Kips","team":"Toronto KOI","slug":"kips"},{"tag":"Envoy","team":"G2 Minnesota","slug":"envoy"},{"tag":"Kremp","team":"G2 Minnesota","slug":"kremp"},{"tag":"Nastie","team":"G2 Minnesota","slug":"nastie"},{"tag":"Skyz","team":"G2 Minnesota","slug":"skyz"},{"tag":"Exceed","team":"Carolina Royal Ravens","slug":"exceed"},{"tag":"Fire","team":"Carolina Royal Ravens","slug":"fire"},{"tag":"Lurqxx","team":"Carolina Royal Ravens","slug":"lurqxx"},{"tag":"Standy","team":"Carolina Royal Ravens","slug":"standy"},{"tag":"Afro","team":"Boston Breach","slug":"afro"},{"tag":"Purj","team":"Boston Breach","slug":"purj"},{"tag":"Spart","team":"Boston Breach","slug":"spart"},{"tag":"TJHaLy","team":"Boston Breach","slug":"tjhaly"},{"tag":"Encourage","team":"Cloud9 New York","slug":"encourage"},{"tag":"Hide","team":"Cloud9 New York","slug":"hide"},{"tag":"Nejra","team":"Cloud9 New York","slug":"nejra"},{"tag":"Wevy","team":"Cloud9 New York","slug":"wevy"},{"tag":"Craze","team":"Vancouver Surge","slug":"craze"},{"tag":"Lunarz","team":"Vancouver Surge","slug":"lunarz"},{"tag":"Mamba","team":"Vancouver Surge","slug":"mamba"},{"tag":"Nero","team":"Vancouver Surge","slug":"nero"}];const input=document.getElementById('globalPlayerSearch'),box=document.getElementById('globalPlayerResults');if(!input||!box)return;let matches=[];function draw(){const q=input.value.trim().toLowerCase();if(!q){box.classList.remove('open');box.innerHTML='';matches=[];return;}matches=data.filter(p=>(p.tag+' '+p.team).toLowerCase().includes(q)).slice(0,8);box.innerHTML=matches.length?matches.map((p,i)=>`<a class="header-result ${i===0?'active':''}" href="${p.slug}.html"><span><b>${p.tag}</b><span>${p.team}</span></span><em>OPEN ›</em></a>`).join(''):'<div class="header-empty">No matching player or team.</div>';box.classList.add('open');}input.addEventListener('input',draw);input.addEventListener('focus',draw);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&matches[0])location.href=''+matches[0].slug+'.html';if(e.key==='Escape'){box.classList.remove('open');input.blur();}});document.addEventListener('click',e=>{if(!e.target.closest('.header-searchbox'))box.classList.remove('open');if(!e.target.closest('.nav-team')){const m=document.querySelector('.nav-team');if(m)m.removeAttribute('open');}});})();</script>
