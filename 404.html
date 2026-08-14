@@ -565,6 +565,54 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
   .team-block{grid-template-columns:1fr;gap:6px}
   .team-stat-value{font-size:27px}
 }
+
+/* ---- 17. stats grid: no stretched empty panels ---------------- */
+.stats-grid{align-items:start}
+.stats-grid > .panel,.stats-stack > .panel{height:auto}
+
+/* ---- 18. support page ---------------------------------------- */
+.support-grid{display:grid;gap:28px;grid-template-columns:1fr 380px;align-items:start}
+.support-block{padding:20px 0 19px;border-top:1px solid var(--edge)}
+.support-block:first-child{border-top:0;padding-top:0}
+.support-kicker{display:block;margin-bottom:9px;font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.support-block p{margin:0 0 10px;max-width:620px;font-size:14.5px;line-height:1.75;color:#c3cad0}
+.support-block p:last-child{margin-bottom:0}
+.support-inline-links{font-size:13px}
+.support-inline-links a{color:var(--accent)}
+.support-inline-links a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.support-card{position:relative;padding:24px 24px 22px;background:var(--panel);
+  border:1px solid var(--edge)}
+.support-card::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;
+  background:var(--accent)}
+.support-terms{margin:0 0 20px;padding:0;list-style:none}
+.support-terms li{position:relative;background:none;border:0;border-bottom:1px solid #171c21;
+  padding:0 0 11px 18px;margin-bottom:11px;font-family:'Barlow',sans-serif;font-size:13.5px;
+  line-height:1.6;color:#aab3ba}
+.support-terms li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0;color:#c3cad0}
+.support-terms li b{color:var(--paper)}
+.support-terms li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
+  background:var(--accent)}
+.support-terms b{color:var(--paper)}
+.support-paypal{display:flex;align-items:center;gap:14px;padding:15px 16px;
+  background:var(--accent);color:#180a04;
+  transition:background-color .12s ease,transform .001s}
+.support-paypal:hover,.support-paypal:focus-visible{background:#ff8a3d;color:#0a0405}
+.support-paypal-mark{flex:0 0 42px;height:42px;display:flex;align-items:center;
+  justify-content:center;background:rgba(0,0,0,.22);color:inherit}
+.support-paypal-body{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.support-paypal-label{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;line-height:1}
+.support-paypal-handle{font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  letter-spacing:.02em;color:rgba(24,10,4,.72);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.support-paypal-go{flex:0 0 auto;font-style:normal;font-size:17px;font-weight:700}
+.support-fineprint{margin:12px 0 0;font-size:11.5px;line-height:1.55;color:#7f888f}
+
+@media(max-width:900px){
+  .support-grid{grid-template-columns:1fr;gap:24px}
+}
 </style>
 </head>
 <body>
@@ -580,7 +628,7 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
 </div></div>
 <footer><div class="wrap">
 <a class="footer-brand" href="index.html"><img src="logo.png" alt="">COD<b>LOCKER</b></a>
-<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
+<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></div>
 <span>© 2026 CODLOCKER · Fan-made. Not affiliated with Activision or the Call of Duty League.</span>
 </div></footer>
 <script id="v313-nav">(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();</script>

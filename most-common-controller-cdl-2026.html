@@ -565,6 +565,54 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
   .team-block{grid-template-columns:1fr;gap:6px}
   .team-stat-value{font-size:27px}
 }
+
+/* ---- 17. stats grid: no stretched empty panels ---------------- */
+.stats-grid{align-items:start}
+.stats-grid > .panel,.stats-stack > .panel{height:auto}
+
+/* ---- 18. support page ---------------------------------------- */
+.support-grid{display:grid;gap:28px;grid-template-columns:1fr 380px;align-items:start}
+.support-block{padding:20px 0 19px;border-top:1px solid var(--edge)}
+.support-block:first-child{border-top:0;padding-top:0}
+.support-kicker{display:block;margin-bottom:9px;font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.support-block p{margin:0 0 10px;max-width:620px;font-size:14.5px;line-height:1.75;color:#c3cad0}
+.support-block p:last-child{margin-bottom:0}
+.support-inline-links{font-size:13px}
+.support-inline-links a{color:var(--accent)}
+.support-inline-links a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.support-card{position:relative;padding:24px 24px 22px;background:var(--panel);
+  border:1px solid var(--edge)}
+.support-card::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;
+  background:var(--accent)}
+.support-terms{margin:0 0 20px;padding:0;list-style:none}
+.support-terms li{position:relative;background:none;border:0;border-bottom:1px solid #171c21;
+  padding:0 0 11px 18px;margin-bottom:11px;font-family:'Barlow',sans-serif;font-size:13.5px;
+  line-height:1.6;color:#aab3ba}
+.support-terms li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0;color:#c3cad0}
+.support-terms li b{color:var(--paper)}
+.support-terms li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
+  background:var(--accent)}
+.support-terms b{color:var(--paper)}
+.support-paypal{display:flex;align-items:center;gap:14px;padding:15px 16px;
+  background:var(--accent);color:#180a04;
+  transition:background-color .12s ease,transform .001s}
+.support-paypal:hover,.support-paypal:focus-visible{background:#ff8a3d;color:#0a0405}
+.support-paypal-mark{flex:0 0 42px;height:42px;display:flex;align-items:center;
+  justify-content:center;background:rgba(0,0,0,.22);color:inherit}
+.support-paypal-body{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.support-paypal-label{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;line-height:1}
+.support-paypal-handle{font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  letter-spacing:.02em;color:rgba(24,10,4,.72);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.support-paypal-go{flex:0 0 auto;font-style:normal;font-size:17px;font-weight:700}
+.support-fineprint{margin:12px 0 0;font-size:11.5px;line-height:1.55;color:#7f888f}
+
+@media(max-width:900px){
+  .support-grid{grid-template-columns:1fr;gap:24px}
+}
 </style>
 </head>
 <body><header class="site"><div class="wrap">
@@ -578,7 +626,7 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
 <h2 style="font-family:'Barlow Condensed';font-size:26px;text-transform:uppercase;margin:24px 0 10px;color:var(--accent)">Polling boards</h2><p>Twenty-two of the 45 tracked pads run a Marius board, which is what takes a controller to native 8 kHz polling. Eight of those are confirmed Battle Beaver builds. Seven belong to OpTic Texas and FaZe Vegas, who are both sponsored by Battle Beaver, so their Marius pads come from them. The eighth is Cellium, confirmed separately. For the remaining 14 the board is recorded but the builder is not confirmed, and the site says so on those pages rather than guessing.</p><h2>Exact controller descriptions in the database</h2><div class="analysis-table-wrap"><table class="analysis-table"><thead><tr><th>Rank</th><th>Recorded controller</th><th>Players</th></tr></thead><tbody><tr><td>#1</td><td>PS4 custom, builder unconfirmed</td><td>9</td></tr><tr><td>#2</td><td>Battle Beaver custom (PS4)</td><td>6</td></tr><tr><td>#3</td><td>Battle Beaver custom (PS5)</td><td>5</td></tr><tr><td>#4</td><td>PS5 custom, builder unconfirmed</td><td>4</td></tr><tr><td>#5</td><td>SCUF Reflex (PS5)</td><td>3</td></tr><tr><td>#6</td><td>DualSense (PS5), default</td><td>3</td></tr><tr><td>#7</td><td>SCUF (PS5)</td><td>2</td></tr><tr><td>#8</td><td>Battle Beaver custom (PS5), no paddles</td><td>1</td></tr><tr><td>#9</td><td>SCUF Impact (PS4)</td><td>1</td></tr><tr><td>#10</td><td>SCUF (PS5), no paddles</td><td>1</td></tr><tr><td>#11</td><td>PS5 controller (2 back buttons)</td><td>1</td></tr><tr><td>#12</td><td>PS4 controller</td><td>1</td></tr><tr><td>#13</td><td>SCUF Reflex Pro (PS5)</td><td>1</td></tr><tr><td>#14</td><td>DualSense Edge (PS5)</td><td>1</td></tr><tr><td>#15</td><td>PS4 custom, builder unconfirmed, smart bumpers &amp;amp; triggers</td><td>1</td></tr><tr><td>#16</td><td>Demonwork custom (PS4)</td><td>1</td></tr><tr><td>#17</td><td>SCUF (PS4)</td><td>1</td></tr><tr><td>#18</td><td>PS5 controller</td><td>1</td></tr><tr><td>#19</td><td>Battle Beaver custom (no smart pad)</td><td>1</td></tr><tr><td>#20</td><td>Battle Beaver custom</td><td>1</td></tr></tbody></table></div>
 <p>This is a descriptive count of the controller information players have publicly shared or that has been recorded from league sources. It does not imply sponsorship or official endorsement.</p></article></section></div></div><footer><div class="wrap">
 <a class="footer-brand" href="index.html"><img src="logo.png" alt="">COD<b>LOCKER</b></a>
-<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
+<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></div>
 <span>© 2026 CODLOCKER · Fan-made. Not affiliated with Activision or the Call of Duty League.</span>
 </div></footer><script id="v313-nav">(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();</script>
 </body></html>

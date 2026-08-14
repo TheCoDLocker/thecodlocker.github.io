@@ -565,6 +565,54 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
   .team-block{grid-template-columns:1fr;gap:6px}
   .team-stat-value{font-size:27px}
 }
+
+/* ---- 17. stats grid: no stretched empty panels ---------------- */
+.stats-grid{align-items:start}
+.stats-grid > .panel,.stats-stack > .panel{height:auto}
+
+/* ---- 18. support page ---------------------------------------- */
+.support-grid{display:grid;gap:28px;grid-template-columns:1fr 380px;align-items:start}
+.support-block{padding:20px 0 19px;border-top:1px solid var(--edge)}
+.support-block:first-child{border-top:0;padding-top:0}
+.support-kicker{display:block;margin-bottom:9px;font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.support-block p{margin:0 0 10px;max-width:620px;font-size:14.5px;line-height:1.75;color:#c3cad0}
+.support-block p:last-child{margin-bottom:0}
+.support-inline-links{font-size:13px}
+.support-inline-links a{color:var(--accent)}
+.support-inline-links a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.support-card{position:relative;padding:24px 24px 22px;background:var(--panel);
+  border:1px solid var(--edge)}
+.support-card::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;
+  background:var(--accent)}
+.support-terms{margin:0 0 20px;padding:0;list-style:none}
+.support-terms li{position:relative;background:none;border:0;border-bottom:1px solid #171c21;
+  padding:0 0 11px 18px;margin-bottom:11px;font-family:'Barlow',sans-serif;font-size:13.5px;
+  line-height:1.6;color:#aab3ba}
+.support-terms li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0;color:#c3cad0}
+.support-terms li b{color:var(--paper)}
+.support-terms li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
+  background:var(--accent)}
+.support-terms b{color:var(--paper)}
+.support-paypal{display:flex;align-items:center;gap:14px;padding:15px 16px;
+  background:var(--accent);color:#180a04;
+  transition:background-color .12s ease,transform .001s}
+.support-paypal:hover,.support-paypal:focus-visible{background:#ff8a3d;color:#0a0405}
+.support-paypal-mark{flex:0 0 42px;height:42px;display:flex;align-items:center;
+  justify-content:center;background:rgba(0,0,0,.22);color:inherit}
+.support-paypal-body{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.support-paypal-label{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;line-height:1}
+.support-paypal-handle{font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  letter-spacing:.02em;color:rgba(24,10,4,.72);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.support-paypal-go{flex:0 0 auto;font-style:normal;font-size:17px;font-weight:700}
+.support-fineprint{margin:12px 0 0;font-size:11.5px;line-height:1.55;color:#7f888f}
+
+@media(max-width:900px){
+  .support-grid{grid-template-columns:1fr;gap:24px}
+}
 </style>
 </head>
 <body><header class="site"><div class="wrap">
@@ -577,7 +625,7 @@ footer{border-top:1px solid var(--edge);background:var(--ink)}
 <h2>Every tracked sensitivity, fastest to slowest</h2><div class="analysis-table-wrap"><table class="analysis-table"><thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>Sens</th><th>FOV</th></tr></thead><tbody><tr><td class="rank">#1</td><td><a href="cellium.html">Cellium</a></td><td>Riyadh Falcons</td><td>2.1</td><td>100</td></tr><tr><td class="rank">#2</td><td><a href="lurqxx.html">Lurqxx</a></td><td>Carolina Royal Ravens</td><td>2.05</td><td>103</td></tr><tr><td class="rank">#3</td><td><a href="estreal.html">Estreal</a></td><td>Paris Gentle Mates</td><td>1.9</td><td>102</td></tr><tr><td class="rank">#4</td><td><a href="kips.html">Kips</a></td><td>Toronto KOI</td><td>1.85</td><td>105</td></tr><tr><td class="rank">#5</td><td><a href="joedeceives.html">JoeDeceives</a></td><td>Paris Gentle Mates</td><td>1.83</td><td>103</td></tr><tr><td class="rank">#6</td><td><a href="exceed.html">Exceed</a></td><td>Carolina Royal Ravens</td><td>1.8</td><td>99</td></tr><tr><td class="rank">#7</td><td><a href="hide.html">Hide</a></td><td>Cloud9 New York</td><td>1.8</td><td>103</td></tr><tr><td class="rank">#8</td><td><a href="nero.html">Nero</a></td><td>Vancouver Surge</td><td>1.8</td><td>102</td></tr><tr><td class="rank">#9</td><td><a href="wevy.html">Wevy</a></td><td>Cloud9 New York</td><td>1.8</td><td>105</td></tr><tr><td class="rank">#10</td><td><a href="alluka.html">Alluka</a></td><td>Riyadh Falcons</td><td>1.75</td><td>102</td></tr><tr><td class="rank">#11</td><td><a href="craze.html">Craze</a></td><td>Vancouver Surge</td><td>1.75</td><td>99</td></tr><tr><td class="rank">#12</td><td><a href="encourage.html">Encourage</a></td><td>Cloud9 New York</td><td>1.75</td><td>101</td></tr><tr><td class="rank">#13</td><td><a href="ghosty.html">Ghosty</a></td><td>Paris Gentle Mates</td><td>1.75</td><td>103</td></tr><tr><td class="rank">#14</td><td><a href="kismet.html">KiSMET</a></td><td>Riyadh Falcons</td><td>1.75</td><td>103</td></tr><tr><td class="rank">#15</td><td><a href="purj.html">Purj</a></td><td>Boston Breach</td><td>1.75</td><td>100</td></tr><tr><td class="rank">#16</td><td><a href="reeal.html">ReeaL</a></td><td>Miami Heretics</td><td>1.75</td><td>100</td></tr><tr><td class="rank">#17</td><td><a href="shotzzy.html">Shotzzy</a></td><td>OpTic Texas</td><td>1.75</td><td>100</td></tr><tr><td class="rank">#18</td><td><a href="04.html">04</a></td><td>FaZe Vegas</td><td>1.7</td><td>102</td></tr><tr><td class="rank">#19</td><td><a href="abe.html">Abe</a></td><td>Toronto KOI</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#20</td><td><a href="drazah.html">Drazah</a></td><td>FaZe Vegas</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#21</td><td><a href="envoy.html">Envoy</a></td><td>G2 Minnesota</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#22</td><td><a href="exnid.html">Exnid</a></td><td>Riyadh Falcons</td><td>1.7</td><td>103</td></tr><tr><td class="rank">#23</td><td><a href="fire.html">Fire</a></td><td>Carolina Royal Ravens</td><td>1.7</td><td>107</td></tr><tr><td class="rank">#24</td><td><a href="huke.html">Huke</a></td><td>OpTic Texas</td><td>1.7</td><td>99</td></tr><tr><td class="rank">#25</td><td><a href="hydra.html">HyDra</a></td><td>Los Angeles Thieves</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#26</td><td><a href="kremp.html">Kremp</a></td><td>G2 Minnesota</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#27</td><td><a href="lunarz.html">Lunarz</a></td><td>Vancouver Surge</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#28</td><td><a href="mamba.html">Mamba</a></td><td>Vancouver Surge</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#29</td><td><a href="mercules.html">Mercules</a></td><td>OpTic Texas</td><td>1.7</td><td>103</td></tr><tr><td class="rank">#30</td><td><a href="nastie.html">Nastie</a></td><td>G2 Minnesota</td><td>1.7</td><td>102</td></tr><tr><td class="rank">#31</td><td><a href="neptune.html">Neptune</a></td><td>Paris Gentle Mates</td><td>1.7</td><td>102</td></tr><tr><td class="rank">#32</td><td><a href="nium.html">Nium</a></td><td>Los Angeles Thieves</td><td>1.7</td><td>101</td></tr><tr><td class="rank">#33</td><td><a href="pred.html">Pred</a></td><td>Riyadh Falcons</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#34</td><td><a href="renkor.html">RenKoR</a></td><td>Miami Heretics</td><td>1.7</td><td>102</td></tr><tr><td class="rank">#35</td><td><a href="scrap.html">Scrap</a></td><td>Los Angeles Thieves</td><td>1.7</td><td>98</td></tr><tr><td class="rank">#36</td><td><a href="simp.html">Simp</a></td><td>FaZe Vegas</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#37</td><td><a href="skyz.html">Skyz</a></td><td>G2 Minnesota</td><td>1.7</td><td>102</td></tr><tr><td class="rank">#38</td><td><a href="tjhaly.html">TJHaLy</a></td><td>Boston Breach</td><td>1.7</td><td>100</td></tr><tr><td class="rank">#39</td><td><a href="abezy.html">aBeZy</a></td><td>Los Angeles Thieves</td><td>1.65</td><td>100</td></tr><tr><td class="rank">#40</td><td><a href="abuzah.html">Abuzah</a></td><td>FaZe Vegas</td><td>1.65</td><td>100</td></tr><tr><td class="rank">#41</td><td><a href="dashy.html">Dashy</a></td><td>OpTic Texas</td><td>1.65</td><td>98</td></tr><tr><td class="rank">#42</td><td><a href="insight.html">Insight</a></td><td>Toronto KOI</td><td>1.65</td><td>100</td></tr><tr><td class="rank">#43</td><td><a href="scump.html">Scump</a></td><td>OpTic Texas</td><td>1.65</td><td>100</td></tr><tr><td class="rank">#44</td><td><a href="sib.html">Sib</a></td><td>Paris Gentle Mates</td><td>1.6</td><td>107</td></tr><tr><td class="rank">#45</td><td><a href="spart.html">Spart</a></td><td>Boston Breach</td><td>1.6</td><td>98</td></tr></tbody></table></div>
 <p>This ranking is generated directly from the same settings records used on each player page. When a player's verified sensitivity changes, this table changes on the next site build too.</p></article></section></div></div><footer><div class="wrap">
 <a class="footer-brand" href="index.html"><img src="logo.png" alt="">COD<b>LOCKER</b></a>
-<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></div>
+<div class="footer-links"><a href="guides.html">Guides</a><a href="verify.html">How We Verify</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></div>
 <span>© 2026 CODLOCKER · Fan-made. Not affiliated with Activision or the Call of Duty League.</span>
 </div></footer><script id="v313-nav">(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();</script>
 </body></html>
