@@ -1,0 +1,30 @@
+/* ============================================================== fixes ==
+   Site-wide corrections. Loaded last on every page.
+
+   1. Native control theming. The compare page's player dropdowns set the
+      closed control to translucent white and the option text to #f3f6f9,
+      but left `option` backgrounds transparent. The open popup is drawn on
+      an OS surface, which defaults to white — so it rendered as near-white
+      text on white. `color-scheme:dark` fixes the popup surface, scrollbars
+      and other native chrome; the explicit option colours cover browsers
+      that ignore it.
+   ==================================================================== */
+
+:root{color-scheme:dark}
+
+select,input,textarea,button{color-scheme:dark}
+
+select option,select optgroup{
+  background-color:#0e141c;
+  color:#e9eef4;
+}
+select option:checked,select option:hover{
+  background-color:#18212c;
+  color:#fff;
+}
+
+/* Firefox renders the closed control from the same rules; keep it legible
+   rather than relying on a translucent fill over an unknown backdrop. */
+@-moz-document url-prefix(){
+  select{background-color:#101720}
+}
