@@ -11,8 +11,6 @@
    sample pros and the whole meta panel are all still here.
    ==================================================================== */
 
-.home-shell{--ink:#e9eef4;--dim:#7b8895;--hair:#1f2831}
-
 /* -------------------------------------------------------------- hero -- */
 /* Pulled in so the pros sit above the fold instead of trailing off. */
 .home-shell .lead{padding-top:30px;padding-bottom:24px}
@@ -27,24 +25,24 @@
   display:grid !important;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:8px;
-  border-top:1px solid var(--hair);
+  border-top:1px solid #1f2831;
   margin-top:4px;
 }
 .lead-roster .roster-label{
   grid-column:1/-1;
   font-family:'IBM Plex Mono',ui-monospace,monospace;
   font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--dim);padding-top:14px;margin-bottom:2px;
+  color:#7b8895;padding-top:14px;margin-bottom:2px;
 }
 .lead-roster a{
   display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;
   gap:0 12px;padding:9px 13px 9px 9px;text-decoration:none;
-  border:1px solid var(--hair);border-radius:10px;
+  border:1px solid #1f2831;border-radius:10px;
   background:linear-gradient(90deg,color-mix(in srgb,var(--team) 7%,#0d1219),#0a0e14 62%);
   transition:border-color .15s ease,background .15s ease;
 }
 .lead-roster a:hover,.lead-roster a:focus-visible{
-  border-color:color-mix(in srgb,var(--team) 48%,var(--hair));
+  border-color:color-mix(in srgb,var(--team) 48%,#1f2831);
   background:linear-gradient(90deg,color-mix(in srgb,var(--team) 13%,#0d1219),#0a0e14 62%);
   outline:none;
 }
@@ -54,22 +52,22 @@
   grid-column:2;grid-row:1;align-self:end;
   font-family:'Barlow Condensed',system-ui,sans-serif;
   font-weight:700;font-size:17px;line-height:1.05;letter-spacing:.005em;
-  text-transform:uppercase;color:var(--ink);
+  text-transform:uppercase;color:#e9eef4;
 }
 .lead-roster u{
   grid-column:2;grid-row:2;align-self:start;text-decoration:none;
-  font-size:10.5px;line-height:1.3;color:var(--dim);
+  font-size:10.5px;line-height:1.3;color:#7b8895;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .lead-roster em,.lead-roster i{
   grid-row:1/3;display:block;font-style:normal;text-align:right;min-width:44px;
   font-family:'IBM Plex Mono',ui-monospace,monospace;
-  font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink);
+  font-size:15px;font-weight:600;letter-spacing:-.02em;color:#e9eef4;
 }
-.lead-roster i{min-width:38px;padding-left:12px;border-left:1px solid var(--hair)}
+.lead-roster i{min-width:38px;padding-left:12px;border-left:1px solid #1f2831}
 .lead-roster em::before,.lead-roster i::before{
   display:block;margin-bottom:2px;
-  font-size:8.5px;font-weight:500;letter-spacing:.16em;color:var(--dim);
+  font-size:8.5px;font-weight:500;letter-spacing:.16em;color:#7b8895;
 }
 .lead-roster em::before{content:"SENS"}
 .lead-roster i::before{content:"FOV"}
