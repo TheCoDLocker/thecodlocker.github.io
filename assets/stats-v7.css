@@ -28,46 +28,66 @@
   }
   .data-table thead th:active{background:#18212c;color:#e9eef4}
 
-  /* --- each row becomes a card ---------------------------------------- */
-  .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:auto}
-  .data-table{min-width:0;width:100%;border-collapse:separate;border-spacing:0}
+  /* --- dense rows, not 51 stacked cards ------------------------------
+     First pass made every row a card with five label/value lines, which
+     turned 51 players into roughly 10,000px of scrolling. Now: name and the
+     two numbers people came for on one line, everything else as a wrapped
+     inline run underneath, rows split by a hairline instead of boxed.
+     Same seven fields, about a third of the height. */
+  .data-table,.data-table tbody,.data-table tr{display:block;width:auto}
+  .data-table{min-width:0;width:100%;border-collapse:collapse}
 
   .data-table tbody tr{
     position:relative;
-    margin-bottom:9px;padding:11px 13px 4px;
-    border:1px solid #1d262f;border-radius:11px;
-    background:linear-gradient(180deg,#0f151c,#0a0e14);
+    padding:12px 2px 14px;
+    border-bottom:1px solid #161e27;
   }
+  .data-table tbody tr:last-child{border-bottom:0}
 
-  /* cell 1 = player, cell 2 = team: together they are the card header */
+  /* line 1 — player, with sens and FOV parked on the right */
   .data-table tbody td:nth-child(1){
-    padding:0 0 2px;border:0;
+    display:block;padding:0 124px 11px 0;border:0;
     font-family:'Barlow Condensed',system-ui,sans-serif;
-    font-weight:700;font-size:19px;line-height:1.05;text-transform:uppercase;
+    font-weight:700;font-size:18px;line-height:1.15;letter-spacing:.01em;
+    text-transform:uppercase;
   }
-  .data-table tbody td:nth-child(2){
-    padding:0 0 10px;border:0;margin-bottom:9px;
-    border-bottom:1px solid #1d262f !important;
-    font-size:11.5px;color:#7b8895;
-  }
-
-  /* cells 3-7 = label / value pairs */
-  .data-table tbody td:nth-child(n+3){
-    display:flex;align-items:baseline;justify-content:space-between;gap:14px;
-    padding:5px 0;border:0;
+  .data-table tbody td:nth-child(3),
+  .data-table tbody td:nth-child(4){
+    position:absolute;top:9px;padding:0;border:0;
+    text-align:right;line-height:1.15;
     font-family:'IBM Plex Mono',ui-monospace,monospace;
-    font-size:13.5px;color:#e9eef4;text-align:right;
+    font-size:15px;font-weight:600;letter-spacing:-.03em;color:#fff;
   }
-  .data-table tbody td:nth-child(n+3)::before{
-    content:attr(data-k);
-    font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-    color:#6f7d8b;text-align:left;flex:0 0 auto;
+  .data-table tbody td:nth-child(3){right:60px;width:60px}
+  .data-table tbody td:nth-child(4){right:2px;width:50px}
+  .data-table tbody td:nth-child(3)::before,
+  .data-table tbody td:nth-child(4)::before{
+    display:block;margin-bottom:1px;
+    font-size:8.5px;font-weight:500;letter-spacing:.16em;color:#66737f;
   }
   .data-table tbody td:nth-child(3)::before{content:"SENS"}
   .data-table tbody td:nth-child(4)::before{content:"FOV"}
-  .data-table tbody td:nth-child(5)::before{content:"LAYOUT"}
-  .data-table tbody td:nth-child(6)::before{content:"GRIP"}
-  .data-table tbody td:nth-child(7)::before{content:"CONTROLLER"}
+
+  /* line 2 — team, layout, grip, controller flow as one wrapped run */
+  .data-table tbody td:nth-child(2),
+  .data-table tbody td:nth-child(5),
+  .data-table tbody td:nth-child(6),
+  .data-table tbody td:nth-child(7){
+    display:inline;padding:0;border:0;
+    font-size:12px;line-height:1.7;color:#8593a1;
+  }
+  .data-table tbody td:nth-child(2){color:#9aa7b4}
+  /* Separators lead each item rather than trailing it, so a hidden cell
+     never leaves an orphan middot at either end of the run. */
+  .data-table tbody td:nth-child(5)::before,
+  .data-table tbody td:nth-child(6)::before,
+  .data-table tbody td:nth-child(7)::before{
+    content:" \00B7 ";color:#3c4753;
+  }
+  /* "not recorded" cells carry .nd — the dash still shows on desktop, but
+     on a phone the slot is dropped instead of printing "\00B7 \2014 \00B7" */
+  .data-table tbody td.nd,
+  .data-table tbody td:empty{display:none}
 
   /* --- the chart section was still two columns on a phone ------------ */
   /* .stats-grid held 180px + 115px tracks inside a 312px container, which
