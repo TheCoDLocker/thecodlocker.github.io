@@ -1,0 +1,31 @@
+/* ============================================================ home v7 ==
+   Homepage only. Loads after redesign.css.
+
+   Scope: the directory cards. Portraits used to be generated initials, so
+   they were kept small on purpose. They are photographs now, so they get
+   room, and the numbers beside them get set in the mono face the rest of
+   the site already uses for data.
+
+   Nothing here changes layout or content — sizing, type and hover only.
+   ==================================================================== */
+
+.home-shell .card .pp{--pp-size:64px;--pp-radius:11px}
+
+.home-shell .card{transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+.home-shell .card:hover{
+  transform:translateY(-2px);
+  border-color:color-mix(in srgb,var(--team) 46%,#252f3a);
+  box-shadow:0 12px 28px rgba(0,0,0,.34),0 0 0 1px color-mix(in srgb,var(--team) 20%,transparent);
+}
+
+.home-shell .card .tag{letter-spacing:-.005em}
+.home-shell .cardstats b{font-family:'IBM Plex Mono',ui-monospace,monospace;letter-spacing:-.01em}
+
+@media(max-width:900px){
+  .home-shell .card .pp{--pp-size:54px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .home-shell .card{transition:none}
+  .home-shell .card:hover{transform:none}
+}
