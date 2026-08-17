@@ -1,0 +1,91 @@
+/* =========================================================== stats v7 ==
+   Mobile layout for the league table.
+
+   The problem: the 7-column table sits in a 290px scroll window on a 390px
+   phone (nested padding eats 100px), so Sens and FOV — the two columns
+   anyone actually opens this page for — are off-screen behind a sideways
+   scroll. Below 760px each row becomes a card and every field is visible.
+
+   Column headers stay on screen as a chip row, so sorting still works.
+   Desktop is untouched.
+   ==================================================================== */
+
+@media(max-width:760px){
+
+  /* reclaim the width the nested frames were eating */
+  .page-frame{padding-left:8px;padding-right:8px}
+  .table-panel{padding-left:10px;padding-right:10px}
+  .table-scroll{overflow-x:visible;margin:0;padding:0}
+
+  /* --- headers become a sort chip row (click handlers are on th) ------ */
+  .data-table thead{display:block;margin-bottom:10px}
+  .data-table thead tr{display:flex;flex-wrap:wrap;gap:6px}
+  .data-table thead th{
+    display:block;padding:6px 10px;border:1px solid #202a34;border-radius:999px;
+    background:#101720;color:#8794a2;
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;
+  }
+  .data-table thead th:active{background:#18212c;color:#e9eef4}
+
+  /* --- each row becomes a card ---------------------------------------- */
+  .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:auto}
+  .data-table{min-width:0;width:100%;border-collapse:separate;border-spacing:0}
+
+  .data-table tbody tr{
+    position:relative;
+    margin-bottom:9px;padding:11px 13px 4px;
+    border:1px solid #1d262f;border-radius:11px;
+    background:linear-gradient(180deg,#0f151c,#0a0e14);
+  }
+
+  /* cell 1 = player, cell 2 = team: together they are the card header */
+  .data-table tbody td:nth-child(1){
+    padding:0 0 2px;border:0;
+    font-family:'Barlow Condensed',system-ui,sans-serif;
+    font-weight:700;font-size:19px;line-height:1.05;text-transform:uppercase;
+  }
+  .data-table tbody td:nth-child(2){
+    padding:0 0 10px;border:0;margin-bottom:9px;
+    border-bottom:1px solid #1d262f !important;
+    font-size:11.5px;color:#7b8895;
+  }
+
+  /* cells 3-7 = label / value pairs */
+  .data-table tbody td:nth-child(n+3){
+    display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+    padding:5px 0;border:0;
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:13.5px;color:#e9eef4;text-align:right;
+  }
+  .data-table tbody td:nth-child(n+3)::before{
+    content:attr(data-k);
+    font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:#6f7d8b;text-align:left;flex:0 0 auto;
+  }
+  .data-table tbody td:nth-child(3)::before{content:"SENS"}
+  .data-table tbody td:nth-child(4)::before{content:"FOV"}
+  .data-table tbody td:nth-child(5)::before{content:"LAYOUT"}
+  .data-table tbody td:nth-child(6)::before{content:"GRIP"}
+  .data-table tbody td:nth-child(7)::before{content:"CONTROLLER"}
+
+  /* --- the chart section was still two columns on a phone ------------ */
+  /* .stats-grid held 180px + 115px tracks inside a 312px container, which
+     squeezed the chart panels to 115px and collapsed every .bar-row's bar
+     track to 0px — the distribution bars were rendering at zero width. */
+  .stats-grid{grid-template-columns:minmax(0,1fr) !important;gap:10px}
+  .stats-grid>*{min-width:0}
+  .stats-chart-panel,.sens-chart-shell,.chart-note{width:auto !important;max-width:none}
+  .bar-row{grid-template-columns:86px minmax(0,1fr) 34px !important;align-items:center;gap:8px}
+  .sens-chart-meta{width:auto !important}
+
+  /* --- stat tiles: stop values breaking mid-number ("45 / 51") -------- */
+  .stats-hero-grid,.page-summary.stats-summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .statgrid .stat b,.statgrid b,.stat-hero b,
+  .stats-hero-grid b,.page-summary.stats-summary b{white-space:nowrap}
+}
+
+@media(max-width:400px){
+  .data-table tbody td:nth-child(n+3){font-size:12.5px}
+  .data-table tbody td:nth-child(1){font-size:17px}
+}
