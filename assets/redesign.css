@@ -1,0 +1,881 @@
+/* ============================================================================
+   CODLOCKER — redesign layer (v6)
+   Loaded last, so it owns the visual language. Class names match the existing
+   markup; this restyles rather than replaces.
+
+   Direction: keep the near-black esports base, but let the twelve CDL team
+   colours drive the chroma instead of a single orange. Glassy panels with
+   neon edge lighting, mono numerals on tinted stat tiles, grid-overlay heroes.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- tokens - */
+:root{
+  /* Deeper, slightly blue-cast base — reads richer than a flat neutral black */
+  --bg:#06080c;
+  --bg2:#080b11;
+  --panel:#0e131b;
+  --panel2:#131a24;
+  --panel3:#1a2430;
+  --line:#222c3a;
+  --line2:#2f3c4d;
+  --text:#f3f6f9;
+  --muted:#8d9aab;
+  --dim:#6b7889;
+
+  /* Brand orange stays — it is the logo and the primary CTA */
+  --accent:#ff5a1f;
+  --accent2:#ff8f45;
+
+  /* Supporting hues. Multi-hue is what makes the UI read as colourful without
+     turning noisy: each one owns a meaning and never strays outside it. */
+  --verified:oklch(0.85 0.2 150);   /* confirmed data, positive delta   */
+  --info:#3cc4ff;                   /* comparison B, informational      */
+  --violet:#a98bff;                 /* meta / league-wide aggregates    */
+  --hot:#ff4d6d;                    /* differences, alerts              */
+  --gold:#ffc247;                   /* rank 1, highlights               */
+
+  --team-fallback:var(--accent);
+  --shadow:0 22px 60px rgba(0,0,0,.45);
+  --radius:10px;
+}
+
+/* `--t` is the active accent every component tints itself with. It must
+   INHERIT: a universal `*{--t:…}` would re-resolve it on every element and
+   stop a parent from handing its accent down to its own labels and bars.
+   So: default it at the root, and re-point it only where a team colour is
+   actually declared (always as an inline `--team`, including the ones the
+   compare page sets from script). */
+:root{--t:var(--team-fallback)}
+[style*="--team"]{--t:var(--team)}
+
+html{background:var(--bg)}
+body{
+  background:linear-gradient(180deg,#06080c,#080b12 45%,#06080c);
+  color:var(--text);
+}
+/* Ambient colour wash — two team-agnostic glows so every page has depth even
+   before a team colour is in play. */
+body::before{
+  background:
+    radial-gradient(900px 500px at 78% -4%, color-mix(in srgb,var(--t) 13%,transparent), transparent 62%),
+    radial-gradient(700px 460px at 4% 14%, rgba(169,139,255,.055), transparent 70%),
+    radial-gradient(600px 380px at 50% 102%, rgba(60,196,255,.045), transparent 72%);
+}
+body::after{opacity:.26}
+
+/* --------------------------------------------------------------- header - */
+header.site{
+  background:rgba(6,8,12,.86);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(16px) saturate(1.3);
+  box-shadow:0 8px 30px rgba(0,0,0,.36);
+}
+.logo b{
+  color:var(--accent);
+  text-shadow:0 0 22px color-mix(in srgb,var(--accent) 45%,transparent);
+}
+.nav a,.nav-team summary{color:#c9d3de;transition:color .15s ease,transform .15s ease}
+.nav a:hover,.nav-team summary:hover{color:var(--accent2)}
+.nav a[aria-current="page"]{
+  color:#fff;
+  text-shadow:0 0 18px color-mix(in srgb,var(--accent) 55%,transparent);
+}
+.header-searchbox input{
+  background:rgba(255,255,255,.035);
+  border-color:var(--line);
+  border-radius:6px;
+}
+.header-searchbox input:focus{
+  border-color:color-mix(in srgb,var(--accent) 55%,var(--line));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);
+}
+
+/* ------------------------------------------------------------- portraits - */
+/* A generated avatar: team-tinted gradient, diagonal texture, condensed
+   initials. Drop a real photo at players/<slug>.webp and the <img> covers it;
+   if that file is missing the img removes itself and this shows through. */
+.pp{
+  --pp-size:56px;
+  position:relative;
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:var(--pp-size);
+  height:var(--pp-size);
+  border-radius:var(--pp-radius,9px);
+  overflow:hidden;
+  background:
+    linear-gradient(152deg,
+      color-mix(in srgb,var(--t) 88%,#0a0e15) 0%,
+      color-mix(in srgb,var(--t) 34%,#0a0e15) 52%,
+      #0a0e15 88%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb,var(--t) 55%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 22px color-mix(in srgb,var(--t) 22%,transparent);
+}
+.pp::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 5px,transparent 5px 11px);
+  opacity:.55;
+}
+.pp::after{
+  content:attr(data-i);
+  position:relative;
+  font-family:'Barlow Condensed',system-ui,sans-serif;
+  font-weight:700;
+  font-size:calc(var(--pp-size) * .43);
+  line-height:1;
+  letter-spacing:.01em;
+  /* Lift toward white so initials stay legible on the darker team colours
+     (Heretics blue, G2 red) without blowing out the bright ones. */
+  color:color-mix(in srgb,var(--t) 22%,#ffffff);
+  text-shadow:0 2px 14px rgba(0,0,0,.7);
+}
+/* Gated on a successful load rather than hidden on error, so a missing photo
+   can never paint a broken-image glyph over the avatar mid-load. */
+.pp img{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 22%;
+  opacity:0;
+  transition:opacity .18s ease;
+}
+.pp img[data-ok]{opacity:1}
+.pp.lg{--pp-size:132px;--pp-radius:12px}
+.pp.sm{--pp-size:34px;--pp-radius:7px}
+.pp.xs{--pp-size:26px;--pp-radius:6px}
+
+/* ------------------------------------------------------------ glass panel - */
+/* The mockup's signature: hairline neon ring + soft outer bloom + inner top
+   highlight, over a barely-there vertical gradient. */
+.panel,
+.profile-card,
+.insight-card,
+.summary-card,
+.analysis-card,
+.recent-card,
+.news-card,
+.compare-picker,
+.table-panel{
+  position:relative;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.014)),
+    var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 0 0 1px color-mix(in srgb,var(--t) 15%,transparent),
+    0 0 30px color-mix(in srgb,var(--t) 8%,transparent),
+    0 14px 34px rgba(0,0,0,.30);
+}
+.panel::before,
+.profile-card::before,
+.analysis-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:2px;
+  background:linear-gradient(90deg,
+    var(--t) 0%,
+    color-mix(in srgb,var(--t) 45%,transparent) 42%,
+    transparent 100%);
+}
+.panel h2,
+.profile-card h3{
+  border-bottom:1px solid var(--line);
+  color:#f6f9fc;
+}
+.panel h2::before,
+.profile-card h3::before{
+  background:var(--t);
+  box-shadow:0 0 14px color-mix(in srgb,var(--t) 60%,transparent);
+}
+
+/* Rosters run four or five deep; a fixed five-column track leaves a hole on
+   the four-player teams, so let the row fill itself instead. */
+.teamsec .grid{grid-template-columns:repeat(auto-fit,minmax(212px,1fr))}
+.row{border-bottom:1px solid rgba(255,255,255,.055)}
+.row .k{color:var(--muted)}
+.row .v{color:#f2f6fa;font-weight:500}
+/* Untracked values shouldn't compete with real data */
+.row .v.empty{color:var(--dim)}
+
+/* -------------------------------------------------------------- stat tiles - */
+/* Mockup pattern: tiny letterspaced mono label over a large mono numeral,
+   sitting on a faint fill with 1px gaps showing the panel through. */
+.statgrid{
+  display:grid;
+  grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));
+  gap:1px;
+  background:rgba(255,255,255,.07);
+  border-radius:8px;
+  overflow:hidden;
+}
+/* Lets a four-up row fold to two-up on a phone on its own, rather than
+   depending on a breakpoint (and without an inline --cols a media query
+   could never outrank). */
+.statgrid-auto{grid-template-columns:repeat(auto-fit,minmax(104px,1fr))}
+.stattile{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),transparent),var(--panel);
+  padding:11px 14px;
+}
+.stattile i{
+  display:block;
+  font:400 9.5px/1 'IBM Plex Mono',monospace;
+  font-style:normal;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.stattile b{
+  display:block;
+  margin-top:7px;
+  font:600 21px/1 'IBM Plex Mono',monospace;
+  color:#f4f7fa;
+}
+.stattile.hot b{color:var(--t)}
+.stattile.good b{color:var(--verified)}
+
+/* ------------------------------------------------------------ player cards - */
+.card{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:15px 16px;
+  min-height:0;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012)),var(--panel);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 26px rgba(0,0,0,.26);
+  transition:transform .17s ease,border-color .17s ease,box-shadow .17s ease;
+}
+/* The old build drew a top hairline via ::before; the portrait carries the
+   team colour now, so retire it rather than doubling up. */
+.card::before{display:none}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:color-mix(in srgb,var(--t) 58%,var(--line));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    0 0 0 1px color-mix(in srgb,var(--t) 40%,transparent),
+    0 0 30px color-mix(in srgb,var(--t) 20%,transparent),
+    0 16px 38px rgba(0,0,0,.34);
+}
+.card .cardbody{min-width:0;flex:1}
+.card .tag{
+  display:block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:23px;
+  line-height:1.02;
+  letter-spacing:.015em;
+  text-transform:uppercase;
+  color:#f6f9fc;
+}
+.card .team{
+  display:block;
+  margin-top:1px;
+  font:400 10.5px/1.3 'IBM Plex Mono',monospace;
+  color:var(--dim);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.card .cardstats{
+  display:flex;
+  gap:14px;
+  margin-top:9px;
+  padding-top:0;
+  border-top:0;
+}
+/* The old build separated stats with a right border and big side margins;
+   flex gap does that job now, so clear them or they double up. */
+.card .cardstats div{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  margin-right:0;
+  padding-right:0;
+  border-right:0;
+}
+.card .cardstats i{
+  font:400 8.5px/1 'IBM Plex Mono',monospace;
+  font-style:normal;
+  letter-spacing:.13em;
+  color:var(--dim);
+}
+.card .cardstats b{
+  font:600 14px/1 'IBM Plex Mono',monospace;
+  color:color-mix(in srgb,var(--t) 42%,#f2f6fa);
+}
+
+/* --------------------------------------------------------- team sections - */
+.teamsec{
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--bg2);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--t) 12%,transparent),0 16px 40px rgba(0,0,0,.28);
+  overflow:hidden;
+}
+.teamhead{
+  position:relative;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--t) 20%,transparent) 0%,
+      color-mix(in srgb,var(--t) 5%,transparent) 34%,
+      transparent 62%),
+    linear-gradient(180deg,rgba(255,255,255,.045),transparent),
+    #0b0f16;
+  border-bottom:1px solid color-mix(in srgb,var(--t) 22%,var(--line));
+}
+/* Left edge bar in team colour — cheap, strong identity cue per section */
+.teamhead::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--t);
+  box-shadow:0 0 18px color-mix(in srgb,var(--t) 70%,transparent);
+}
+.teamhead h2 a{color:#f6f9fc}
+.teamhead .tcount{
+  font:400 10.5px 'IBM Plex Mono',monospace;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.teamhead .view-team{color:var(--t)}
+.team-logo-shell{
+  display:grid;
+  place-items:center;
+  width:40px;
+  height:40px;
+  border-radius:9px;
+  background:rgba(255,255,255,.05);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--t) 30%,transparent);
+}
+
+/* ---------------------------------------------------------- league rails - */
+/* Was a row of near-invisible dashes; now vivid per-team chips. This is the
+   single biggest "more colourful" win on the homepage. */
+.league-rail a{
+  position:relative;
+  border-bottom:none !important;
+  color:#cad4e0;
+  transition:color .15s ease,background .15s ease;
+}
+.league-rail a::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  translate:-50% 0;
+  top:12px;
+  width:26px;
+  height:3px;
+  border-radius:2px;
+  background:var(--team);
+  box-shadow:0 0 14px color-mix(in srgb,var(--team) 75%,transparent);
+}
+.league-rail a:hover{
+  color:#fff;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--team) 16%,transparent),transparent);
+}
+
+/* ------------------------------------------------------------ hero blocks - */
+.hero,.page-hero,.lower-third{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 150% at 84% -12%, color-mix(in srgb,var(--t) 17%,transparent), transparent 56%),
+    linear-gradient(180deg,#0a0e15,#070a10);
+  border-bottom:1px solid var(--line);
+}
+/* Blueprint grid, straight from the mockup hero */
+.hero::before,.page-hero::before,.lower-third::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(180deg,#000,transparent 88%);
+}
+.lower-third::after{opacity:.16}
+.lower-third h1{
+  font-size:clamp(44px,6vw,66px);
+  line-height:.94;
+  letter-spacing:-.012em;
+  text-transform:uppercase;
+}
+.lower-third .rail{
+  height:3px;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--t),color-mix(in srgb,var(--t) 10%,transparent));
+  box-shadow:0 0 20px color-mix(in srgb,var(--t) 55%,transparent);
+}
+.teamname{
+  color:var(--t);
+  font-weight:600;
+  letter-spacing:.09em;
+}
+.badge.verified{
+  color:var(--verified);
+  border-color:color-mix(in srgb,var(--verified) 42%,transparent);
+  background:color-mix(in srgb,var(--verified) 11%,transparent);
+  border-radius:20px;
+}
+.pagemeta{color:var(--dim);font-family:'IBM Plex Mono',monospace;font-size:11.5px}
+
+/* Player hero becomes a portrait + identity row */
+.player-hero-row{
+  display:flex;
+  align-items:flex-start;
+  gap:22px;
+  margin-top:16px;
+}
+.player-hero-id{min-width:0;flex:1}
+.player-hero-row h1{margin:0}
+
+/* Headline numbers, lifted into the hero the way the mockup leads with them */
+.hero-stats{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.hero-stats .statgrid{
+  flex:1;
+  min-width:min(430px,100%);
+  max-width:560px;
+  background:rgba(255,255,255,.09);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--t) 18%,transparent),0 12px 30px rgba(0,0,0,.3);
+}
+.hero-stats .stattile{background:rgba(10,14,21,.82)}
+.hero-stats .stattile b{font-size:23px}
+.hero-compare{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  height:38px;
+  padding:0 17px;
+  border-radius:7px;
+  border:1px solid color-mix(in srgb,var(--t) 42%,var(--line2));
+  background:color-mix(in srgb,var(--t) 10%,transparent);
+  font:700 12px 'Barlow Condensed',sans-serif;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:#e7edf5;
+  transition:.16s ease;
+}
+.hero-compare:hover{
+  color:#fff;
+  border-color:color-mix(in srgb,var(--t) 70%,transparent);
+  box-shadow:0 0 22px color-mix(in srgb,var(--t) 22%,transparent);
+}
+
+/* ------------------------------------------------------- homepage lead - */
+/* The hero the mockup opens on: blueprint grid, a warm accent bloom off the
+   top-right, and the headline doing the heavy lifting. */
+.lead{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(105% 130% at 88% -14%, color-mix(in srgb,var(--accent) 17%,transparent), transparent 58%),
+    radial-gradient(70% 90% at 6% 108%, rgba(169,139,255,.10), transparent 66%),
+    linear-gradient(180deg,#0a0e15,#070a10);
+}
+.lead::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(120% 100% at 70% 0%,#000,transparent 78%);
+}
+.lead-main,.lead-panel{position:relative;z-index:1}
+.lead-ring{color:var(--accent)}
+.lead-go{
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  box-shadow:0 0 30px color-mix(in srgb,var(--accent) 38%,transparent);
+  border-radius:7px;
+  transition:.16s ease;
+}
+.lead-go:hover{box-shadow:0 0 42px color-mix(in srgb,var(--accent) 55%,transparent);transform:translateY(-1px)}
+.lead-alt{
+  border-radius:7px;
+  border:1px solid var(--line2);
+  transition:.16s ease;
+}
+.lead-alt:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line2));color:#fff}
+
+/* Meta pulse — the league-wide readout, so it takes the aggregate spectrum */
+.lead-panel.meta-pulse{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012)),var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 0 0 1px rgba(60,196,255,.10),
+    0 18px 44px rgba(0,0,0,.34);
+}
+.meta-kicker{color:var(--info);letter-spacing:.14em}
+.meta-combo b,.meta-combo strong{font-family:'IBM Plex Mono',monospace}
+.meta-track{background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.meta-dist:nth-of-type(odd) .meta-track > *{
+  background:linear-gradient(90deg,var(--info),color-mix(in srgb,var(--info) 45%,transparent));
+  box-shadow:0 0 14px color-mix(in srgb,var(--info) 40%,transparent);
+}
+.meta-dist:nth-of-type(even) .meta-track > *{
+  background:linear-gradient(90deg,var(--verified),color-mix(in srgb,var(--verified) 45%,transparent));
+  box-shadow:0 0 14px color-mix(in srgb,var(--verified) 40%,transparent);
+}
+.meta-mini{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(255,255,255,.028);
+}
+.meta-mini:nth-child(1){--t:var(--accent)}
+.meta-mini:nth-child(2){--t:var(--violet)}
+.meta-mini:nth-child(3){--t:var(--info)}
+.meta-mini:nth-child(4){--t:var(--verified)}
+.meta-mini b,.meta-mini strong{color:var(--t);font-family:'IBM Plex Mono',monospace}
+.panel-link{color:var(--accent)}
+
+/* ---------------------------------------------------------------- chips - */
+.chip,.filter-chip{
+  border-radius:6px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  color:var(--muted);
+  transition:.15s ease;
+}
+.chip:hover,.filter-chip:hover{
+  color:#fff;
+  border-color:color-mix(in srgb,var(--accent) 45%,var(--line));
+}
+.chip.active,.chip[aria-pressed="true"],.filter-chip.active{
+  color:#fff;
+  background:rgba(255,255,255,.07);
+  border-color:color-mix(in srgb,var(--accent) 60%,transparent);
+  box-shadow:0 0 18px color-mix(in srgb,var(--accent) 18%,transparent);
+}
+
+/* --------------------------------------------------------------- tables - */
+.data-table th{
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid var(--line2);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;
+  letter-spacing:.13em;
+  color:var(--dim);
+}
+.data-table td{
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+}
+.data-table tbody tr{transition:background .14s ease}
+.data-table tbody tr:hover{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--t) 9%,transparent),transparent 55%);
+}
+/* Rank 1–3 get medal tints so a dense table has a focal point */
+.data-table tbody tr:nth-child(1) td:first-child{color:var(--gold);font-weight:600}
+.data-table tbody tr:nth-child(2) td:first-child{color:#d6dee8;font-weight:600}
+.data-table tbody tr:nth-child(3) td:first-child{color:#d19a6a;font-weight:600}
+
+/* -------------------------------------------------------------- compare - */
+/* The mockup diffs A against B with two fixed hues. Here each pro carries a
+   real team colour, which is better identity — but two red teams then look
+   alike, so the side is carried structurally instead: A is anchored left and
+   B mirrors to the right, each with its own edge. */
+.compare-profile{
+  display:block;
+  padding:17px 18px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012)),var(--panel);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 0 0 1px color-mix(in srgb,var(--t) 16%,transparent),
+    0 12px 30px rgba(0,0,0,.28);
+  transition:.16s ease;
+}
+.compare-profile::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--t);
+  box-shadow:0 0 18px color-mix(in srgb,var(--t) 70%,transparent);
+}
+.compare-profile{position:relative;overflow:hidden}
+.cp-a::before{left:0}
+.cp-b::before{right:0}
+.cp-b{text-align:right}
+.cp-b .cp-head{flex-direction:row-reverse}
+.cp-b .compare-quick{justify-content:flex-end}
+.compare-profile:hover{
+  border-color:color-mix(in srgb,var(--t) 50%,var(--line));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 0 1px color-mix(in srgb,var(--t) 38%,transparent),
+    0 0 28px color-mix(in srgb,var(--t) 16%,transparent),
+    0 14px 34px rgba(0,0,0,.32);
+}
+.cp-head{display:flex;align-items:center;gap:13px;margin:9px 0 14px}
+.cp-head .pp{--pp-size:52px}
+.cp-id{min-width:0}
+.cp-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:30px;
+  line-height:1.02;
+  text-transform:uppercase;
+  color:var(--t);
+}
+.cp-team{font:400 11px 'IBM Plex Mono',monospace;color:var(--dim)}
+.cp-kicker{
+  font:500 9.5px 'IBM Plex Mono',monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.compare-quick{display:flex;gap:22px}
+.compare-quick b{
+  display:block;
+  font:600 20px 'IBM Plex Mono',monospace;
+  color:#f3f7fb;
+}
+.compare-quick span{
+  font:400 9px 'IBM Plex Mono',monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.compare-vs{
+  display:grid;
+  place-items:center;
+  font:600 13px 'IBM Plex Mono',monospace;
+  letter-spacing:.1em;
+  color:var(--dim);
+}
+.compare-picker select{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:7px;
+  color:var(--text);
+}
+.compare-picker select:focus{
+  outline:0;
+  border-color:color-mix(in srgb,var(--t) 55%,var(--line));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--t) 15%,transparent);
+}
+/* Rows where the two pros differ */
+.data-table tbody tr:has(td.diff),
+.compare-table tbody tr:has(td.diff){
+  background:linear-gradient(90deg,color-mix(in srgb,var(--hot) 9%,transparent),transparent 78%);
+}
+td.diff{
+  color:var(--hot);
+  font-weight:600;
+  background:color-mix(in srgb,var(--hot) 8%,transparent);
+}
+.compare-table th{
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid var(--line2);
+}
+.compare-table td{
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-family:'IBM Plex Mono',monospace;
+}
+.compare-table .pro-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:21px;
+  text-transform:uppercase;
+}
+.compare-table .pro-team{
+  font:400 9.5px 'IBM Plex Mono',monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.compare-note{font:400 11.5px 'IBM Plex Mono',monospace;color:var(--dim);margin-top:12px}
+
+/* ------------------------------------------------- aggregate-page colour - */
+/* League-wide pages have no team to borrow from, so they'd fall back to one
+   orange for everything. Rotating the supporting hues across sequential cards
+   gives those pages their own colour identity while keeping meaning stable:
+   each card owns a hue, and the hue stays put as you scan down. */
+.summary-card:nth-child(5n+1),.insight-card:nth-child(5n+1),.news-card:nth-child(5n+1){--t:var(--accent)}
+.summary-card:nth-child(5n+2),.insight-card:nth-child(5n+2),.news-card:nth-child(5n+2){--t:var(--info)}
+.summary-card:nth-child(5n+3),.insight-card:nth-child(5n+3),.news-card:nth-child(5n+3){--t:var(--verified)}
+.summary-card:nth-child(5n+4),.insight-card:nth-child(5n+4),.news-card:nth-child(5n+4){--t:var(--violet)}
+.summary-card:nth-child(5n+5),.insight-card:nth-child(5n+5),.news-card:nth-child(5n+5){--t:var(--gold)}
+
+/* These cards carry a left edge rather than a top bar */
+.insight-card{border-left:3px solid var(--t)}
+.insight-card::before{display:none}
+/* Research cards pinned their label and hover to the brand orange; let them
+   follow the rotation like every other card in the row. */
+.research-card .insight-label{color:var(--t)}
+.research-card:hover,.research-card:focus-visible{
+  border-color:var(--t);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--t) 10%,transparent),transparent 70%),var(--panel);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--t) 30%,transparent),0 16px 34px rgba(0,0,0,.32);
+}
+.research-card:hover::after,.research-card:focus-visible::after{color:var(--t)}
+
+.summary-card::before{background:var(--t);box-shadow:0 0 14px color-mix(in srgb,var(--t) 55%,transparent)}
+.summary-value,.insight-value{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:600;
+  color:#f5f8fb;
+}
+.insight-label{color:var(--t);letter-spacing:.13em}
+
+/* Distribution bars pick up the same spectrum instead of a flat orange */
+.bar-fill{
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--info) 80%,transparent),
+    color-mix(in srgb,var(--verified) 85%,transparent));
+  box-shadow:0 0 16px color-mix(in srgb,var(--info) 26%,transparent);
+  border-radius:3px;
+}
+.bar-track{background:rgba(255,255,255,.055);border-radius:3px}
+.bar-name,.bar-count{font-family:'IBM Plex Mono',monospace}
+.bar-count{color:var(--muted)}
+/* The modal sensitivity column — the one the league clusters on */
+.sens-col .sens-bar{
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  border-radius:3px 3px 0 0;
+}
+.sens-col.peak .sens-bar{
+  background:linear-gradient(180deg,var(--verified),color-mix(in srgb,var(--verified) 55%,transparent));
+  box-shadow:0 0 20px color-mix(in srgb,var(--verified) 45%,transparent);
+}
+.sens-num{font-family:'IBM Plex Mono',monospace;color:#eef3f8}
+.sens-label{font-family:'IBM Plex Mono',monospace;color:var(--dim)}
+
+/* ------------------------------------------------------- analysis cards - */
+.analysis-card{min-height:0;padding:17px 18px 16px}
+.analysis-label{
+  border-radius:5px;
+  background:color-mix(in srgb,var(--t) 12%,rgba(255,255,255,.03));
+  border:1px solid color-mix(in srgb,var(--t) 32%,transparent);
+  color:color-mix(in srgb,var(--t) 40%,#f2f6fa);
+}
+.analysis-value{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:31px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:#f6f9fc;
+}
+.analysis-copy{color:var(--muted);font-size:12.5px;line-height:1.6}
+
+/* ------------------------------------------------------------- CTA panel - */
+/* Mockup 1b's "apply this config" block — the one place a saturated fill and
+   a real glow are earned. */
+.cta-panel{
+  padding:16px 17px;
+  border-radius:var(--radius);
+  border:1px solid color-mix(in srgb,var(--t) 32%,transparent);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--t) 12%,transparent),transparent 70%),var(--panel);
+  box-shadow:0 0 34px color-mix(in srgb,var(--t) 10%,transparent);
+}
+.cta-panel h3{
+  margin:0 0 8px;
+  font:700 12px 'Barlow Condensed',sans-serif;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--t);
+}
+.cta-panel p{margin:0 0 12px;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:var(--muted)}
+.btn-primary{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  border-radius:6px;
+  background:var(--t);
+  color:#07130c;
+  font:700 12px 'Barlow Condensed',sans-serif;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  box-shadow:0 0 26px color-mix(in srgb,var(--t) 34%,transparent);
+}
+.btn-ghost{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  border-radius:6px;
+  border:1px solid var(--line2);
+  color:#dbe3ec;
+  font:700 12px 'Barlow Condensed',sans-serif;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.btn-ghost:hover{border-color:color-mix(in srgb,var(--t) 55%,var(--line2));color:#fff}
+
+/* ------------------------------------------------------------ TOC / misc - */
+.player-toc{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.04),transparent),var(--panel);
+}
+.player-toc a{color:var(--muted);border-radius:6px;transition:.14s ease}
+.player-toc a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.player-toc a.active,.player-toc a[aria-current]{
+  color:#fff;
+  background:color-mix(in srgb,var(--t) 14%,rgba(255,255,255,.04));
+  box-shadow:inset 2px 0 0 var(--t);
+}
+.player-written{
+  border-left:3px solid var(--t);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.006));
+}
+footer{border-top:1px solid var(--line);background:#05070a}
+.footer-brand b{color:var(--accent)}
+
+/* --------------------------------------------------------------- motion - */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* ----------------------------------------------------------- responsive - */
+@media(max-width:900px){
+  .player-hero-row{gap:15px}
+  .pp.lg{--pp-size:92px}
+  .lower-third h1{font-size:clamp(36px,9vw,52px)}
+}
+@media(max-width:540px){
+  .card{padding:13px}
+  .pp{--pp-size:46px}
+  .card .tag{font-size:20px}
+  .statgrid{--cols:2}
+}
