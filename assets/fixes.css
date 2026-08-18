@@ -28,3 +28,41 @@ select option:checked,select option:hover{
 @-moz-document url-prefix(){
   select{background-color:#101720}
 }
+
+/* ------------------------------------------------- sticky header, mobile --
+   header.site is sticky with background rgba(6,8,12,.86) and a 16px backdrop
+   blur. At 86% opacity page content ghosts through it while you scroll, and
+   the nav row inside it has no background of its own — so bright cards and
+   headings read straight through the bar. Backdrop-filter also fails outright
+   on some mobile browsers, leaving a near-transparent strip.
+
+   Below 900px: opaque bar, a hairline and shadow to separate it from the page,
+   and no reliance on backdrop-filter.
+   ------------------------------------------------------------------------ */
+@media(max-width:900px){
+  /* header.site is a fixed 67px box with overflow:visible, and .nav renders
+     at y=72-107 — entirely outside the painted background. That gap is the
+     bug: the bar looked opaque but the link row never had a background at
+     all, so page content scrolled straight through it. Letting the header
+     size to its contents makes the background cover the nav too. */
+  header.site{
+    height:auto !important;
+    padding-bottom:9px;
+    background:#070a0f !important;
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+  }
+  /* .nav overflows the header box rather than sizing it, so it needs its own
+     background. Bled to the full width with a negative margin, since the row
+     is inset 14px and a background stopping short would look like a seam. */
+  header.site .nav{
+    background:#070a0f;
+    margin-left:-14px;margin-right:-14px;
+    padding-left:14px;padding-right:14px;
+    border-bottom:1px solid #1a2230;
+    box-shadow:0 10px 24px rgba(0,0,0,.5);
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  header.site .nav::-webkit-scrollbar{display:none}
+}
