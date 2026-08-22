@@ -128,3 +128,31 @@ select option:checked,select option:hover{
   .mw4-strip h2{font-size:25px}
   .mw4-strip-go,.mw4-cta a{text-align:center}
 }
+
+
+/* MW4 settings table (added 2026-08-22) */
+.mw4-table-panel h2{margin:0}
+.mw4-table-head{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.mw4-table-head input{background:var(--panel,#0b0e13);border:1px solid var(--line,#252e36);
+  color:var(--text,#f2f4f5);font:inherit;font-size:14px;padding:9px 12px;min-width:230px}
+.mw4-table-head input:focus{outline:none;border-color:var(--accent,#ff5a1f)}
+.mw4-table-note{margin-top:10px;font-size:13px;line-height:1.65;color:var(--muted,#8f99a2)}
+.mw4-table-scroll{margin-top:14px;overflow-x:auto}
+.mw4-table{width:100%;border-collapse:collapse;font-size:14px}
+.mw4-table th{text-align:left;padding:9px;border-bottom:1px solid var(--line,#252e36);cursor:pointer;
+  font-family:'Barlow Condensed',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted,#8f99a2);white-space:nowrap;user-select:none}
+.mw4-table th:hover,.mw4-table th:focus{color:var(--accent,#ff5a1f);outline:none}
+.mw4-table th[data-dir=up]::after{content:" \2191";color:var(--accent,#ff5a1f)}
+.mw4-table th[data-dir=down]::after{content:" \2193";color:var(--accent,#ff5a1f)}
+.mw4-table td{padding:9px;border-bottom:1px solid var(--line,#252e36);white-space:nowrap}
+.mw4-table tbody tr:hover td{background:var(--panel2,#10141b)}
+.mw4-table td.mw4-p{border-left:3px solid var(--team,#ff5a1f)}
+.mw4-table td.mw4-p a{font-family:'Barlow Condensed',system-ui,sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:17px;color:var(--text,#f2f4f5);text-decoration:none}
+.mw4-table td.mw4-p a:hover{color:var(--accent,#ff5a1f)}
+.mw4-table td.mw4-t a{color:var(--muted,#8f99a2);text-decoration:none;font-size:13px}
+.mw4-table td.mw4-t a:hover{color:var(--text,#f2f4f5)}
+.mw4-table td b{color:var(--text,#f2f4f5)}
+.mw4-empty{margin-top:12px;font-size:14px;color:var(--muted,#8f99a2)}
+@media(max-width:720px){.mw4-hide{display:none}.mw4-table-head input{width:100%}}
