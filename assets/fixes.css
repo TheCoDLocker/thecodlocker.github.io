@@ -248,6 +248,9 @@ select option:checked,select option:hover{
 .mw4b-att-open b{color:var(--muted,#8d9aab)}
 
 /* stat bars */
+.mw4b-ev{padding:16px;border-top:1px solid var(--line,#222c3a)}
+.mw4b-ev .profile-evidence{margin:0}
+.mw4b-ev .profile-evidence-grid{grid-template-columns:1fr}
 .mw4b-perf{display:grid;gap:14px;padding:16px;border-top:1px solid var(--line,#222c3a);
   background:var(--bg2,#080b11)}
 .mw4b-stats{display:grid;gap:8px;align-content:center}
@@ -304,6 +307,7 @@ select option:checked,select option:hover{
   .mw4b-head{padding:14px 20px}
   .mw4b-title{padding:18px 20px 0}
   .mw4b-stage{padding:20px 20px 8px}
+  .mw4b-ev{padding:20px}
   .mw4b-read{padding:24px 22px}
   .mw4b-perf{grid-template-columns:minmax(0,1fr) 320px;gap:26px;padding:18px 20px;
     align-items:center}
