@@ -346,3 +346,87 @@ select option:checked,select option:hover{
   .mw4b-stat{grid-template-columns:62px minmax(0,1fr) 52px;gap:8px}
   .mw4b-att i{text-align:left;grid-column:1/-1;margin-top:2px}
 }
+
+
+/* ---------------------------------------------------------------------------
+   Teammates block on player profiles — added 2026-08-26. Scoped to .tm-*.
+   --------------------------------------------------------------------------- */
+.tm-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.tm-card{display:flex;flex-direction:column;align-items:center;gap:9px;padding:18px 12px 15px;
+  text-align:center;text-decoration:none;border:1px solid var(--line,#222c3a);
+  border-radius:var(--radius,10px);background:var(--panel,#0e131b);position:relative;
+  overflow:hidden;transition:border-color .14s ease,transform .14s ease,background-color .14s ease}
+.tm-card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;
+  background:var(--team,var(--accent,#ff5a1f));opacity:.85}
+.tm-card:hover,.tm-card:focus-visible{border-color:var(--team,var(--accent,#ff5a1f));
+  background:var(--panel2,#131a24);transform:translateY(-2px)}
+.tm-card .pp{--pp-size:84px}
+.tm-card b{font-family:'Barlow Condensed',system-ui,sans-serif;text-transform:uppercase;
+  font-size:22px;line-height:1;letter-spacing:.02em;color:var(--text,#f3f6f9)}
+.tm-card u{text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--team,var(--accent,#ff5a1f));line-height:1.3}
+.tm-stat{display:flex;align-items:baseline;gap:9px;margin-top:2px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:var(--muted,#8d9aab)}
+.tm-stat em{font-style:normal;color:var(--text,#f3f6f9)}
+.tm-stat em::after{content:" sens";font-size:9px;color:var(--dim,#6b7889)}
+.tm-stat i{font-style:normal;color:var(--text,#f3f6f9)}
+.tm-stat i::after{content:" fov";font-size:9px;color:var(--dim,#6b7889)}
+.tm-stat-none{font-size:10.5px;letter-spacing:.04em;color:var(--dim,#6b7889)}
+.tm-team{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 14px;
+  border:1px solid var(--line2,#2f3c4d);border-radius:8px;text-decoration:none;font-weight:600;
+  font-size:12.5px;letter-spacing:.03em;color:var(--t,var(--accent,#ff5a1f))}
+.tm-team:hover{background:var(--panel2,#131a24);border-color:var(--t,var(--accent,#ff5a1f))}
+
+@media(max-width:520px){
+  .tm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tm-card{padding:14px 8px 12px}
+  .tm-card .pp{--pp-size:66px}
+  .tm-card b{font-size:19px}
+  .tm-team{width:100%;justify-content:center;padding:13px 14px}
+}
+
+/* ---------------------------------------------------------------------------
+   Header consistency — added 2026-08-26
+   1. The active-tab underline was display:block with margin-top, so it added
+      6px to the link box and made the whole nav taller on every page except
+      home. Taken out of flow so the box never changes size.
+   2. home.css set the shared .wrap to 1440/28px while pages.css set 1320/24px,
+      which slid the entire header sideways between home and everything else.
+      One width for the whole site.
+   --------------------------------------------------------------------------- */
+.nav a[aria-current="page"]{position:relative}
+.nav a[aria-current="page"]::after{position:absolute;left:0;right:0;top:calc(100% + 4px);
+  margin-top:0}
+.wrap{max-width:1320px;padding:0 24px}
+header.site .wrap{padding-left:24px;padding-right:24px}
+
+/* ---------------------------------------------------------------------------
+   Homepage "Recently verified" list — added 2026-08-26
+   home.css already has a phone layout for this block, but its own base rule
+   wins the cascade, so the 5-column grid (46 + 150 + 1fr + 80 + 24) stayed on
+   at phone widths and forced ~21px of horizontal scroll at 320px. Same intent,
+   applied late enough to actually take effect.
+   --------------------------------------------------------------------------- */
+@media(max-width:760px){
+  .v30-updates{grid-template-columns:1fr}
+  .v30-updates-title{min-height:0;padding:26px 0;border-right:0;
+    border-bottom:1px solid #313538}
+  .v30-updates-list a{grid-template-columns:34px minmax(0,1fr) 22px;
+    grid-template-rows:auto auto;align-items:center;min-height:80px;padding:12px 6px;
+    column-gap:8px}
+  .v30-updates-list a:hover{padding-left:6px}
+  .v30-updates-list strong,.v30-updates-list em{min-width:0;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .v30-updates-list em{grid-column:2}
+  .v30-updates-list time{display:none}
+  .v30-updates-list b{grid-column:3;grid-row:1/3}
+}
+
+
+/* Policy pages: plain prose bullets, not the monospace data-row list style
+   the .article-prose default applies. Added 2026-08-26. */
+.article-prose ul.policy-list{margin:12px 0 0;padding:0 0 0 20px;list-style:disc;
+  background:none;border:0}
+.article-prose ul.policy-list li{display:list-item;font-family:'Barlow',system-ui,sans-serif;
+  font-size:15px;line-height:1.75;color:var(--text,#f3f6f9);background:none;border:0;
+  padding:0;margin:0 0 6px}
