@@ -430,3 +430,14 @@ header.site .wrap{padding-left:24px;padding-right:24px}
 .article-prose ul.policy-list li{display:list-item;font-family:'Barlow',system-ui,sans-serif;
   font-size:15px;line-height:1.75;color:var(--text,#f3f6f9);background:none;border:0;
   padding:0;margin:0 0 6px}
+
+/* ---------------------------------------------------------------------------
+   Homepage hero: the secondary "Compare two pros" button — added 2026-08-26
+   .lead-actions a{border:1px solid transparent} is a shorthand that lands after
+   .lead-alt's own border rules and wiped them, so the button rendered as text
+   on a near-invisible surface. Given a solid slate fill and a visible edge so it
+   reads as a button next to the orange primary without competing with it.
+   --------------------------------------------------------------------------- */
+.lead-actions a.lead-alt{background:#2a3644;border:1px solid #6f7d8c;color:#fff}
+.lead-actions a.lead-alt:hover,.lead-actions a.lead-alt:focus-visible{
+  background:#344354;border-color:var(--accent,#ff5a1f);color:#fff}
