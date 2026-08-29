@@ -494,3 +494,55 @@ header.site .wrap{padding-left:24px;padding-right:24px}
     pointer-events:none;border-radius:0 11px 11px 0;
     background:linear-gradient(90deg,rgba(11,16,22,0),rgba(11,16,22,.92))}
 }
+
+
+/* ---------------------------------------------------------------------------
+   MW4 beta setups — player filter rail (added 2026-08-28).
+
+   Layout comes from .player-profile-shell and .player-toc, already defined in
+   pages.css and home.css, so the rail keeps its sidebar/pill-bar responsive
+   behaviour even if this file is stale. The rules below only undo the shell's
+   own page-level width, since here it sits inside .page-body.
+   --------------------------------------------------------------------------- */
+.mw4b-shell{max-width:none;margin:18px 0 0;padding:0;gap:20px}
+.mw4b-toc{top:92px}
+.mw4b-toc a{flex-direction:column;align-items:flex-start;gap:2px;min-height:44px;
+  padding:9px 10px 9px 13px}
+.mw4b-toc a b{font-size:14px;font-weight:700;letter-spacing:.02em;color:inherit}
+.mw4b-toc a em{font-family:'Barlow',system-ui,sans-serif;font-style:normal;font-size:11px;
+  font-weight:500;letter-spacing:0;color:var(--dim,#6b7889);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.mw4b-toc a.active em{color:var(--muted,#8d9aab)}
+
+.mw4b-list{min-width:0}
+.mw4b-count{margin:0 0 12px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.04em;color:var(--dim,#6b7889)}
+.mw4b-empty{margin:0;padding:26px 20px;border:1px dashed var(--line2,#2f3c4d);border-radius:14px;
+  text-align:center;font-size:14px;color:var(--muted,#8d9aab)}
+.mw4b-list .mw4b-card[hidden]{display:none}
+
+@media(max-width:900px){
+  .mw4b-shell{gap:0}
+  .mw4b-toc{top:auto;margin-bottom:14px}
+  .mw4b-toc a{flex-direction:row;align-items:baseline;gap:7px;min-height:36px;padding:7px 12px}
+  .mw4b-toc a em{font-size:10.5px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   Header nav overflow, 821px–939px (pre-existing, found 2026-08-28).
+
+   The nav switches to its horizontal-scroll treatment at max-width:820px, but
+   the full row of links stops fitting at about 940px. Between those two widths
+   every page scrolled sideways by up to ~104px. Extending the same treatment
+   up to 939px closes the gap; below 820px the existing rule still applies.
+   --------------------------------------------------------------------------- */
+@media(min-width:821px) and (max-width:939px){
+  header.site .wrap{flex-wrap:wrap;height:auto;min-height:62px;
+    padding-top:8px;padding-bottom:8px}
+  header.site .nav{width:100%;order:3;margin:0;padding-bottom:7px;
+    overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;
+    scrollbar-width:none;-ms-overflow-style:none}
+  header.site .nav::-webkit-scrollbar{display:none}
+  header.site .header-searchbox{margin-left:auto}
+}
