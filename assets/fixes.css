@@ -485,15 +485,23 @@ header.site .wrap{padding-left:24px;padding-right:24px}
   .player-analysis.profile-analysis .analysis-table th,
   .player-analysis.profile-analysis .analysis-table td{padding:9px 10px}
 }
-/* Below 600px the 570px min-width makes the table scroll; fade the right edge
-   so the cut-off column reads as scrollable rather than clipped. */
+/* Below 600px the 570px min-width makes the table scroll. The fade sits on
+   .pa-scroll, which does NOT scroll — an absolutely positioned pseudo-element
+   inside the scroll container itself travels with the content and shows up as
+   a divider down the middle of the table. It clears once you reach the end. */
 @media(max-width:599px){
   .player-analysis.profile-analysis .analysis-table{min-width:570px}
   .pa-scroll{position:relative}
-  .pa-scroll::after{content:"";position:absolute;top:1px;right:1px;bottom:1px;width:34px;
-    pointer-events:none;border-radius:0 11px 11px 0;
-    background:linear-gradient(90deg,rgba(11,16,22,0),rgba(11,16,22,.92))}
+  .pa-scroll .analysis-table-wrap{margin:0}
+  .pa-scroll::after{content:"";position:absolute;top:1px;right:1px;bottom:1px;width:30px;
+    pointer-events:none;border-radius:0 3px 3px 0;opacity:1;
+    transition:opacity .18s ease;
+    background:linear-gradient(90deg,rgba(13,18,22,0),rgba(13,18,22,.9))}
+  .pa-scroll[data-scroll-end]::after{opacity:0}
 }
+.pa-scroll{margin:20px 0 8px}
+.player-analysis.profile-analysis .pa-scroll{margin:20px 0 8px}
+.player-analysis.profile-analysis .pa-scroll .analysis-table-wrap{margin:0}
 
 
 /* ---------------------------------------------------------------------------
