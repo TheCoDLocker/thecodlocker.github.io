@@ -80,3 +80,62 @@ img{max-width:100%;height:auto}
   .locker-ui.locker-ui .team-block-kicker{
     color:color-mix(in srgb, var(--team, var(--accent2, var(--accent))) 76%, #ffffff)}
 }
+
+/* ===========================================================================
+   v30.1
+   =========================================================================== */
+
+/* --- hero team rail: greyed out by default -------------------------------
+   locker.css shipped the twelve team logos at grayscale(1) and 65% opacity,
+   so the rail read as disabled until you hovered a tile. Show every crest in
+   full colour and move the emphasis to hover instead: a tint in that team's
+   colour, a brighter label, an underline in the team colour and a small lift
+   on the crest. Keyboard focus gets the same treatment. */
+.locker-ui.locker-ui .league-rail img{
+  filter:none;
+  opacity:1;
+  transition:transform .18s ease,filter .18s ease}
+.locker-ui.locker-ui .league-rail a{
+  color:#c4ced9;
+  transition:background .18s ease,color .18s ease,box-shadow .18s ease}
+.locker-ui.locker-ui .league-rail a:hover,
+.locker-ui.locker-ui .league-rail a:focus-visible{
+  background:color-mix(in srgb,var(--team) 15%,#151c24);
+  box-shadow:inset 0 -2px var(--team);
+  color:#fff}
+.locker-ui.locker-ui .league-rail a:hover img,
+.locker-ui.locker-ui .league-rail a:focus-visible img{
+  transform:scale(1.12);
+  filter:brightness(1.12)}
+@media(prefers-reduced-motion:reduce){
+  .locker-ui.locker-ui .league-rail a:hover img,
+  .locker-ui.locker-ui .league-rail a:focus-visible img{transform:none}
+}
+
+/* --- compare page ran about a fifth too large ----------------------------
+   Once two players were picked the cards were set at 43px names, 31px stat
+   values and a 27px dropdown, which crowded the layout on desktop and forced
+   team names onto two lines on a phone. Scaled the whole block down roughly
+   20% at each of locker.css's breakpoints; proportions are unchanged. */
+.locker-ui.locker-ui .cp-name{font-size:34px}
+.locker-ui.locker-ui .cp-kicker,
+.locker-ui.locker-ui .cp-team{font-size:12.5px}
+.locker-ui.locker-ui .compare-quick{margin-top:16px;padding-top:14px}
+.locker-ui.locker-ui .compare-quick b{font-size:25px}
+.locker-ui.locker-ui .compare-quick span{font-size:12px}
+.locker-ui.locker-ui .compare-vs{font-size:22px}
+.locker-ui.locker-ui .compare-table .pro-name{font-size:19px}
+.locker-ui.locker-ui .compare-picker select{font-size:19px;height:46px}
+
+@media(max-width:700px){
+  .locker-ui.locker-ui .cp-name{font-size:27px}
+  .locker-ui.locker-ui .compare-quick b{font-size:20px}
+  .locker-ui.locker-ui .compare-quick span{font-size:11.5px}
+  .locker-ui.locker-ui .compare-vs{font-size:18px}
+  .locker-ui.locker-ui .compare-picker select{font-size:17px;height:44px}
+}
+@media(max-width:450px){
+  .locker-ui.locker-ui .cp-name{font-size:23px}
+  .locker-ui.locker-ui .cp-kicker,
+  .locker-ui.locker-ui .cp-team{font-size:12px}
+}
