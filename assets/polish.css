@@ -1,0 +1,82 @@
+/* CODLOCKER polish layer (v30).
+   Loaded after locker.css so these corrections win the cascade. Everything
+   here is a fix for something measured on the built pages, noted inline. */
+/* ===========================================================================
+   v30 polish pass
+   =========================================================================== */
+
+/* --- floor on label size -------------------------------------------------
+   A run of supporting labels rendered at 8-10px: the evidence caption on
+   player profiles, the provenance badge, the comparison kickers, the guide
+   kickers and the MW4 date tag. Under Lighthouse's 12px legibility threshold
+   and hard to read on a phone. Nudged up without changing the hierarchy. */
+.profile-provenance-badge{font-size:11.5px}
+.profile-evidence-label{font-size:11.5px}
+.popular-compare-kicker,.guide-kicker,.mw4b-tag{font-size:11.5px}
+.popular-compare-open,.news-read,.summary-detail,
+.insight-copy,.insight-label,.chart-note{font-size:12px}
+@media(max-width:820px){
+  .data-table td,.stats-table td{font-size:12px}
+  .lead-tape u,.tm-card u{font-size:11.5px}
+}
+
+/* --- tap targets ---------------------------------------------------------
+   Links inside cards, rails and back-navigation measured 14-22px tall. Under
+   ~30px is fiddly with a thumb; this raises the hit area without moving any
+   of the type. */
+@media(max-width:820px){
+  .page-back,.view-team,.news-read,.popular-compare-open,
+  .locker-text-link,.section-rail a,.league-rail a{
+    min-height:34px;display:inline-flex;align-items:center;gap:6px}
+  .team-drop-link{min-height:42px}
+  .nav>a,.nav .navbtn,.nav-team>summary{
+    min-height:38px;display:inline-flex;align-items:center}
+  label[for],input[type=checkbox]{min-height:24px}
+}
+
+/* --- keep group padding after h4 became h3 ------------------------------- */
+.lgb-group>h3{padding:10px 12px}
+
+/* --- images now declare intrinsic size -----------------------------------
+   width/height attributes let the browser reserve space before the image
+   decodes, which is what stops the page jumping as it loads. Pairing them with
+   height:auto is required: without it the attribute height is treated as a
+   literal presentational hint and any image whose width comes from CSS gets
+   stretched. This rule is element-level specificity, so every component rule
+   that sets an explicit img height (.league-rail img, .tm-portrait img,
+   .team-drop-logo img and the rest) still wins. */
+img{max-width:100%;height:auto}
+
+/* --- footer links and guide tiles were 17-22px tall on a phone ------------
+   These are block navigation, not inline prose links, so they get a proper
+   hit area. Inline links inside paragraphs and tables are left alone -- they
+   are meant to sit in the line of text. */
+@media(max-width:820px){
+  .footer-links a{min-height:34px;display:inline-flex;align-items:center}
+  .guide-tool a{min-height:34px;display:inline-flex;align-items:center}
+}
+
+/* --- muted secondary text sat just under WCAG AA -------------------------
+   The mid-grey label colours measured 3.7-4.3 against the panel backgrounds
+   where AA wants 4.5. Lifted a few steps; the hierarchy is unchanged. */
+/* Team colours used as small text sat at 4.3-4.4 against the dark panels --
+   the blue (#2E6BFF) and the reds especially. Rather than change any team's
+   colour globally, lighten it only where it carries small text. Swatches,
+   bars, rails and borders keep the exact brand value. */
+@supports (color: color-mix(in srgb, red, white)){
+  .profile-section-kicker,.team-block-kicker,.teamname,
+  .view-team,.profile-provenance-badge,.profile-evidence-item em{
+    color:color-mix(in srgb, var(--team, var(--accent)) 84%, #ffffff)}
+}
+/* locker.css scopes these under .locker-ui, so match that specificity --
+   fixes.css loads last, so an equal-specificity rule here wins. */
+@supports (color: color-mix(in srgb, red, white)){
+  .locker-ui.locker-ui .graphics-fov-label,
+  .locker-ui.locker-ui .profile-section-kicker,
+  .locker-ui.locker-ui .teamname,
+  .locker-ui.locker-ui .view-team,
+  .locker-ui.locker-ui .profile-provenance-badge,
+  .locker-ui.locker-ui .profile-evidence-item em,
+  .locker-ui.locker-ui .team-block-kicker{
+    color:color-mix(in srgb, var(--team, var(--accent2, var(--accent))) 76%, #ffffff)}
+}

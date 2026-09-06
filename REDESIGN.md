@@ -1,98 +1,43 @@
-# CODLOCKER redesign (v6)
+# CODLOCKER v29 — GitHub Pages root
 
-A visual redesign of the existing site, moving it toward the Claude Design
-mockups in `../project/Pro Settings Site.dc.html` and making it considerably
-more colourful. No content, data, or copy was changed.
+## Upload
 
-Drop these files into the GitHub Pages root exactly as they are — internal
-links are all relative and unchanged.
+1. Extract the ZIP.
+2. Upload **all of its files and folders** to your GitHub Pages repository root, replacing the existing versions. `index.html`, `assets/`, `players/` and the other folders must sit directly at the root.
+3. Keep any custom `CNAME` file or repository settings that already exist in GitHub; neither is supplied by this archive.
+4. Once GitHub Pages finishes updating, refresh the site. If your browser still displays the old version, use Ctrl+F5 (Windows) or Cmd+Shift+R (Mac).
+
+This is the same plain HTML/CSS/JavaScript format as the supplied ZIP. No package installation, build command, framework migration or hosting service is required. `.nojekyll` keeps GitHub Pages serving the static files directly.
 
 ## What changed
 
-### 1. Shared CSS extracted (`assets/`)
+- A new homepage opening with oversized condensed typography, orange accents, real supplied portraits, and a player spotlight switching between Dashy, Shotzzy, HyDra and Simp.
+- The player database now sits ahead of the update log, with larger portrait cards and clearer sensitivity/FOV values.
+- Player search supports multiple terms, alongside team filtering, alphabetical/sensitivity/FOV sorting and card/compact layouts.
+- Select two players directly from the directory and open their comparison. Selections can be removed or cleared.
+- Profile comparison links select the relevant player automatically. Comparisons also support swapping players, showing differences only and copying a URL.
+- Pending database profiles are available in comparison selectors, explicitly marked as pending, with unconfirmed comparative values left empty.
+- Player profiles have clearer headings, more readable settings tables, prominent FOV panels, collapsible FAQs and a button to copy recorded settings with the profile's source link.
+- Shared navigation has a mobile menu, keyboard player search (press `/`, then use arrow keys and Enter), clear focus states and a skip link.
+- Shared styling extends across all 96 HTML pages, including teams, stats, classes, guides and editorial pages.
+- Back-to-top controls, copy feedback and reduced-motion support.
+- Fixed an inherited CSS path to the existing logo and removed requests for absent portraits; initials remain as the fallback.
 
-Every page carried the same ~85KB of inline `<style>` — 91 pages shared a
-byte-identical 67.6KB core block, and all 92 shared two more. That is now:
+## Files
 
-| file | what | used by |
-|---|---|---|
-| `pages.css` | shared page core | 91 pages |
-| `home.css` | homepage-only core | `index.html` |
-| `site.css` | the old polish + square layers | all 92 |
-| `teams.css` | team-page additions | 12 team pages |
-| `fonts.css` | self-hosted webfaces | all 92 |
-| `redesign.css` | **the new visual language** | all 92 |
+- `assets/locker.css`: new shared visual layer and responsive layouts.
+- `assets/locker.js`: navigation, spotlight, directory, selection, copy and comparison interactions.
+- `assets/locker-data.js`: searchable player metadata taken from the supplied site. Pending cards stay unconfirmed.
+- All 96 HTML pages reference the new shared files. Existing paths, local images, self-hosted fonts, source links, metadata and external scripts are preserved.
 
-Pages dropped from ~100KB to 14–40KB, and the shared CSS is now cached once
-instead of re-downloaded per page. The extraction was verified pixel-identical
-before any restyling began.
+Keep all three new assets with the updated HTML. Update the `v=29` cache query in the HTML if you revise these assets later. Player information is static; updates to a profile do not automatically rewrite the directory, comparison dataset or league aggregates.
 
-**All visual work now happens in `redesign.css`.** It loads last and restyles
-the existing class names rather than replacing markup.
+## Validation
 
-### 2. Colour: team colours now drive the UI
+- Parsed all 96 HTML pages; checked local file links, anchor targets, duplicate IDs and inline JavaScript syntax.
+- Checked new external JavaScript syntax and all relative stylesheet asset references.
+- Exercised the existing comparison renderer with URL selections, invalid inputs, identical players, pending players and all 51 profile choices.
+- Verified that original files, canonical metadata, external source links and external script references remain present.
+- Browser visual and end-to-end interaction testing were not run in this environment. Responsive breakpoints are supplied for desktop, tablet and mobile.
 
-The twelve CDL team colours already existed in the markup but were nearly
-invisible — a few hairlines and dots. They now drive panels, card glows,
-portraits, table hovers, section headers and rails, so each team section reads
-as its own colour while the near-black base holds it together.
-
-Pages with no team to borrow from (stats, news, league research) rotate through
-a supporting palette instead of repeating one orange:
-
-- `--accent` orange — brand, primary CTAs
-- `--verified` green — confirmed data, positive values
-- `--info` cyan — comparison, informational
-- `--violet` — league-wide aggregates
-- `--gold` — rank 1, highlights
-- `--hot` — differences in the compare table
-
-Each hue keeps one meaning, so the extra colour adds information rather than
-noise.
-
-### 3. Player portraits
-
-Every player now has a portrait — a generated avatar built from their team
-colour and initials, so the site is complete with no image files at all.
-
-**To use real photos:** drop `players/<slug>.webp` (e.g. `players/scump.webp`).
-The photo takes over automatically; players without one keep their avatar, so a
-partial set is fine. See `players/README.md`.
-
-The `<img>` only becomes visible once it has actually loaded, so a missing file
-can never flash a broken-image icon.
-
-> Note: the photos themselves are not included. These are real people, and
-> their images are generally owned by the photographers, teams or the league —
-> worth sorting out licensing before publishing any.
-
-### 4. Mockup components
-
-- **Player hero** — portrait, headline stat tiles (sens / FOV / ADS / curve,
-  read from each page's own data) and a compare link, matching the mockup's
-  "config at a glance" opening.
-- **Glass panels** — hairline team-coloured ring, inner top highlight and a
-  soft outer bloom.
-- **Blueprint grid + accent bloom** on every hero.
-- **Compare** — portraits on both pros, and the two sides mirrored (A anchored
-  left, B right) so they stay distinguishable even when both teams are red.
-- **Stat tiles** — small letterspaced mono labels over large mono numerals.
-
-### 5. Self-hosted fonts
-
-Barlow, Barlow Condensed and IBM Plex Mono now ship from `assets/fonts/`
-(220KB, woff2) instead of Google Fonts. Removes a render-blocking third-party
-request, drops the external dependency, and avoids a flash of fallback text.
-
-## Verified
-
-All 92 pages render at 1440px and 390px with no console errors, no horizontal
-overflow, no broken images. Directory search, header typeahead, compare
-re-render and stats sorting all still work.
-
-## Not done
-
-- Real player photos (see above).
-- The mockup's "copy this config" export — the mockup shows a download/copy
-  action the site has no backing feature for, so it was left out rather than
-  shipped as a dead button.
+This redesign uses the data and images in the supplied archive. It does not claim a fresh verification of player settings or news.
