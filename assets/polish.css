@@ -139,3 +139,70 @@ img{max-width:100%;height:auto}
   .locker-ui.locker-ui .cp-kicker,
   .locker-ui.locker-ui .cp-team{font-size:12px}
 }
+
+/* ===========================================================================
+   v30.2 — mobile menu
+   =========================================================================== */
+
+@media(max-width:900px){
+
+  /* --- menu rows did not line up ------------------------------------------
+     The open menu is a two-column grid. locker.css gives every nav link
+     padding:10px 12px and a 42px floor, but an older sheet carries
+     .navbtn{padding:0!important}, so MW4 and Classes rendered 42px tall and
+     flush to the column edge while their neighbours were 50px tall and inset
+     12px. Rows and separator lines were staggered on both axes. Same box for
+     every item, so the two columns track each other. */
+  .locker-ui header.site.menu-open .nav>a,
+  .locker-ui header.site.menu-open .nav>a.navbtn,
+  .locker-ui header.site.menu-open .nav .nav-team>summary{
+    display:flex;
+    align-items:center;
+    box-sizing:border-box;
+    min-height:48px;
+    margin:0;
+    padding:10px 12px!important;
+    border-bottom:1px solid #293847;
+    line-height:1.15}
+
+  /* six links fill three clean rows, then Teams takes a full row of its own */
+  .locker-ui header.site.menu-open .nav>a{order:1}
+  .locker-ui header.site.menu-open .nav>.nav-team{order:2;grid-column:1/-1}
+  .locker-ui header.site.menu-open .nav>.nav-team>summary{border-bottom:0}
+
+  /* --- Teams opened as a two-column panel 71px off the right edge ---------
+     locker.css sets this list to a single full-width column on small screens,
+     but pages.css carries .nav-team[open] .team-dropdown{grid-template-columns:
+     1fr 1fr} at higher specificity, so it won and half the teams sat outside
+     the viewport. One column, in flow, sized to the menu. */
+  .locker-ui .nav-team[open] .team-dropdown,
+  .locker-ui .nav-team:hover .team-dropdown{
+    position:static;
+    grid-template-columns:1fr;
+    width:100%;
+    max-width:100%;
+    inset:auto;
+    transform:none;
+    max-height:none;
+    gap:0;
+    margin:0;
+    padding:2px 0 6px;
+    border:0;
+    border-radius:0;
+    background:none;
+    box-shadow:none}
+
+  .locker-ui .nav-team .team-drop-link{
+    box-sizing:border-box;
+    min-height:46px;
+    padding:8px 12px;
+    border-bottom:1px solid #1d2836}
+  .locker-ui .nav-team .team-drop-link:last-child{border-bottom:0}
+  .locker-ui .nav-team .team-drop-name{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap}
+
+  /* the panel scrolls vertically already; stop anything spilling sideways */
+  .locker-ui header.site .nav{overflow-x:hidden;overflow-y:auto}
+}

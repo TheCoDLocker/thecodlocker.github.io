@@ -1,0 +1,39 @@
+/* Readable article copy; tables and the shared page layout keep their styles. */
+.locker-ui .editorial-copy > p,
+.locker-ui .editorial-copy > ol,
+.locker-ui .editorial-copy > ul {
+  font: 400 1.0625rem/1.8 Barlow, Arial, sans-serif;
+  color: #bac5d2;
+  margin: 0 0 1.15em;
+}
+.locker-ui .editorial-copy > h2 {
+  margin: 1.45em 0 .5em;
+  font: 600 1.875rem/1.2 'Barlow Condensed', Arial, sans-serif;
+  color: #f0f3f7;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.locker-ui .editorial-copy > p:first-child { color: #dbe2eb; font-size: 1.125rem; }
+.locker-ui .editorial-copy > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 24px 0;
+  border: 1px solid var(--line);
+}
+.locker-ui .editorial-copy > ol,
+.locker-ui .editorial-copy > ul { padding-left: 1.5em; }
+.locker-ui .editorial-copy li { margin: .55em 0; padding-left: .25em; }
+.locker-ui .editorial-copy a { color: #ffad89; text-decoration: underline; text-underline-offset: 3px; }
+.locker-ui .editorial-copy a:hover { color: #ffd4bd; }
+.locker-ui .editorial-copy > .editorial-caption { font-size: .875rem; line-height: 1.6; color: #a5b2c1; margin-top: 12px; }
+.locker-ui .editorial-copy code { font-size: .875em; overflow-wrap: anywhere; }
+.locker-ui .editorial-copy .analysis-table-wrap { max-width: 100%; overflow-x: auto; margin: 22px 0; }
+.locker-ui .editorial-copy strong { color: #e6edf6; }
+@media (max-width: 600px) {
+  .locker-ui .editorial-copy > p,
+  .locker-ui .editorial-copy > ol,
+  .locker-ui .editorial-copy > ul { font-size: 1rem; line-height: 1.75; }
+  .locker-ui .editorial-copy > p:first-child { font-size: 1.0625rem; }
+  .locker-ui .editorial-copy > h2 { font-size: 1.625rem; }
+}
