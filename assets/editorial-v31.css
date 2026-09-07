@@ -37,3 +37,180 @@
   .locker-ui .editorial-copy > p:first-child { font-size: 1.0625rem; }
   .locker-ui .editorial-copy > h2 { font-size: 1.625rem; }
 }
+
+/* ===========================================================================
+   v31.1 — article furniture
+   Articles were a stack of <p> and <h2> on a flat panel. These are the pieces
+   that give a long read some structure: a standfirst, a byline strip, section
+   rules, proper data tables, pull-out figures, a takeaway panel and a sources
+   block. All of it opt-in per article — nothing here changes a page that
+   doesn't use the classes.
+   =========================================================================== */
+
+/* --- byline strip -------------------------------------------------------- */
+.locker-ui .article-meta{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
+  margin:0 0 26px;padding:0 0 18px;
+  border-bottom:1px solid var(--line);
+  font:600 .75rem/1 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+.locker-ui .article-meta .am-tag{
+  padding:5px 9px;background:#1b2430;border-left:2px solid var(--accent);color:#e2e9f2}
+.locker-ui .article-meta time{color:var(--dim)}
+
+/* --- standfirst ---------------------------------------------------------- */
+.locker-ui .editorial-copy > .article-lede{
+  font:400 1.3125rem/1.62 Barlow,Arial,sans-serif;
+  color:#e2e9f2;
+  margin:0 0 1.3em;
+  padding-left:18px;
+  border-left:3px solid var(--accent)}
+
+/* --- section headings get a rule so scanning is easier ------------------- */
+.locker-ui .editorial-copy > h2{
+  position:relative;padding-top:22px;margin-top:1.9em}
+.locker-ui .editorial-copy > h2::before{
+  content:"";position:absolute;top:0;left:0;width:46px;height:2px;background:var(--accent)}
+.locker-ui .editorial-copy > h2:first-of-type{margin-top:1.2em}
+.locker-ui .editorial-copy > h3{
+  margin:1.6em 0 .45em;
+  font:600 1.25rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  color:#eef2f7;text-transform:none;letter-spacing:0}
+
+/* --- data tables ---------------------------------------------------------
+   Replaces the per-cell inline styles the older articles carried. */
+.locker-ui .editorial-copy .ed-table-wrap{
+  margin:26px 0;border:1px solid var(--line);background:#0d1218;overflow-x:auto}
+.locker-ui .editorial-copy .ed-table-wrap > figcaption{
+  padding:11px 14px;border-bottom:1px solid var(--line);background:#121922;
+  font:600 .75rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.locker-ui .editorial-copy table.ed-table{
+  width:100%;border-collapse:collapse;font:400 .9375rem/1.45 Barlow,Arial,sans-serif}
+.locker-ui .editorial-copy table.ed-table th{
+  padding:11px 14px;text-align:left;white-space:nowrap;
+  border-bottom:1px solid var(--line2);background:#131b24;
+  font:600 .75rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.locker-ui .editorial-copy table.ed-table td{
+  padding:11px 14px;border-bottom:1px solid #1c242e;color:#c8d2de}
+.locker-ui .editorial-copy table.ed-table tbody tr:last-child td{border-bottom:0}
+.locker-ui .editorial-copy table.ed-table tbody tr:nth-child(odd) td{background:#0f151c}
+.locker-ui .editorial-copy table.ed-table .num{
+  text-align:right;font-family:'IBM Plex Mono',monospace;font-size:.875rem;color:#eef2f7}
+.locker-ui .editorial-copy table.ed-table th.num{text-align:right}
+.locker-ui .editorial-copy table.ed-table .who{color:#eef2f7;font-weight:500}
+
+/* --- pull-out figures ---------------------------------------------------- */
+.locker-ui .editorial-copy .stat-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;margin:26px 0;background:var(--line);border:1px solid var(--line)}
+.locker-ui .editorial-copy .stat-row > div{padding:16px 18px;background:#0f151c}
+.locker-ui .editorial-copy .stat-row b{
+  display:block;
+  font:700 2rem/1 'Barlow Condensed',Arial,sans-serif;
+  color:var(--accent2);margin-bottom:6px}
+.locker-ui .editorial-copy .stat-row span{
+  display:block;font:400 .8125rem/1.45 Barlow,Arial,sans-serif;color:var(--muted)}
+
+/* --- takeaway / note panel ----------------------------------------------- */
+.locker-ui .editorial-copy .article-note{
+  margin:26px 0;padding:18px 20px;
+  background:#111922;border:1px solid var(--line);border-left:3px solid var(--accent)}
+.locker-ui .editorial-copy .article-note h3{
+  margin:0 0 8px;
+  font:600 .8125rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--accent2)}
+.locker-ui .editorial-copy .article-note p{margin:0 0 .65em;font-size:1rem;line-height:1.7;color:#c2cddb}
+.locker-ui .editorial-copy .article-note p:last-child{margin-bottom:0}
+.locker-ui .editorial-copy .article-note ul{margin:0;padding-left:1.25em}
+.locker-ui .editorial-copy .article-note li{font-size:1rem;line-height:1.65;color:#c2cddb}
+
+/* --- outbound source links ------------------------------------------------ */
+.locker-ui .editorial-copy a[href^="http"]::after{
+  content:"↗";margin-left:3px;font-size:.8em;text-decoration:none;opacity:.75}
+
+/* --- sources block -------------------------------------------------------- */
+.locker-ui .article-sources{
+  margin:36px 0 0;padding:18px 20px;border:1px solid var(--line);background:#0d1218}
+.locker-ui .article-sources h2{
+  margin:0 0 10px;
+  font:600 .8125rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.locker-ui .article-sources ul{margin:0;padding-left:1.15em}
+.locker-ui .article-sources li{
+  margin:.4em 0;font:400 .9375rem/1.6 Barlow,Arial,sans-serif;color:#aeb9c7}
+.locker-ui .article-sources a{color:#ffad89;text-decoration:underline;text-underline-offset:3px}
+
+/* --- keep reading --------------------------------------------------------- */
+.locker-ui .article-more{margin:34px 0 0}
+.locker-ui .article-more > h2{
+  margin:0 0 14px;
+  font:600 .8125rem/1.3 'Barlow Condensed',Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.locker-ui .article-more-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:12px}
+.locker-ui .article-more-grid a{
+  display:block;padding:15px 16px;background:#0f151c;
+  border:1px solid var(--line);border-top:2px solid var(--line2);
+  text-decoration:none;transition:border-color .16s ease,background .16s ease}
+.locker-ui .article-more-grid a:hover{background:#141c25;border-top-color:var(--accent)}
+.locker-ui .article-more-grid b{
+  display:block;margin-bottom:5px;
+  font:600 1.0625rem/1.25 'Barlow Condensed',Arial,sans-serif;color:#eef2f7}
+.locker-ui .article-more-grid span{
+  display:block;font:400 .8125rem/1.5 Barlow,Arial,sans-serif;color:var(--muted)}
+
+@media (max-width:600px){
+  .locker-ui .editorial-copy > .article-lede{font-size:1.125rem;padding-left:14px}
+  .locker-ui .article-meta{gap:8px 12px;font-size:.6875rem}
+  .locker-ui .editorial-copy .stat-row b{font-size:1.75rem}
+  .locker-ui .editorial-copy table.ed-table th,
+  .locker-ui .editorial-copy table.ed-table td{padding:10px 12px}
+  .locker-ui .editorial-copy .article-note{padding:15px 16px}
+}
+
+/* the site already defines .data-table with min-width:900px for a different
+   table, so this one carries its own class; belt and braces on the width. */
+.locker-ui .editorial-copy table.ed-table{min-width:0}
+
+/* --- desktop rail --------------------------------------------------------
+   The prose column is capped at 800px inside a 1336px frame, so long reads
+   left a wide empty gutter. On roomy screens the article gets a contents
+   list in that space; below 1080px it collapses back to a single column and
+   the list is hidden, since the page is short enough to scroll. */
+@media (min-width:1080px){
+  .locker-ui .page-body.has-rail{
+    display:grid;
+    grid-template-columns:minmax(0,800px) minmax(210px,262px);
+    gap:44px}
+  /* the rail's grid item must stretch to the row height, otherwise sticky has
+     no travel room and the list just sits at the top and scrolls away */
+  .locker-ui .page-body.has-rail > .article-rail{
+    align-self:stretch;position:sticky;top:88px;height:max-content}
+  .locker-ui .article-rail h2{
+    margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line);
+    font:600 .75rem/1.3 'Barlow Condensed',Arial,sans-serif;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+  .locker-ui .article-rail ol{margin:0;padding:0;list-style:none;counter-reset:r}
+  .locker-ui .article-rail li{counter-increment:r;margin:0 0 2px}
+  .locker-ui .article-rail a{
+    display:flex;gap:10px;padding:8px 10px;
+    border-left:2px solid transparent;
+    font:400 .875rem/1.4 Barlow,Arial,sans-serif;color:var(--muted);
+    text-decoration:none;transition:color .15s ease,border-color .15s ease,background .15s ease}
+  .locker-ui .article-rail a::before{
+    content:counter(r,decimal-leading-zero);
+    font:500 .75rem/1.55 'IBM Plex Mono',monospace;color:var(--dim)}
+  .locker-ui .article-rail a:hover{color:#eef2f7;background:#111922;border-left-color:var(--line2)}
+  .locker-ui .article-rail a.is-current{color:#eef2f7;border-left-color:var(--accent)}
+}
+@media (max-width:1079px){ .locker-ui .article-rail{display:none} }
+
+/* .page-frame carries overflow:hidden, which makes it the scroll container for
+   anything sticky inside it — the rail just scrolled away. overflow:clip does
+   the same clipping without establishing a scroll container. Scoped with :has()
+   so only pages that actually have a rail are affected. */
+@media (min-width:1080px){
+  .locker-ui .page-frame:has(.page-body.has-rail){overflow:clip}
+}

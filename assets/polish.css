@@ -231,3 +231,33 @@ img{max-width:100%;height:auto}
 /* The hero's own search field is left alone on purpose: its magnifier is a
    flex item sitting beside the input, not layered over it, so it never
    covers what you type and hiding it would just leave a gap. */
+
+/* ===========================================================================
+   v30.4
+   =========================================================================== */
+
+/* --- directory search: the magnifier sat on top of the text ---------------
+   locker.css moves that mark to the left of the field and pairs it with a
+   44px inset on the input. But home.css carries .directory #search{padding-
+   left:18px}, and an ID beats three classes, so the inset collapsed to 18px
+   while the mark stayed at 16px. Text and glyph started within 2px of each
+   other and the first characters were struck through. The ID has to be
+   matched to win it back. */
+.locker-ui .directory .search-wrap #search{padding-left:46px}
+@media(max-width:520px){
+  .locker-ui .directory .search-wrap #search{padding-left:42px}
+  .locker-ui .directory .search-mark{left:14px;font-size:23px}
+}
+
+/* the mark is an empty-field prompt like the header one, so it steps aside
+   once there is a query and the text takes the full width */
+.locker-ui .directory .search-wrap #search:not(:placeholder-shown){padding-left:16px}
+.search-wrap #search:not(:placeholder-shown)~.search-mark{
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .12s ease}
+
+/* --- hero eyebrow now holds a single item --------------------------------
+   The season badge is gone from the markup, so stop the flex row pushing the
+   remaining label around. */
+.locker-home .locker-eyebrow{justify-content:flex-start}
