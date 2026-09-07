@@ -206,3 +206,28 @@ img{max-width:100%;height:auto}
   /* the panel scrolls vertically already; stop anything spilling sideways */
   .locker-ui header.site .nav{overflow-x:hidden;overflow-y:auto}
 }
+
+/* ===========================================================================
+   v30.3
+   =========================================================================== */
+
+/* --- search icon stayed put once you typed -------------------------------
+   The magnifier is absolutely positioned inside the field and the input keeps
+   a 30px left inset for it, so after typing a name the value sat wedged
+   between the magnifier and the browser's own clear button. The "/" focus
+   hint had the same problem on desktop, colliding with that clear button.
+   Both are affordances for an empty field, so both step aside once the field
+   has something in it, and the text reclaims the space. */
+.header-searchbox input:not(:placeholder-shown)~.header-search-icon{
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .12s ease}
+.header-searchbox input:not(:placeholder-shown){
+  padding-left:11px}
+.header-searchbox input:focus~.search-shortcut,
+.header-searchbox input:not(:placeholder-shown)~.search-shortcut{
+  display:none}
+
+/* The hero's own search field is left alone on purpose: its magnifier is a
+   flex item sitting beside the input, not layered over it, so it never
+   covers what you type and hiding it would just leave a gap. */
