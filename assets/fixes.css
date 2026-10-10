@@ -609,3 +609,10 @@ header.site .wrap{padding-left:24px;padding-right:24px}
   .lgb-rows{padding:4px 12px 10px}
   .lgb-group>h4{padding:10px 12px}
 }
+
+
+/* v27: roster entries for players with no public settings */
+.card.card-static,.tm-card.tm-card-static{cursor:default;pointer-events:none}
+.card.card-static .status{color:var(--dim,#7f8a94)}
+/* a hardware block with one card left spans the full row */
+.hardware-grid>.profile-card:only-child{grid-column:1/-1}

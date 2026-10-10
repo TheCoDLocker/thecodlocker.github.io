@@ -350,3 +350,73 @@ html{scroll-behavior:smooth;scroll-padding-top:104px}
 @media(max-width:700px){.locker-hero{grid-template-columns:1fr;gap:28px;padding-top:29px}.locker-intro>.locker-eyebrow{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:12px}.locker-intro>.locker-eyebrow span:last-child{width:auto}.locker-hero h1{font-size:clamp(50px,9vw,68px);margin-bottom:18px}.locker-intro>p{max-width:52ch;margin-bottom:20px}.locker-quick-search{max-width:none}.locker-hero-counts{gap:24px}.locker-hero-counts>div{padding-right:24px}.locker-hero-counts b{font-size:28px}.locker-hero-counts span{font-size:13px}.spot-profile{min-height:340px}.spot-photo{object-position:center 35%}.spot-identity h2{font-size:56px}.spot-ghost{font-size:98px}.spot-selectors button{font-size:17px}.spot-selectors button span{display:inline}.spot-stats{padding:16px 24px}.spot-stats b{font-size:28px}.spot-stats>div+div{padding-left:22px}.locker-ui .home-shell .directory{margin-top:34px}.locker-ui .home-shell .directory-head{display:block;padding-bottom:20px}.locker-ui .home-shell .directory-head h2{font-size:43px}.locker-ui .directory-head p{max-width:none;margin:10px 0 0;text-align:left;font-size:15px}.locker-directory-bar{grid-template-columns:1fr auto;gap:12px}.locker-ui .directory .search-wrap{grid-column:1/-1;grid-row:1}.locker-sort{grid-column:1;grid-row:2}.locker-sort select{height:42px;width:100%;max-width:205px}.locker-view{grid-column:2;grid-row:2;height:42px}.locker-view button{padding:0 12px}.locker-ui .chips{flex-wrap:nowrap;overflow-x:auto;padding:0 0 10px;scrollbar-width:thin}.locker-ui .chip{white-space:nowrap;flex:0 0 auto}.locker-results-line{margin-top:12px;align-items:center}.locker-results-line>span:last-child{font-size:12px;letter-spacing:0;text-align:right;max-width:175px}.locker-ui .teamsec .grid,.locker-sorted-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.locker-ui .home-shell .card{min-height:185px;padding:18px 12px 12px}.locker-ui .home-shell .card .pp{width:70%;height:125px}.locker-ui .home-shell .card .tag{font-size:29px}.locker-ui .home-shell .card .team{font-size:12px;min-height:36px;max-width:160px}.locker-ui .home-shell .card .cardstats{gap:16px;margin-top:10px;padding-top:10px}.locker-ui .home-shell .card .cardstats>div{gap:5px}.locker-ui .home-shell .card .cardstats i{font-size:12px}.locker-ui .home-shell .card .cardstats b{font-size:20px}.locker-ui .teamhead{gap:9px}.locker-ui .teamhead h2{font-size:23px}.locker-ui .teamhead .tcount{display:none}.locker-ui .teamhead .view-team{font-size:13px}.locker-ui .is-compact .teamsec .grid,.locker-ui .is-compact .locker-sorted-grid{grid-template-columns:1fr}.locker-ui .home-shell .is-compact .card .team{min-height:0;max-width:none}.locker-ui .home-shell .is-compact .card{min-height:95px}.locker-ui .home-shell .is-compact .card .pp{height:100%;width:80px}.locker-ui .lower-third>.wrap{padding:0 20px}.locker-ui .player-hero-row{gap:20px;align-items:flex-start}.locker-ui .player-hero-row>.pp{--pp-size:112px;width:112px;height:137px}.locker-ui .lower-third h1{font-size:54px}.locker-ui .lower-third .teamname{font-size:17px}.locker-ui .lower-third .pagemeta{display:block;width:100%;font-size:13px}.locker-ui .player-hero-id{display:contents}.locker-ui .player-hero-row{display:grid;grid-template-columns:112px minmax(0,1fr);column-gap:20px;row-gap:6px}.locker-ui .player-hero-row>.pp{grid-row:1/3;grid-column:1}.locker-ui .player-hero-id>h1{grid-column:2;align-self:end}.locker-ui .player-hero-id>.sub{grid-column:2;align-self:start;margin-top:0;gap:6px 10px}.locker-ui .hero-stats{grid-column:1/-1;margin-top:18px}.locker-ui .statgrid{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}.locker-ui .stattile{padding:0 13px}.locker-ui .stattile b{font-size:29px}.locker-ui .stattile i{font-size:12px;letter-spacing:0}.profile-actions{grid-column:1/-1;margin-top:18px;gap:18px}.locker-ui .player-profile-shell{padding:20px 20px 50px}.locker-ui .profile-section-head{display:block}.locker-ui .profile-section-head h2{font-size:32px}.locker-ui .profile-section-head p{margin:9px 0 0;max-width:none;font-size:15px}.locker-ui .profile-card-grid,.locker-ui .hardware-grid{grid-template-columns:1fr}.locker-ui .profile-card{padding:20px}.locker-ui .profile-card .row{gap:18px}.locker-ui .graphics-fov{display:block;padding:22px}.locker-ui .graphics-fov-copy{margin-top:16px}.locker-ui .page-hero{padding:27px 23px}.locker-ui .page-hero h1{font-size:50px}.locker-ui .page-hero p{font-size:16px}.locker-ui .compare-profiles{grid-template-columns:1fr 1fr;gap:10px}.locker-ui .compare-profile{padding:18px 14px}.locker-ui .cp-head{display:flex;flex-direction:column;align-items:flex-start;gap:10px}.locker-ui .cp-b .cp-head{flex-direction:column;align-items:flex-start}.locker-ui .cp-id{text-align:left}.locker-ui .cp-name{font-size:33px}.locker-ui .cp-head .pp{--pp-size:74px}.locker-ui .cp-team{font-size:13px}.locker-ui .compare-quick{gap:8px;display:flex;flex-wrap:wrap}.locker-ui .compare-quick b{font-size:24px}.locker-ui .compare-quick span{font-size:12px}.locker-ui .compare-quick>div{flex:1;min-width:32px;padding:0 5px;border:0}.locker-ui .compare-selectors{gap:8px;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)}.locker-ui .compare-picker{padding:12px}.locker-ui .compare-picker label{font-size:12px;letter-spacing:0}.locker-ui .compare-picker select{font-size:22px;padding:8px;min-height:48px}.locker-ui .compare-vs{font-size:22px}.locker-ui .compare-table th,.locker-ui .compare-table td{padding:12px 10px;font-size:14px}.locker-ui .compare-table .pro-name{font-size:23px}.locker-ui .compare-table .pro-team{font-size:12px;white-space:normal}.locker-ui .compare-table{min-width:0;table-layout:fixed;overflow-wrap:anywhere}.locker-ui .compare-table td:first-child{width:35%}.locker-ui .compare-table-wrap{overflow-x:auto}.locker-ui .popular-compare-grid{grid-template-columns:1fr}.locker-ui .popular-compare-head{display:block}.locker-ui .mw4-strip{display:block;padding:24px}.locker-ui .mw4-strip h2{font-size:28px}.locker-ui .mw4-strip-go{display:inline-block;margin-top:18px}.locker-ui .v30-updates{grid-template-columns:1fr}.locker-ui .v30-updates-title{border-right:0;border-bottom:1px solid var(--line);padding:22px}.locker-ui .v30-updates-title h2{margin:10px 0;font-size:35px}.locker-ui .v30-updates-list a{grid-template-columns:24px 100px 1fr 20px;grid-template-rows:auto;min-height:64px;padding:12px 16px;gap:10px}.locker-ui .v30-updates-list em{grid-column:auto}.locker-ui .v30-updates-list b{grid-column:auto;grid-row:auto}.locker-ui .about-home{grid-template-columns:1fr}.locker-ui .about-copy,.locker-ui .about-feature{padding:24px}.locker-compare-tray{bottom:12px;padding:14px 16px;gap:12px;flex-wrap:wrap}.locker-compare-tray>div:first-child{width:100%}.locker-tray-actions{width:100%;justify-content:space-between}.locker-tray-actions .locker-btn{flex:1;max-width:75%}.locker-toast{bottom:198px}.locker-ui footer>.wrap{display:flex;flex-direction:column;align-items:flex-start;padding:0 24px}.locker-ui .footer-links{display:flex;flex-wrap:wrap;gap:12px 22px}}
 @media(max-width:450px){.locker-ui header.site .wrap{padding:0 16px;gap:10px}.locker-ui .logo{font-size:23px;gap:7px}.locker-ui .logomark{width:27px;height:27px}.locker-ui .header-searchbox{flex:1;min-width:0}.locker-ui .header-searchbox input{padding-right:8px;font-size:14px}.search-shortcut{display:none}.locker-ui .header-results{position:fixed;left:16px;right:16px;top:76px;min-width:0;max-height:65vh}.locker-menu{flex-basis:38px;width:38px}.locker-ui .home-shell,.locker-ui .page-shell{padding-left:16px;padding-right:16px}.locker-intro>.locker-eyebrow{font-size:12px;letter-spacing:.04em}.locker-hero h1{font-size:51px}.locker-hero-counts{gap:17px}.locker-hero-counts>div{padding-right:17px}.locker-hero-counts span{font-size:12px}.locker-ui .section-rail a{padding:15px 12px;grid-template-columns:20px 1fr;gap:3px 5px}.locker-ui .section-rail a b{font-size:18px}.locker-ui .section-rail a span{font-size:12px}.locker-sort{display:block;font-size:12px}.locker-sort select{display:block;width:100%;margin-top:5px;max-width:none;font-size:14px}.locker-view{align-self:end}.locker-ui .home-shell .card .tag{font-size:26px}.locker-ui .home-shell .card .cardstats{gap:12px}.locker-ui .home-shell .card .cardstats b{font-size:19px}.locker-ui .teamhead h2{font-size:21px}.locker-ui .teamhead .view-team{font-size:12px}.locker-ui .team-logo-shell{width:27px;height:27px}.locker-league-data{padding:22px 18px;margin:35px 0}.locker-ui .home-shell .locker-league-data .meta-pulse{grid-template-columns:1fr}.locker-ui .home-shell .locker-league-data .meta-lock{border-right:0;padding-right:0}.locker-ui .home-shell .locker-league-data .meta-distribution{padding-left:0}.locker-ui .home-shell .locker-league-data .meta-cards{grid-template-columns:1fr 1fr}.locker-ui .home-shell .locker-league-data .meta-mini{padding:15px 10px;border-bottom:1px solid var(--line)}.locker-ui .home-shell .locker-league-data .meta-mini:nth-child(odd){padding-left:0}.locker-ui .home-shell .locker-league-data .meta-mini:nth-child(even){border-right:0}.locker-ui .v30-updates-list a{grid-template-columns:24px 1fr 20px;grid-template-rows:auto auto;gap:0 10px}.locker-ui .v30-updates-list em{grid-column:2;grid-row:2}.locker-ui .v30-updates-list b{grid-column:3;grid-row:1/3}.locker-ui .v30-updates-list a>span{grid-row:1/3}.locker-ui .stattile{padding:0 9px}.locker-ui .stattile b{font-size:26px}.locker-ui .player-hero-row{grid-template-columns:96px 1fr;column-gap:17px}.locker-ui .player-hero-row>.pp{width:96px;height:123px}.locker-ui .lower-third h1{font-size:48px}.locker-ui .profile-card{padding:18px 16px}.locker-ui .profile-card .row .k{font-size:14px}.locker-ui .profile-card .row .v{font-size:13px}.locker-ui .compare-picker{padding:10px}.locker-ui .compare-picker select{font-size:20px}.locker-ui .compare-quick>div{padding:0}.locker-ui .cp-name{font-size:29px}.locker-compare-tools>div{flex-wrap:wrap}.locker-ui .profile-actions .locker-btn{padding:10px 13px;gap:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.locker-ui *, .locker-ui *::before,.locker-ui *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* ==== v29.1 ============================================================ */
+/* Search boxes: one border, one focus ring, and a quiet clear button
+   instead of the browser's bright default. */
+.locker-ui input[type=search]{-webkit-appearance:none;appearance:none}
+.locker-ui input[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+.locker-ui input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;
+  width:12px;height:12px;margin:0 0 0 8px;cursor:pointer;opacity:.7;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 2l8 8M10 2l-8 8' stroke='%23a9b4c3' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/12px 12px no-repeat}
+.locker-ui input[type=search]::-webkit-search-cancel-button:hover{opacity:1}
+
+/* header search: the box draws the border, the input sits inside it */
+.locker-ui .header-searchbox{height:40px;border:1px solid var(--line);border-radius:3px;background:#141820;
+  box-shadow:none;transition:border-color .15s ease,box-shadow .15s ease}
+.locker-ui .header-searchbox:hover{border-color:#4a5564}
+.locker-ui .header-searchbox:focus-within{border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.locker-ui .header-searchbox input{height:100%;border:0;border-radius:0;background:transparent;box-shadow:none;
+  padding:0 30px 0 34px}
+.locker-ui .header-searchbox:focus-within input{padding-right:10px}
+.locker-ui .header-searchbox input:focus,
+.locker-ui .header-searchbox input:focus-visible{outline:none;box-shadow:none;border:0}
+.locker-ui .header-search-icon{left:11px;right:auto;top:50%;transform:translateY(-50%);line-height:1}
+.locker-ui .search-shortcut{top:50%;transform:translateY(-50%);line-height:1}
+.locker-ui .header-searchbox:focus-within .search-shortcut,
+.locker-ui .header-searchbox input:not(:placeholder-shown)~.search-shortcut{display:none}
+@media(max-width:450px){
+  .locker-ui .header-searchbox input{padding-right:10px}
+  .locker-ui .header-results{width:auto}
+}
+
+/* hero search: the form already has the border, so no second ring inside it */
+.locker-ui .locker-quick-search{transition:border-color .15s ease,box-shadow .15s ease}
+.locker-ui .locker-quick-search:focus-within{border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.locker-ui .locker-quick-search input{padding:0 12px 0 0}
+.locker-ui .locker-quick-search input:focus,
+.locker-ui .locker-quick-search input:focus-visible{outline:none!important}
+
+/* player-database search: icon on the left needs the text to start after it */
+.locker-ui .directory .search-wrap::before{content:none}
+.locker-ui .directory #search{height:50px;padding:0 14px 0 46px;border:1px solid #404b59;border-radius:3px;
+  background:#121820;box-shadow:none;font:16px Barlow,Arial,sans-serif;color:#fff;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.locker-ui .directory #search:hover{border-color:#566273}
+.locker-ui .directory #search:focus,
+.locker-ui .directory #search:focus-visible{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.locker-ui .directory .search-mark{left:16px;right:auto;line-height:1}
+
+/* "Classes" carries an old .navbtn colour with !important: it sat brighter than
+   the other links and never turned orange on its own page */
+.locker-ui .nav a.navbtn:not(.nav-mw4){color:#b4becc!important}
+.locker-ui .nav a.navbtn:not(.nav-mw4):hover{color:#fff!important}
+.locker-ui .nav a.navbtn:not(.nav-mw4)[aria-current=page]{color:var(--accent)!important}
+
+/* phone menu: MW4 and Classes carry an old .navbtn rule (padding:0!important),
+   which knocked them out of line with the other menu items */
+@media(max-width:900px){
+  .locker-ui header.site .nav>a{display:flex;align-items:center;gap:8px}
+  .locker-ui header.site .nav>a.navbtn{padding:10px 12px!important}
+  .locker-ui header.site .nav-mw4 em{display:inline-block}
+}
+
+/* roster entries for players with no public settings: shown, not linked */
+.card.card-static,.tm-card.tm-card-static{cursor:default;pointer-events:none}
+.card.card-static .status{color:#8b96a3}
+/* a hardware block with one card left spans the full row */
+.hardware-grid>.profile-card:only-child{grid-column:1/-1}
