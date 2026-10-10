@@ -287,34 +287,3 @@
     showTop();
   }
 })();
-
-
-/* ---------------------------------------------------------------------------
-   Folded in from per-page inline copies (v30). These were byte-identical on
-   up to 96 pages; keeping one cached copy removes ~100 KB of repeated HTML.
-   --------------------------------------------------------------------------- */
-
-/* --- nav current-page marker --- */
-(function(){var p=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll(".nav a[href]").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().toLowerCase();if(h&&h===p)a.setAttribute("aria-current","page");});var d=document.querySelector(".nav-team");if(d&&d.querySelector('a[href="'+p+'"]'))d.setAttribute("data-current","");})();
-
-/* --- player TOC scrollspy --- */
-(function(){
-  const toc=[...document.querySelectorAll('.player-toc a[data-section]')];
-  const sections=toc.map(a=>document.getElementById(a.dataset.section)).filter(Boolean);
-  if(!toc.length||!sections.length) return;
-  const setActive=id=>toc.forEach(a=>a.classList.toggle('active',a.dataset.section===id));
-  const update=()=>{
-    const marker=window.scrollY+Math.min(180,window.innerHeight*.26);
-    let current=sections[0].id;
-    sections.forEach(sec=>{if(sec.offsetTop<=marker)current=sec.id;});
-    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-6)current=sections[sections.length-1].id;
-    setActive(current);
-  };
-  toc.forEach(a=>a.addEventListener('click',()=>setActive(a.dataset.section)));
-  window.addEventListener('scroll',update,{passive:true});
-  window.addEventListener('resize',update,{passive:true});
-  window.addEventListener('load',update);update();
-})();
-
-/* --- analysis-table scroll-end shadow --- */
-(function(){var w=document.querySelectorAll(".pa-scroll");for(var i=0;i<w.length;i++){(function(o){var s=o.querySelector(".analysis-table-wrap");if(!s)return;function u(){var end=s.scrollLeft>=s.scrollWidth-s.clientWidth-1;if(end){o.setAttribute("data-scroll-end","");}else{o.removeAttribute("data-scroll-end");}}s.addEventListener("scroll",u,{passive:true});addEventListener("resize",u);u();})(w[i]);}})();

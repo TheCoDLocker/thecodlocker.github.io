@@ -544,7 +544,7 @@ header.site .wrap{height:66px;gap:26px}
 .lead-main::after{content:"";position:absolute;right:-205px;top:50%;width:640px;height:640px;
   transform:translateY(-50%);border-radius:50%;pointer-events:none;
   opacity:.09;filter:grayscale(1) brightness(1.8) contrast(.72);
-  background:url("logo.png") center/58% no-repeat}
+  background:url("../logo.png") center/58% no-repeat}
 .lead-main .lead-ring{position:absolute;right:-172px;top:50%;width:494px;height:494px;
   transform:translateY(-50%);border-radius:50%;pointer-events:none;z-index:1;
   border:1px solid rgba(255,90,31,.13);
