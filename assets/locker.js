@@ -1,4 +1,4 @@
-/* CODLOCKER v29. Progressive enhancements; static pages remain directly usable. */
+/* CODLOCKER v40. Progressive enhancements; static pages remain directly usable. */
 (() => {
   'use strict';
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -115,21 +115,38 @@
       $('#spot-content').innerHTML = `<a class="spot-profile" href="${escape(p.slug)}.html"><img class="spot-photo" src="${escape(p.image)}" alt="${escape(p.tag)}" width="512" height="512"><span class="spot-ghost" aria-hidden="true">${escape(p.tag.toUpperCase())}</span><div class="spot-identity"><span>${escape(p.team)}</span><h2>${escape(p.tag)}<span aria-hidden="true">↗</span></h2></div><div class="spot-stats"><div><span>Sensitivity</span><b>${escape(p.sens)}</b></div><div><span>Field of view</span><b>${escape(p.fov)}</b></div><div><span>Response curve</span><b>${escape(p.curve)}</b></div></div></a>`;
     }));
   }
-  const directory = $('#players'), teams = $('.teams-list');
-  if (directory && teams) {
-    const search = $('#search'), chips = $$('.chip', directory), sorter = $('#lockerSort');
-    const cards = $$('.locker-player', teams), sections = $$('.teamsec', teams), sortedGrid = $('.locker-sorted-grid', teams);
-    const originalGrid = new Map(cards.map(wrapper => [wrapper, wrapper.parentElement]));
-    const empty = $('.locker-empty', teams);
-    let team = 'all';
+  const directory = $('#players'), lists = $$('.teams-list');
+  if (directory && lists.length) {
+    // One roster list per season; the open season decides which list, chips and count are live.
+    const search = $('#search'), sorter = $('#lockerSort');
+    const seasonOf = () => document.documentElement.getAttribute('data-season') === 'bo7' ? 'bo7' : 'mw4';
+    const ctx = lists.map(list => {
+      const cards = $$('.locker-player', list);
+      return {list, season: list.dataset.seasonList || 'mw4', cards, sections: $$('.teamsec', list),
+        sortedGrid: $('.locker-sorted-grid', list), empty: $('.locker-empty', list),
+        home: new Map(cards.map(w => [w, w.parentElement]))};
+    });
+    const active = () => ctx.find(c => c.season === seasonOf()) || ctx[0];
+    const chipsNow = () => {
+      const box = $(`.chips[data-season-panel="${active().season}"]`, directory) || $('.chips', directory);
+      return box ? $$('.chip', box) : [];
+    };
+    let team = new URLSearchParams(location.search).get('team') || 'all';
     const number = (wrapper, key) => {
       const n = parseFloat($('.card', wrapper).dataset[key]);
       return Number.isFinite(n) ? n : -Infinity;
     };
+    function syncChips() {
+      const chips = chipsNow();
+      if (!chips.some(c => c.dataset.team === team)) team = 'all';
+      chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.team === team)));
+    }
     function filter() {
+      syncChips();
+      const c = active();
       const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       let visible = 0;
-      cards.forEach(wrapper => {
+      c.cards.forEach(wrapper => {
         const card = $('.card', wrapper);
         const haystack = `${card.dataset.search || ''} ${card.dataset.sens} ${card.dataset.fov}`.toLowerCase();
         const match = (team === 'all' || card.dataset.team === team) && terms.every(q => haystack.includes(q));
@@ -137,42 +154,37 @@
         if (match) visible++;
       });
       const mode = sorter.value;
-      sortedGrid.hidden = mode === 'team';
+      c.sortedGrid.hidden = mode === 'team';
       if (mode === 'team') {
-        cards.forEach(wrapper => originalGrid.get(wrapper).appendChild(wrapper));
-        sections.forEach(section => { section.hidden = !$$('.locker-player', section).some(w => !w.hidden); });
+        c.cards.forEach(wrapper => c.home.get(wrapper).appendChild(wrapper));
+        c.sections.forEach(section => { section.hidden = !$$('.locker-player', section).some(w => !w.hidden); });
       } else {
-        sections.forEach(section => { section.hidden = true; });
-        const ordered = [...cards].sort((x, y) => {
+        c.sections.forEach(section => { section.hidden = true; });
+        const ordered = [...c.cards].sort((x, y) => {
           if (mode === 'sens' || mode === 'fov') {
             const a = number(x, mode), b = number(y, mode);
             if (a !== b) return a > b ? -1 : 1;
           }
           return $('.tag', x).textContent.localeCompare($('.tag', y).textContent);
         });
-        ordered.forEach(w => sortedGrid.appendChild(w));
+        ordered.forEach(w => c.sortedGrid.appendChild(w));
       }
-      $('#count').textContent = `${visible} of ${cards.length} players`;
-      empty.hidden = visible !== 0;
+      $('#count').textContent = `${visible} of ${c.cards.length} players`;
+      c.empty.hidden = visible !== 0;
     }
-    chips.forEach(chip => chip.addEventListener('click', () => {
-      team = chip.dataset.team;
-      chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
-      filter();
-    }));
+    $$('.chip', directory).forEach(chip => chip.addEventListener('click', () => { team = chip.dataset.team; filter(); }));
     search.addEventListener('input', filter); sorter.addEventListener('change', filter);
+    document.addEventListener('locker:season', filter);
     $$('[data-view]').forEach(button => button.addEventListener('click', () => {
-      teams.classList.toggle('is-compact', button.dataset.view === 'compact');
+      lists.forEach(l => l.classList.toggle('is-compact', button.dataset.view === 'compact'));
       $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
     }));
-    $('[data-reset-filters]').addEventListener('click', () => {
+    $$('[data-reset-filters]').forEach(btn => btn.addEventListener('click', () => {
       search.value = ''; team = 'all'; sorter.value = 'team';
-      chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.team === 'all')));
       filter(); search.focus();
-    });
+    }));
     $('.locker-quick-search').addEventListener('submit', e => {
       e.preventDefault(); search.value = $('#quickSearch').value; team = 'all';
-      chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.team === 'all')));
       filter(); directory.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
       search.focus({preventScroll:true});
     });
@@ -222,14 +234,17 @@
     const name = $('.player-hero-id h1').textContent.trim();
     const teamName = $('.teamname').textContent.trim();
     const lines = [`${name} — ${teamName}`, $('.pagemeta').textContent.trim(), ''];
-    ['controller-settings', 'graphics', 'hardware'].forEach(id => {
+    const season = document.documentElement.getAttribute('data-season') === 'bo7' ? 'bo7' : 'mw4';
+    const ids = document.getElementById('season-mw4') ? (season === 'bo7' ? ['controller-settings', 'graphics'] : ['mw4-settings', 'mw4-graphics', 'hardware']) : ['controller-settings', 'graphics', 'hardware'];
+    if (season === 'bo7' && document.querySelector('#season-bo7 .pagemeta')) lines[1] = document.querySelector('#season-bo7 .pagemeta').textContent.trim();
+    ids.forEach(id => {
       const section = document.getElementById(id); if (!section) return;
       const values = [];
       const fov = $('.graphics-fov-value', section);
       if (fov) values.push('Field of view: ' + [...fov.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join('').trim());
       $$('.row', section).forEach(row => {
         const k = $('.k', row), v = $('.v', row);
-        if (k && v && !v.classList.contains('empty') && v.textContent.trim() !== '—') values.push(`${k.textContent.trim()}: ${v.textContent.trim()}`);
+        if (k && v && !v.classList.contains('empty') && v.textContent.trim() !== '—') { const c = v.cloneNode(true); const old = c.querySelector('.season-src'); if (old) old.remove(); values.push(`${k.textContent.trim()}: ${c.textContent.trim()}${old ? ' (last season)' : ''}`); }
       });
       if (values.length) lines.push($('.profile-section-head h2', section).textContent.toUpperCase(), ...values, '');
     });

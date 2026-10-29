@@ -1,0 +1,212 @@
+/* CODLOCKER v40: MW4 / 2027 season layer. MW4 leads, the 2026 Black Ops 7 record sits in an archive tab. */
+
+/* Switch: hidden without JS, where both seasons simply stack (MW4 first). */
+.season-switch{display:none}
+.sj .season-switch{display:flex;align-items:stretch;gap:0;margin:0 0 30px;border-bottom:1px solid var(--line)}
+.season-switch button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;background:none;color:var(--dim);padding:10px 22px 12px 0;text-align:left}
+.season-switch button+button{padding-left:22px;border-left:1px solid var(--line)}
+.season-switch button b{font:700 26px/1 'Barlow Condensed',Arial,sans-serif;letter-spacing:.01em;text-transform:uppercase;color:inherit}
+.season-switch button span{font:500 11px/1.3 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.season-switch [data-season-tab="bo7"] b{font-size:17px;font-weight:600}
+.season-switch [data-season-tab="bo7"]{align-self:flex-end}
+.season-switch button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
+.season-switch [data-season-tab="mw4"][aria-selected="true"] b{color:var(--accent)}
+.season-switch button:hover{color:var(--text)}
+
+/* Panel gating, set before first paint by the inline head script. */
+.sj[data-season="mw4"] [data-season-panel="bo7"],
+.sj[data-season="bo7"] [data-season-panel="mw4"]{display:none!important}
+.sj[data-season="mw4"] .player-toc a[data-season="bo7"],
+.sj[data-season="bo7"] .player-toc a[data-season="mw4"]{display:none}
+html:not(.sj) .toc-season{display:none}
+.player-toc .toc-season{margin-top:10px;border-top:1px solid var(--line);padding-top:12px;color:var(--dim);font-size:13px}
+
+/* Status line at the top of the MW4 settings. */
+.season-status{margin:0 0 20px;padding:14px 18px;border:1px solid var(--line);border-left:3px solid var(--line2);background:var(--panel);color:#c9d2dc;font-size:15px;line-height:1.55}
+.season-status.is-beta{border-left-color:#f2b84b}
+.season-status.is-mw4{border-left-color:var(--verified)}
+.season-status.is-carried{border-left-color:var(--dim)}
+.season-aside{margin:16px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
+.season-aside a{color:var(--text)}
+.season-src{display:inline-block;margin-left:8px;padding:1px 6px;border:1px solid var(--line2);font:500 10px/1.5 'IBM Plex Mono',monospace;font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);vertical-align:2px;white-space:nowrap}
+.season-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.season-grid>.profile-card:nth-child(3){grid-column:1/-1}
+.season-grid>.profile-card:nth-child(3) h3{grid-column:1/-1}
+@media (min-width:1000px){.season-grid>.profile-card:nth-child(3){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;align-content:start}}
+.season-classes{display:grid;gap:22px}
+.season-classes .mw4b-card{margin:0}
+.season-classes .mw4b-body{grid-template-columns:1fr}
+.season-classes .mw4b-atts{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.season-verify-link{display:inline-block;margin-top:10px;color:var(--muted);font-size:13px}
+.verification-card .verify-line+.verify-line{margin-top:6px}
+
+/* Hero badges for the MW4 state. */
+.badge.beta{color:#f2b84b;border-color:#f2b84b}
+.badge.carried{color:var(--muted);border-color:var(--line2)}
+.hero-season-note{margin:10px 0 0;color:var(--muted);font-size:14px}
+
+/* 2026 archive. */
+.season-archive-head{margin:0 0 34px;padding:22px 24px;border:1px solid var(--line);background:linear-gradient(180deg,#121820,#0d1117)}
+.season-archive-head h2{margin:6px 0 8px;font:600 32px/1.1 'Barlow Condensed',Arial,sans-serif}
+.season-archive-head p{margin:0 0 14px;color:var(--muted);font-size:15px;max-width:62ch}
+.season-archive-head .sub{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:14px}
+.season-archive-head .teamname{font:600 16px 'Barlow Condensed',Arial,sans-serif;text-transform:uppercase;color:var(--team)}
+.season-archive-head .pagemeta{font:400 12px 'IBM Plex Mono',monospace;color:var(--dim)}
+.season-archive-head .statgrid{max-width:640px}
+.season-archive .profile-section-kicker{color:var(--dim)}
+
+/* Homepage. */
+.season-directory-switch{margin:4px 0 18px}
+.sj .season-switch.season-directory-switch{border-bottom:0;margin:0 0 18px}
+.season-directory-switch button{padding-top:4px;padding-bottom:8px}
+.season-list-note{margin:0 0 22px;color:var(--muted);font-size:14px;line-height:1.55}
+.teamsec-note{margin:-4px 0 14px;color:var(--muted);font-size:14px}
+.card .season-flag{display:inline-block;margin-top:6px;font:500 10px/1.4 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.card .season-flag.is-beta{color:#f2b84b}
+.card .season-flag.is-mw4{color:var(--verified)}
+.team-logo-shell .team-logo-text{display:grid;place-items:center;width:100%;height:100%;font:700 13px/1 'Barlow Condensed',Arial,sans-serif;letter-spacing:.04em;color:#0a0d10;background:var(--team)}
+.league-rail .rail-text-logo{display:inline-grid;place-items:center;width:24px;height:24px;font:700 9px/1 'Barlow Condensed',Arial,sans-serif;color:#0a0d10;background:var(--team)}
+.season-archive-label{display:block;margin:0 0 6px;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.season-page-note{max-width:1400px;margin:18px auto 0;padding:0 32px}
+.season-page-note p{margin:0;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--panel);color:#c9d2dc;font-size:14px;line-height:1.55}
+.season-page-note a{color:var(--text)}
+
+@media (max-width:720px){
+  .season-grid{grid-template-columns:1fr}
+  .sj .season-switch{margin-bottom:22px}
+  .season-switch button{padding-right:16px}
+  .season-switch button+button{padding-left:16px}
+  .season-switch button b{font-size:22px}
+  .season-switch [data-season-tab="bo7"] b{font-size:15px}
+  .season-archive-head{padding:18px 16px}
+  .season-archive-head h2{font-size:27px}
+  .season-page-note{padding:0 16px}
+  .season-src{margin-left:6px}
+}
+
+/* ---------- v42: classes page, class tiles, screenshots next to settings ---------- */
+
+/* nav badge on Classes */
+.locker-ui .nav a.nav-classes{display:inline-flex;align-items:center;gap:6px}
+.locker-ui .nav a.nav-classes em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1;letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;background:#2b211c;color:var(--accent2)}
+@media (max-width:1180px){.locker-ui header.site:not(.menu-open) .nav a.nav-classes em{display:none}}
+
+/* screenshots inside the settings and graphics sections */
+.season-evidence{margin-top:18px}
+.season-shots{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:760px){.season-shots.is-pair{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.season-shots .profile-evidence-item{display:block;border:1px solid var(--line);background:var(--panel)}
+.season-shots .profile-evidence-cap{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;font-size:13px;color:var(--muted)}
+.season-shots .profile-evidence-cap em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--team,var(--accent));white-space:nowrap}
+
+/* class tiles: homepage, MW4 page */
+.class-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+@media (max-width:1000px){.class-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.class-tile{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--team,var(--accent));transition:border-color .15s,background .15s}
+.class-tile:hover{background:var(--panel2);border-color:var(--line2);border-top-color:var(--team,var(--accent))}
+.class-tile-stage{position:relative;display:grid;place-items:center;aspect-ratio:1000/437;overflow:hidden;background:var(--bg2);border-bottom:1px solid var(--line)}
+.class-tile-stage::before{content:"";position:absolute;inset:-20% 4%;background:radial-gradient(ellipse at center,var(--team,#ff5a1f) 0,transparent 66%);opacity:.16;pointer-events:none}
+.class-tile-stage img{position:relative;width:92%;height:auto}
+.class-tile-word{position:relative;font:700 clamp(30px,4vw,44px)/1 'Barlow Condensed',Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1px #4a5666}
+.class-tile-body{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px}
+.class-tile-body b{font:700 22px/1.05 'Barlow Condensed',Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.class-tile-body u{text-decoration:none;font-size:14px;color:var(--text)}
+.class-tile-body u i{font-style:normal;color:var(--muted);margin-left:8px;font-size:13px}
+.class-tile-body em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:4px}
+
+/* homepage block */
+.class-showcase{margin:44px 0 0;padding:0}
+.class-showcase-head{display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:20px 34px}
+.class-showcase-head h2{margin:6px 0 0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed',Arial,sans-serif;letter-spacing:.005em}
+.class-showcase-head p{margin:0;max-width:52ch;color:var(--muted);font-size:15px;line-height:1.6}
+.class-showcase-head .locker-btn{white-space:nowrap}
+@media (max-width:900px){.class-showcase-head{grid-template-columns:1fr}.class-showcase-head .locker-btn{justify-self:start}}
+@media (max-width:720px){.class-showcase{margin-top:34px}}
+
+/* card stage without a gun render */
+.mw4b-stage.mw4b-stage-text{min-height:150px}
+.mw4b-stage-text span{position:relative;font:700 clamp(56px,9vw,104px)/1 'Barlow Condensed',Arial,sans-serif;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px #3f4a58;letter-spacing:.02em;padding:18px 0}
+.class-typed{margin:0 0 10px;padding:9px 12px;border:1px dashed var(--line2);color:var(--muted);font-size:13px;line-height:1.5}
+.class-perks-h{margin-top:18px}
+.class-perks{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.class-perks span{padding:6px 10px;border:1px solid var(--line);background:var(--panel2);font:600 14px 'Barlow Condensed',Arial,sans-serif;letter-spacing:.03em;text-transform:uppercase}
+.class-perks i{font-style:normal;font-size:12px;color:var(--dim);margin-left:4px}
+
+/* classes page: by gun */
+.gun-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:18px}
+.gun-card{display:flex;flex-direction:column;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--line);min-width:0}
+.gun-card:hover,.gun-card.active{border-color:var(--accent)}
+.gun-card-stage{display:grid;place-items:center;aspect-ratio:1000/437;background:var(--bg2);border-bottom:1px solid var(--line);overflow:hidden}
+.gun-card-stage img{width:90%;height:auto}
+.gun-card-head{display:flex;flex-direction:column;gap:2px;padding:12px 14px 0}
+.gun-card-head b{font:700 24px/1 'Barlow Condensed',Arial,sans-serif;text-transform:uppercase}
+.gun-card-head i{font-style:normal;font-size:13px;color:var(--muted)}
+.gun-card-label{display:block;margin:12px 14px 6px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.gun-card-list{list-style:none;margin:0 14px;padding:0}
+.gun-card-list li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:14px}
+.gun-card-list li em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent2);white-space:nowrap}
+.gun-card-foot{margin-top:auto;padding:12px 14px;font:600 14px 'Barlow Condensed',Arial,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.class-filter .cf-group{display:block;margin:12px 0 4px;padding:0 13px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:900px){.class-filter .cf-group{display:inline-flex;align-items:center;margin:0 2px 0 10px;padding:0;white-space:nowrap}}
+.classes-archive{max-width:820px}
+.season-change-table td a{color:var(--text);text-decoration:none;border-left:3px solid var(--team);padding-left:8px;font-weight:600}
+.season-change-table td b{color:var(--accent)}
+.mw4-changes .analysis-table-wrap{margin-top:16px}
+.gun-card-list li{font-family:Barlow,Arial,sans-serif;font-size:14px;border:0;border-top:1px solid var(--line);background:none;padding:7px 0;margin:0}
+.gun-card-list li::before,.gun-card-list li::marker{content:none}
+@media (min-width:901px){
+  .class-filter{max-height:calc(100vh - 118px);overflow-y:auto}
+  .class-filter a{flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px;min-height:34px;padding:6px 10px 6px 13px}
+  .class-filter a em{text-align:right}
+}
+.season-change-table td:nth-child(n+3){white-space:nowrap}
+.mw4-changes .analysis-table-wrap{overflow-x:auto}
+@media (max-width:460px){
+  .class-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .class-tile-body{padding:10px 10px 12px}
+  .class-tile-body b{font-size:19px}
+  .class-tile-body u{font-size:13px}
+  .class-tile-body u i{display:block;margin:2px 0 0;font-size:12px}
+}
+.locker-ui .teamhead .team-logo-shell .team-logo-text{flex:none;width:34px;min-width:0;height:28px;font-size:11px;letter-spacing:.02em}
+@media (max-width:560px){
+  .season-archive-head .statgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .season-archive-head .stattile b{font-size:21px}
+}
+/* phone: the four hero tiles go 2 x 2 so values like "Dynamic" fit */
+@media (max-width:480px){
+  .locker-ui .player-hero-id .statgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;row-gap:10px}
+  .locker-ui .player-hero-id .statgrid .stattile{padding:4px 0 4px 12px}
+  .locker-ui .player-hero-id .statgrid .stattile:nth-child(odd){border-left:0;padding-left:0}
+  .locker-ui .player-hero-id .statgrid .stattile:nth-child(n+3){border-top:1px solid #3b4a58;padding-top:8px}
+}
+
+/* phone fixes from the v43 bug run */
+@media (max-width:700px){.locker-ui .stats-hero-grid{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-width:400px){.locker-ui .player-hero-id h1.is-long{font-size:38px}}
+@media (max-width:340px){.locker-ui .home-shell .card .tag,.locker-ui .card .tag{font-size:23px}}
+@media (max-width:480px){
+  .locker-ui .mw4-changes .season-change-table th,.locker-ui .mw4-changes .season-change-table td{padding:9px 7px}
+  .locker-ui .mw4-changes .season-change-table th{font-size:13px;letter-spacing:.04em}
+  .locker-ui .mw4-changes .season-change-table td{font-size:13px}
+  .locker-ui .mw4-changes .season-change-table td a{padding-left:6px}
+}
+
+/* stat values scale down to fit their box at every width (v43).
+   25cqi is one column of the four-across row; the constants are the widest
+   values on the site ("1.60 / 1.65" in the first box, "Dynamic" in the others). */
+.locker-ui .player-hero-id .statgrid,.locker-ui .season-archive-head .statgrid{container-type:inline-size}
+.locker-ui .player-hero-id .stattile b,.locker-ui .season-archive-head .stattile b{white-space:nowrap;font-size:min(34px,calc((25cqi - 20px) / 3.6),calc((25cqi - 42px) / 3.15))}
+@media (max-width:700px){
+  .locker-ui .player-hero-id .stattile b,.locker-ui .season-archive-head .stattile b{font-size:min(29px,calc((25cqi - 13px) / 3.6),calc((25cqi - 28px) / 3.15))}
+}
+@media (max-width:560px){
+  .locker-ui .season-archive-head .stattile b{font-size:min(21px,calc((50cqi - 13px) / 3.6))}
+}
+@media (max-width:480px){
+  .locker-ui .player-hero-id .stattile b{font-size:min(29px,calc((50cqi - 13px) / 3.6))}
+}
+@media (max-width:450px){
+  .locker-ui .player-hero-id .stattile b{font-size:min(26px,calc((50cqi - 13px) / 3.6))}
+}
