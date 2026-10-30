@@ -210,3 +210,7 @@ html:not(.sj) .toc-season{display:none}
 @media (max-width:450px){
   .locker-ui .player-hero-id .stattile b{font-size:min(26px,calc((50cqi - 13px) / 3.6))}
 }
+
+/* split sensitivity (horizontal / vertical) stays on one line in the player cards */
+.locker-ui .home-shell .card .cardstats b.is-split{white-space:nowrap;font-size:17px}
+.locker-ui .home-shell .card .cardstats:has(b.is-split){flex-wrap:wrap;row-gap:4px}
