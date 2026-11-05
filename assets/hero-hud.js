@@ -19,28 +19,45 @@
     tick();
   }
 
-  /* Headline decode: letters cycle through glyphs and settle left to right */
-  const decodeEls = hero.querySelectorAll('[data-decode]');
-  if (!still && decodeEls.length) {
-    const glyphs = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789/#%';
+  /* Headline decode: letters cycle through glyphs and settle left to right.
+     Every word is locked to its finished width before the scramble starts, and
+     the scramble waits for the headline font, so no line can rewrap and nothing
+     else on the page moves while it runs. */
+  const words = [...hero.querySelectorAll('[data-decode] .hx-word')];
+  if (!still && words.length) {
+    const glyphs = 'ABCDEFGHKNPRSTUVXYZ0123456789';
     const booting = document.documentElement.classList.contains('hx-boot');
-    setTimeout(() => decodeEls.forEach((el, line) => {
-      const final = el.textContent;
-      const start = performance.now() + line * 160;
-      const dur = 520;
-      const step = now => {
-        const t = (now - start) / dur;
-        if (t >= 1) { el.textContent = final; return; }
-        const settled = Math.max(0, Math.floor(t * final.length));
-        let out = final.slice(0, settled);
-        for (let i = settled; i < final.length; i++) {
-          out += final[i] === ' ' || final[i] === '.' ? final[i] : glyphs[(Math.random() * glyphs.length) | 0];
-        }
-        el.textContent = out;
+    const fontReady = document.fonts && document.fonts.load
+      ? Promise.race([document.fonts.load('700 100px "Barlow Condensed"'), new Promise(r => setTimeout(r, 2500))])
+      : Promise.resolve();
+    fontReady.then(() => {
+      const finals = words.map(w => w.textContent);
+      const widths = words.map(w => w.getBoundingClientRect().width);
+      words.forEach((w, i) => { w.style.width = widths[i] + 'px'; });
+      const lines = [...hero.querySelectorAll('[data-decode]')].map(line => words.filter(w => line.contains(w)));
+      const run = () => lines.forEach((ws, n) => {
+        const text = ws.map(w => finals[words.indexOf(w)]);
+        const count = text.join('').length;
+        const start = performance.now() + n * 160, dur = 520;
+        const step = now => {
+          const t = Math.max(0, (now - start) / dur);
+          const settled = t >= 1 ? count : Math.floor(t * count);
+          let idx = 0;
+          ws.forEach((w, k) => {
+            let out = '';
+            for (const ch of text[k]) {
+              out += idx < settled || ch === '.' ? ch : glyphs[(Math.random() * glyphs.length) | 0];
+              idx++;
+            }
+            w.textContent = out;
+          });
+          if (t < 1) requestAnimationFrame(step);
+          else ws.forEach(w => { w.style.width = ''; });
+        };
         requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }), booting ? 1150 : 120);
+      });
+      setTimeout(run, booting ? Math.max(0, 1100 - performance.now()) : 0);
+    });
   }
 
   /* Crosshair and pointer readout. Over the search box or the hero buttons the
@@ -99,8 +116,9 @@
     addEventListener('scroll', () => { if (locked) lockOn(locked); }, {passive: true});
   }
 
-  /* Card rail: one long track moved with transforms, so the motion is smooth at
-     any speed. Drag or swipe, trackpad, arrow keys, buttons, slow drift, endless loop. */
+  /* Card rail. The slow drift runs as a browser animation, so it stays smooth even
+     while the page is still loading; dragging, swiping, the arrow buttons and keys
+     take over from it and hand back after a pause. Endless loop via a copy of the row. */
   const rail = hero.querySelector('.hx-rail');
   if (!rail) return;
   const view = rail.parentElement;
@@ -115,54 +133,89 @@
   });
   view.classList.add('is-live');
   const countOut = hero.querySelector('[data-hud="card"]');
-  let W = 1, step = 1, padL = 0;
+  const SPEED = 0.03; // pixels per millisecond
+  let W = 1, step = 1, padL = 0, anim = null;
   const measure = () => {
     padL = rail.children[0].offsetLeft;
     W = (rail.children[total].offsetLeft - padL) || 1;
     step = (rail.children[1].offsetLeft - padL) || 1;
   };
-  measure();
-  addEventListener('resize', measure);
+  const makeAnim = () => {
+    if (still || !rail.animate) return null;
+    const a = rail.animate([{transform: 'translate3d(0,0,0)'}, {transform: `translate3d(${-W}px,0,0)`}],
+      {duration: W / SPEED, iterations: Infinity, easing: 'linear'});
+    a.cancel();
+    return a;
+  };
   const mod = v => ((v % W) + W) % W;
+  measure(); anim = makeAnim();
 
-  let off = 0, target = null, vel = 0, dragging = false, hovering = false, visible = true;
-  let pausedUntil = 0, last = 0, shown = -1;
+  let off = 0, auto = false, target = null, vel = 0, dragging = false, hovering = false, visible = true, pid = null;
+  let flipped = false, keyFocus = false, pausedUntil = 0, startAt = Infinity, shown = -1, last = 0;
   const pause = ms => { pausedUntil = Math.max(pausedUntil, performance.now() + ms); };
-  const render = () => {
-    const x = mod(off);
-    rail.style.transform = `translate3d(${-x}px,0,0)`;
+  const showCount = x => {
     const i = Math.floor((x + step / 2) / step) % total;
     if (countOut && i !== shown) { shown = i; countOut.textContent = pad(i + 1, 2) + ' / ' + pad(total, 2); }
   };
+  const apply = () => { const x = mod(off); rail.style.transform = `translate3d(${-x}px,0,0)`; showCount(x); };
+  const toManual = () => {
+    if (!auto) return;
+    if (anim.currentTime != null) off = anim.currentTime * SPEED;
+    anim.cancel(); auto = false; apply();
+  };
+  const toAuto = () => {
+    off = mod(off);
+    anim.currentTime = off / SPEED;
+    anim.play(); auto = true;
+  };
+  const held = () => hovering || !visible || flipped || keyFocus;
   const frame = now => {
     const dt = last ? Math.min(now - last, 50) : 16; last = now;
-    if (visible && !dragging) {
-      if (target !== null) {
+    if (!auto) {
+      if (!dragging && target !== null) {
         const d = target - off;
         off += still ? d : d * Math.min(1, dt * 0.012);
         if (Math.abs(target - off) < 0.4) { off = target; target = null; }
-      } else if (Math.abs(vel) > 0.01) {
-        off += vel * dt; vel *= Math.pow(0.94, dt / 16);
-      } else if (!still && !hovering && now > pausedUntil &&
-                 !rail.querySelector('.is-flipped') && !view.querySelector(':focus-visible')) {
-        off += dt * 0.03;
+        apply();
+      } else if (!dragging && Math.abs(vel) > 0.01) {
+        off += vel * dt; vel *= Math.pow(0.94, dt / 16); apply();
       }
+      if (anim && pid === null && !dragging && target === null && Math.abs(vel) <= 0.01 &&
+          now > startAt && now > pausedUntil && !held()) toAuto();
+    } else {
+      const h = held();
+      if (h && anim.playState === 'running') anim.pause();
+      else if (!h && anim.playState === 'paused') anim.play();
+      if (anim.currentTime != null) showCount(mod(anim.currentTime * SPEED));
     }
-    render();
     requestAnimationFrame(frame);
   };
+  // Start drifting a moment after the page has finished loading, then fetch the
+  // remaining card photos in idle time so none pop in as the row moves.
+  const begin = () => {
+    startAt = performance.now() + 600;
+    const warm = () => rail.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
+    setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(warm) : warm()), 1500);
+  };
+  if (document.readyState === 'complete') begin(); else addEventListener('load', begin, {once: true});
+  addEventListener('resize', () => {
+    toManual(); measure();
+    if (anim) { anim.cancel(); anim = makeAnim(); }
+    apply();
+  });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(view);
   }
   view.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
   view.addEventListener('pointerleave', () => { hovering = false; });
-  // Card photos are fetched once the page has loaded, so none pop in as the row moves.
-  addEventListener('load', () => rail.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; }), {once: true});
+  view.addEventListener('focusin', () => { keyFocus = !!view.querySelector(':focus-visible'); });
+  view.addEventListener('focusout', () => setTimeout(() => { keyFocus = !!view.querySelector(':focus-visible'); }));
 
   // Drag with a mouse or swipe with a finger; a vertical swipe still scrolls the page.
-  let pid = null, x0 = 0, y0 = 0, off0 = 0, lastX = 0, lastT = 0, moved = false;
+  let x0 = 0, y0 = 0, off0 = 0, lastX = 0, lastT = 0, moved = false;
   view.addEventListener('pointerdown', e => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
+    toManual();
     pid = e.pointerId; x0 = lastX = e.clientX; y0 = e.clientY; off0 = off;
     lastT = performance.now(); moved = false; vel = 0; target = null;
   });
@@ -177,7 +230,7 @@
     const now = performance.now();
     vel = vel * 0.6 + (-(e.clientX - lastX) / Math.max(1, now - lastT)) * 0.4;
     lastX = e.clientX; lastT = now;
-    off = off0 - dx;
+    off = off0 - dx; apply();
   });
   const endDrag = () => {
     if (pid === null) return;
@@ -193,11 +246,11 @@
   view.addEventListener('dragstart', e => e.preventDefault());
   view.addEventListener('wheel', e => {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-    e.preventDefault(); target = null; vel = 0; off += e.deltaX; pause(3000);
+    e.preventDefault(); toManual(); target = null; vel = 0; off += e.deltaX; apply(); pause(3000);
   }, {passive: false});
 
   const nudge = dir => {
-    pause(4000); vel = 0;
+    toManual(); pause(4000); vel = 0;
     target = (Math.round((target ?? off) / step) + dir) * step;
   };
   hero.querySelectorAll('[data-rail]').forEach(b => b.addEventListener('click', () => nudge(+b.dataset.rail)));
@@ -210,6 +263,7 @@
     view.scrollLeft = 0;
     const li = e.target.closest('.hx-rail > li');
     if (!li || li.hasAttribute('data-clone')) return;
+    toManual();
     const x = li.offsetLeft - mod(target ?? off);
     if (x < 0 || x + li.offsetWidth > view.clientWidth) target = (target ?? off) + (x - padL);
     pause(4000);
@@ -221,6 +275,7 @@
     const front = card.querySelector('.hx-front'), back = card.querySelector('.hx-back');
     front.setAttribute('aria-expanded', String(on));
     front.inert = on; back.inert = !on;
+    flipped = !!rail.querySelector('.hx-card.is-flipped');
     if (!card.closest('[data-clone]')) (on ? back.querySelector('a') : front).focus({preventScroll: true});
   };
   rail.addEventListener('click', e => {
@@ -237,5 +292,6 @@
     const card = e.target.closest('.hx-card.is-flipped');
     if (card && e.key === 'Escape') setFlip(card, false);
   });
+  apply();
   requestAnimationFrame(frame);
 })();

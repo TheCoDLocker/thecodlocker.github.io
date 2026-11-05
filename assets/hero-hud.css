@@ -44,8 +44,9 @@ html.hx-boot .hx-bootscreen::before{content:"";position:absolute;left:0;bottom:0
 /* Headline row */
 .hx-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,420px);gap:40px;align-items:end;margin:34px 0 30px}
 .hx-main h1{margin:0;font:700 clamp(58px,7.6vw,124px)/.84 'Barlow Condensed',Impact,sans-serif;letter-spacing:-.02em;text-transform:uppercase;color:#f3f5f8}
-.hx-main h1 span{display:block}
-.hx-main h1 span+span{-webkit-text-stroke:2px #f3f5f8;color:transparent}
+.hx-main h1>span{display:block}
+.hx-main h1>span+span{-webkit-text-stroke:2px #f3f5f8;color:transparent}
+.hx-main h1 .hx-word{display:inline-block;white-space:nowrap}
 .hx-side>p{margin:0 0 16px;max-width:40ch;color:#b9c3cf;font-size:16px;line-height:1.55}
 .hx-search{max-width:none}
 .hx-links{display:flex;align-items:center;flex-wrap:wrap;gap:12px 26px;margin-top:14px}
@@ -146,7 +147,7 @@ html.hx-boot .hx-bootscreen::before{content:"";position:absolute;left:0;bottom:0
   .hx-hud{font-size:11px;gap:6px 16px}
   .hx-hud>div{gap:14px}
   .hx-main h1{font-size:clamp(50px,15vw,74px)}
-  .hx-main h1 span+span{-webkit-text-stroke-width:1.5px}
+  .hx-main h1>span+span{-webkit-text-stroke-width:1.5px}
   .hx-rail-wrap{margin:0 -18px}
   .hx-rail{padding:4px 18px 8px;gap:10px}
   .hx-card{width:170px;height:256px}
