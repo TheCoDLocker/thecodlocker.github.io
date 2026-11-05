@@ -43,121 +43,176 @@
     }), booting ? 1150 : 120);
   }
 
-  /* Crosshair and pointer readout */
+  /* Crosshair and pointer readout. Over the search box or the hero buttons the
+     crosshair snaps to the control's centre and brackets it, like aim assist. */
   const reticle = hero.querySelector('.hx-reticle');
   const xOut = hero.querySelector('[data-hud="x"]');
   const yOut = hero.querySelector('[data-hud="y"]');
   const tag = reticle && reticle.querySelector('em');
   if (reticle && fine && !still) {
-    let tx = 0, ty = 0, cx = 0, cy = 0, running = false, label = '';
+    let tx = 0, ty = 0, cx = 0, cy = 0, running = false, label = null, locked = null;
     const frame = () => {
-      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+      const k = locked ? 0.3 : 0.22;
+      cx += (tx - cx) * k; cy += (ty - cy) * k;
       reticle.style.setProperty('--x', cx + 'px');
       reticle.style.setProperty('--y', cy + 'px');
       if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) requestAnimationFrame(frame); else running = false;
     };
+    const lockOn = el => {
+      locked = el;
+      hero.classList.toggle('hx-locked', !!el);
+      if (!el) return;
+      const h = hero.getBoundingClientRect(), r = el.getBoundingClientRect(), gap = 8;
+      reticle.style.setProperty('--lx', (r.left - h.left - gap) + 'px');
+      reticle.style.setProperty('--ly', (r.top - h.top - gap) + 'px');
+      reticle.style.setProperty('--lw', (r.width + gap * 2) + 'px');
+      reticle.style.setProperty('--lh', (r.height + gap * 2) + 'px');
+      reticle.dataset.tagPos = el.dataset.lockPos || 'below';
+    };
+    const aim = (e, el) => {
+      const h = hero.getBoundingClientRect();
+      if (el) {
+        const r = el.getBoundingClientRect();
+        tx = r.left + r.width / 2 - h.left; ty = r.top + r.height / 2 - h.top;
+      } else {
+        tx = e.clientX - h.left; ty = e.clientY - h.top;
+      }
+    };
     hero.addEventListener('pointermove', e => {
-      const r = hero.getBoundingClientRect();
-      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      const target = e.target.closest ? e.target : null;
+      const lockEl = target && target.closest('[data-lock]');
+      if (lockEl !== locked) lockOn(lockEl);
+      aim(e, lockEl);
       if (!hero.classList.contains('hx-aim')) { cx = tx; cy = ty; hero.classList.add('hx-aim'); }
       if (xOut) xOut.textContent = pad(tx, 4);
       if (yOut) yOut.textContent = pad(ty, 4);
-      const card = e.target.closest && e.target.closest('.hx-card');
-      const next = card ? card.dataset.name : '';
+      const card = target && target.closest('.hx-card');
+      const next = lockEl ? 'lock:' + lockEl.dataset.lock : card ? 'card:' + card.dataset.name : '';
       if (next !== label) {
         label = next;
         reticle.style.setProperty('--rc', card ? card.style.getPropertyValue('--t') : 'var(--accent)');
-        tag.textContent = card ? 'Target ' + next : '';
+        tag.textContent = lockEl ? 'Lock // ' + lockEl.dataset.lock : card ? 'Target ' + card.dataset.name : '';
       }
       if (!running) { running = true; requestAnimationFrame(frame); }
     });
-    hero.addEventListener('pointerleave', () => hero.classList.remove('hx-aim'));
+    hero.addEventListener('pointerleave', () => { hero.classList.remove('hx-aim'); lockOn(null); label = null; });
+    addEventListener('scroll', () => { if (locked) lockOn(locked); }, {passive: true});
   }
 
-  /* Card rail: drag, native scroll, arrow keys, buttons, slow drift, endless loop */
+  /* Card rail: one long track moved with transforms, so the motion is smooth at
+     any speed. Drag or swipe, trackpad, arrow keys, buttons, slow drift, endless loop. */
   const rail = hero.querySelector('.hx-rail');
   if (!rail) return;
+  const view = rail.parentElement;
   const originals = [...rail.children];
   const total = originals.length;
   originals.forEach(li => {
     const copy = li.cloneNode(true);
     copy.setAttribute('aria-hidden', 'true');
-    copy.inert = true;
-    copy.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+    copy.setAttribute('data-clone', '');
+    copy.querySelectorAll('button, a').forEach(n => n.setAttribute('tabindex', '-1'));
     rail.appendChild(copy);
   });
-  let dragging = false;
+  view.classList.add('is-live');
   const countOut = hero.querySelector('[data-hud="card"]');
-  const loopWidth = () => rail.children[total].offsetLeft - rail.children[0].offsetLeft;
-  const stepWidth = () => rail.children[1].offsetLeft - rail.children[0].offsetLeft;
-  const wrap = () => {
-    const w = loopWidth();
-    if (rail.scrollLeft >= w) rail.scrollLeft -= w;
-    else if (rail.scrollLeft <= 0 && dragging) rail.scrollLeft += w;
+  let W = 1, step = 1, padL = 0;
+  const measure = () => {
+    padL = rail.children[0].offsetLeft;
+    W = (rail.children[total].offsetLeft - padL) || 1;
+    step = (rail.children[1].offsetLeft - padL) || 1;
   };
-  const showCount = () => {
-    if (!countOut) return;
-    const i = Math.round((rail.scrollLeft % loopWidth()) / stepWidth()) % total;
-    countOut.textContent = pad(i + 1, 2) + ' / ' + pad(total, 2);
-  };
-  rail.addEventListener('scroll', () => { wrap(); showCount(); }, {passive: true});
+  measure();
+  addEventListener('resize', measure);
+  const mod = v => ((v % W) + W) % W;
 
-  // Drift: slow constant movement that pauses whenever someone is using the rail.
-  let pausedUntil = 0, hovering = false, visible = true, last = 0, carry = 0;
-  const pause = ms => { pausedUntil = performance.now() + ms; };
-  const drift = now => {
+  let off = 0, target = null, vel = 0, dragging = false, hovering = false, visible = true;
+  let pausedUntil = 0, last = 0, shown = -1;
+  const pause = ms => { pausedUntil = Math.max(pausedUntil, performance.now() + ms); };
+  const render = () => {
+    const x = mod(off);
+    rail.style.transform = `translate3d(${-x}px,0,0)`;
+    const i = Math.floor((x + step / 2) / step) % total;
+    if (countOut && i !== shown) { shown = i; countOut.textContent = pad(i + 1, 2) + ' / ' + pad(total, 2); }
+  };
+  const frame = now => {
     const dt = last ? Math.min(now - last, 50) : 16; last = now;
-    const idle = !hovering && !dragging && visible && now > pausedUntil &&
-      !rail.contains(document.activeElement) && !rail.querySelector('.is-flipped');
-    if (idle) {
-      carry += dt * 0.028;
-      const whole = Math.floor(carry);
-      if (whole) { rail.scrollLeft += whole; carry -= whole; }
+    if (visible && !dragging) {
+      if (target !== null) {
+        const d = target - off;
+        off += still ? d : d * Math.min(1, dt * 0.012);
+        if (Math.abs(target - off) < 0.4) { off = target; target = null; }
+      } else if (Math.abs(vel) > 0.01) {
+        off += vel * dt; vel *= Math.pow(0.94, dt / 16);
+      } else if (!still && !hovering && now > pausedUntil &&
+                 !rail.querySelector('.is-flipped') && !view.querySelector(':focus-visible')) {
+        off += dt * 0.03;
+      }
     }
-    requestAnimationFrame(drift);
+    render();
+    requestAnimationFrame(frame);
   };
-  if (!still) {
-    rail.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
-    rail.addEventListener('pointerleave', () => { hovering = false; });
-    rail.addEventListener('touchstart', () => pause(5000), {passive: true});
-    rail.addEventListener('wheel', () => pause(4000), {passive: true});
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(rail);
-    }
-    requestAnimationFrame(drift);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(view);
   }
+  view.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
+  view.addEventListener('pointerleave', () => { hovering = false; });
+  // Card photos are fetched once the page has loaded, so none pop in as the row moves.
+  addEventListener('load', () => rail.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; }), {once: true});
 
-  // Mouse drag to scroll. Touch keeps native swiping.
-  let downX = 0, startLeft = 0, moved = false, pointerId = null;
-  rail.addEventListener('pointerdown', e => {
-    if (e.pointerType !== 'mouse' || e.button !== 0) return;
-    pointerId = e.pointerId; downX = e.clientX; startLeft = rail.scrollLeft; moved = false;
+  // Drag with a mouse or swipe with a finger; a vertical swipe still scrolls the page.
+  let pid = null, x0 = 0, y0 = 0, off0 = 0, lastX = 0, lastT = 0, moved = false;
+  view.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    pid = e.pointerId; x0 = lastX = e.clientX; y0 = e.clientY; off0 = off;
+    lastT = performance.now(); moved = false; vel = 0; target = null;
   });
-  rail.addEventListener('pointermove', e => {
-    if (pointerId !== e.pointerId) return;
-    const dx = e.clientX - downX;
-    if (!dragging && Math.abs(dx) > 6) {
-      dragging = moved = true; rail.classList.add('is-dragging'); rail.setPointerCapture(pointerId);
+  view.addEventListener('pointermove', e => {
+    if (pid !== e.pointerId) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if (!dragging) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      if (Math.abs(dy) > Math.abs(dx)) { pid = null; return; }
+      dragging = moved = true; view.classList.add('is-dragging'); view.setPointerCapture(pid);
     }
-    if (dragging) { rail.scrollLeft = startLeft - dx; }
+    const now = performance.now();
+    vel = vel * 0.6 + (-(e.clientX - lastX) / Math.max(1, now - lastT)) * 0.4;
+    lastX = e.clientX; lastT = now;
+    off = off0 - dx;
   });
   const endDrag = () => {
-    if (pointerId === null) return;
-    pointerId = null;
-    if (dragging) { dragging = false; rail.classList.remove('is-dragging'); pause(2500); }
+    if (pid === null) return;
+    pid = null;
+    if (!dragging) return;
+    dragging = false; view.classList.remove('is-dragging');
+    vel = performance.now() - lastT > 80 ? 0 : Math.max(-2.5, Math.min(2.5, vel));
+    pause(3000);
   };
-  rail.addEventListener('pointerup', endDrag);
-  rail.addEventListener('pointercancel', endDrag);
-  rail.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-  rail.addEventListener('dragstart', e => e.preventDefault());
+  view.addEventListener('pointerup', endDrag);
+  view.addEventListener('pointercancel', endDrag);
+  view.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  view.addEventListener('dragstart', e => e.preventDefault());
+  view.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault(); target = null; vel = 0; off += e.deltaX; pause(3000);
+  }, {passive: false});
 
   const nudge = dir => {
-    pause(4000);
-    rail.scrollBy({left: dir * stepWidth(), behavior: still ? 'auto' : 'smooth'});
+    pause(4000); vel = 0;
+    target = (Math.round((target ?? off) / step) + dir) * step;
   };
   hero.querySelectorAll('[data-rail]').forEach(b => b.addEventListener('click', () => nudge(+b.dataset.rail)));
-  rail.addEventListener('keydown', e => {
+  view.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); nudge(e.key === 'ArrowRight' ? 1 : -1); }
+  });
+  // Tabbing to a card that is off screen brings it into view.
+  view.addEventListener('scroll', () => { view.scrollLeft = 0; });
+  view.addEventListener('focusin', e => {
+    view.scrollLeft = 0;
+    const li = e.target.closest('.hx-rail > li');
+    if (!li || li.hasAttribute('data-clone')) return;
+    const x = li.offsetLeft - mod(target ?? off);
+    if (x < 0 || x + li.offsetWidth > view.clientWidth) target = (target ?? off) + (x - padL);
+    pause(4000);
   });
 
   // Flip cards: tap the front for settings, tap again (or the x) to turn back.
@@ -166,7 +221,7 @@
     const front = card.querySelector('.hx-front'), back = card.querySelector('.hx-back');
     front.setAttribute('aria-expanded', String(on));
     front.inert = on; back.inert = !on;
-    (on ? back.querySelector('a') : front).focus({preventScroll: true});
+    if (!card.closest('[data-clone]')) (on ? back.querySelector('a') : front).focus({preventScroll: true});
   };
   rail.addEventListener('click', e => {
     const card = e.target.closest('.hx-card');
@@ -182,5 +237,5 @@
     const card = e.target.closest('.hx-card.is-flipped');
     if (card && e.key === 'Escape') setFlip(card, false);
   });
-  showCount();
+  requestAnimationFrame(frame);
 })();
