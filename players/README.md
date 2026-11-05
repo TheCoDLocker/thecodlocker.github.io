@@ -33,3 +33,12 @@ matching `.html`. They are unused until those pages exist — harmless, ~40 KB.
 
 To regenerate or add to the set, the crop is: face box from an OpenCV frontal
 cascade, square side = 3.15x the face width, face centre placed 40% down.
+
+## Team colours (Nov 2026)
+
+Backgrounds follow the player's current (2027) team, so a whole roster shares
+one colour. Players who changed teams also have a `<slug>-2026.webp` on their
+2026 team colour; the BO7 archive views (homepage archive grid and the "2026
+teammates" block on player pages) point at those. When a player moves team,
+re-bake their portrait on the new team gradient and keep the old one as the
+2026 copy. Paris Gentle Mates is purple (#A35CFF).
